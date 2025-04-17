@@ -14,6 +14,7 @@ public class Authentification_Step extends BaseSteps
     Authentification authentification = new Authentification(driver);
     PageElement pageElement = new PageElement(driver);
 
+
     @Given("the user is on the 'Authentication' page")
     public void theUserIsOnTheAuthenticationPage() {
         authentification.getCreateAccountButton().isDisplayed();
@@ -52,5 +53,13 @@ public class Authentification_Step extends BaseSteps
     @And("the user's first and last name appear in the menu bar")
     public void theUserSFirstAndLastNameAppearInTheMenuBar() {
         assertTrue(pageElement.AccountButton.getText().contains("Admin admin"));
+    }
+
+    @Given("the user has an account with a valid email address")
+    public void theUserHasAnAccountWithAValidEmailAddress() {
+        authentification.enterCreateEmailAddress("admin13@gmail.com");
+        authentification.enterRegisterPassword("admin");
+        authentification.clickSignInButton();
+        pageElement.clickLogoButton();
     }
 }
