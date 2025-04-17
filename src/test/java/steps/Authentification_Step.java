@@ -9,7 +9,8 @@ import pages.PageElement;
 
 import static org.junit.Assert.assertTrue;
 
-public class Authentification_Step extends BaseStep{
+public class Authentification_Step extends BaseSteps
+{
     Authentification authentification = new Authentification(driver);
     PageElement pageElement = new PageElement(driver);
 

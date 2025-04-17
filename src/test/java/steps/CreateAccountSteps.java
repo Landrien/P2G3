@@ -5,9 +5,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import pages.AccountPage;
 import pages.CreateAccountPage;
 
-public class CreateAccountSteps extends BaseStep
+public class CreateAccountSteps extends BaseSteps
 {
     private CreateAccountPage createAccountPage;
 
@@ -17,6 +18,16 @@ public class CreateAccountSteps extends BaseStep
             createAccountPage = new CreateAccountPage(driver);
 
         return createAccountPage;
+    }
+
+    private AccountPage accountPage;
+
+    private AccountPage getAccountPage()
+    {
+        if (accountPage == null)
+            accountPage = new AccountPage(driver);
+
+        return accountPage;
     }
 
     // Create Account
@@ -96,38 +107,6 @@ public class CreateAccountSteps extends BaseStep
     @And("a message Your account has been created. appears")
     public void checkAccountCreatedMessage()
     {
-
-    }
-
-    // Authentication
-
-    @Given("the user is on the Authentication page")
-    public void theUserIsOnTheAuthenticationPage()
-    {
-    }
-
-    @When("the user enters an incorrectly formatted email address in the Email address field")
-    public void theUserEntersAnIncorrectlyFormattedEmailAddressInTheEmailAddressField()
-    {
-    }
-
-    @And("the user clicks on the Create an account button")
-    public void theUserClicksOnTheCreateAnAccountButton()
-    {
-    }
-
-    @Then("an error message Invalid email address is displayed")
-    public void anErrorMessageInvalidEmailAddressIsDisplayed()
-    {
-    }
-
-    @When("the user enters a valid email address in the Email address field")
-    public void theUserEntersAValidEmailAddressInTheEmailAddressField()
-    {
-    }
-
-    @Then("the Create an account page is displayed")
-    public void theCreateAnAccountPageIsDisplayed()
-    {
+        Assert.assertNotNull(getAccountPage().getAccountCreatedMessage());
     }
 }
