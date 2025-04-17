@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AuthenticationPage extends BasePage {
 
+
     @FindBy(id = "SubmitCreate")
     private WebElement createAccountButton;
 
@@ -27,6 +28,18 @@ public class AuthenticationPage extends BasePage {
 
     @FindBy(xpath = "")
     private WebElement invalidEmailErrorMessage;
+
+    @FindBy(xpath = "//p[@class=\"lost_password form-group\"]")
+    private WebElement RecoverPasswordButton;
+
+    @FindBy(xpath = "//h1[@class=\"page-subheading\"]")
+    private WebElement ForgottenPasswordText;
+
+    @FindBy(xpath = "//button[@class=\"btn btn-default button button-medium\"]")
+    private WebElement RetrievePasswordButton;
+
+    @FindBy(xpath = "//p[@class=\"alert alert-success\"]")
+    private WebElement SuccessMessage;
 
     public AuthenticationPage(WebDriver driver)
     {
@@ -78,4 +91,12 @@ public class AuthenticationPage extends BasePage {
     {
         return signInButton;
     }
+
+    public WebElement getRecoverPasswordButton(){   return RecoverPasswordButton; }
+
+    public WebElement getForgottenPasswordText(){   return ForgottenPasswordText;}
+
+    public WebElement getRetrievePasswordButton(){  return RetrievePasswordButton;}
+
+    public WebElement getSuccessMessage(){  return SuccessMessage;}
 }

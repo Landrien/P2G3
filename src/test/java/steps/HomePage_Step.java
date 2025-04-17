@@ -17,7 +17,7 @@ public class HomePage_Step extends BaseSteps {
     AuthenticationPage authenticationPage = new AuthenticationPage(driver);
 
     @Given("the user is connected and on the homepage")
-        public void theUserIsConnectedAndOnTheHomepage() {
+    public void theUserIsConnectedAndOnTheHomepage() {
             assertTrue(homePage.PopularButton.isDisplayed());
     }
 

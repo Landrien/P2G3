@@ -111,4 +111,30 @@ public class AuthenticationSteps extends BaseSteps
         authenticationPage.clickSignInButton();
         pageElement.clickLogoButton();
     }
+    @When("the user clicks on the 'Forgot your password?' link")
+    public void theUserClicksOnTheForgotYourPasswordLink() {
+        authenticationPage.getRecoverPasswordButton().click();
+
+    }
+
+    @Then("the user is redirected to the password reset page")
+    public void theUserIsRedirectedToThePasswordResetPage() {
+        assertTrue(authenticationPage.getForgottenPasswordText().isDisplayed());
+    }
+
+    @And("the user clicks on the 'Retrieve Password' button")
+    public void theUserClicksOnTheRetrievePasswordButton() {
+        authenticationPage.getRetrievePasswordButton().click();
+    }
+
+    @Then("a confirmation message is displayed")
+    public void aConfirmationMessageIsDisplayed() {
+        assertTrue(authenticationPage.getSuccessMessage().isDisplayed());
+    }
+
+    @Given("the user is on the 'Authentication' page")
+    public void theUserIsOnTheAuthenticationPage() {
+        pageElement.SignButton.click();
+        authenticationPage.getCreateAccountButton().isDisplayed();
+    }
 }
