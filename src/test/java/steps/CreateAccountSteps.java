@@ -38,9 +38,11 @@ public class CreateAccountSteps extends BaseSteps
     {
         // TODO mdroz / Replace with an already defined step
         pageElement.clickSignInButton();
+        enterValidEmail();
+        clickRegisterButton();
     }
 
-    @When("the user enters a <{string}> invalid password")
+    @When("the user enters a {string} invalid password")
     public void enterInvalidPassword(String badPassword)
     {
         getCreateAccountPage().enterPassword(badPassword);
@@ -104,5 +106,19 @@ public class CreateAccountSteps extends BaseSteps
     public void checkAccountCreatedMessage()
     {
         Assert.assertTrue(getAccountPage().getAccountCreatedMessage().isDisplayed());
+    }
+
+    @And("the user enters their date of birth")
+    public void selectBirthDate()
+    {
+        getCreateAccountPage().selectBirthDateDay("11");
+        getCreateAccountPage().selectBirthDateMonth("October");
+        getCreateAccountPage().selectBirthDateYear("2001");
+    }
+
+    @And("the user checks Sign up for our newsletter!")
+    public void theUserChecksSignUpForOurNewsletter()
+    {
+
     }
 }

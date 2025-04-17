@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 public class CreateAccountPage extends BasePage
 {
@@ -37,6 +38,16 @@ public class CreateAccountPage extends BasePage
 
     @FindBy(xpath = "//b[text()='passwd']")
     private WebElement invalidPasswordMessage;
+
+    @FindBy(id = "newsletter")
+    private WebElement newsletterSignUpCheckbox;
+
+    @FindBy(id = "years")
+    private WebElement birthDateYearSelect;
+    @FindBy(id = "months")
+    private WebElement birthDateMonthSelect;
+    @FindBy(id = "days")
+    private WebElement birthDateDaySelect;
 
     public void selectGenderTitle(boolean isMale)
     {
@@ -83,5 +94,29 @@ public class CreateAccountPage extends BasePage
     public WebElement getInvalidPasswordMessage()
     {
         return invalidPasswordMessage;
+    }
+
+    public void clickNewsletterSignUpCheckbox()
+    {
+        // TODO
+    }
+
+    public void selectBirthDateDay(String day)
+    {
+        selectValue(day, birthDateDaySelect);
+    }
+    public void selectBirthDateMonth(String month)
+    {
+        selectValue(month, birthDateMonthSelect);
+    }
+    public void selectBirthDateYear(String year)
+    {
+        selectValue(year, birthDateYearSelect);
+    }
+
+    private void selectValue(String value, WebElement element)
+    {
+        Select select = new Select(element);
+        select.selectByValue(value);
     }
 }

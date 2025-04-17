@@ -27,16 +27,17 @@ public class AuthenticationSteps extends BaseSteps
     PageElement pageElement = new PageElement(driver);
 
     @Given("the user is on the Authentication page")
+    @Given("the user is on the 'Authentication' page")
     public void startAtAuthenticationPage()
     {
-        // TODO mdroz / Navigate towards the create account page
+        // TODO mdroz / Navigate towards the authentication page
+        pageElement.SignButton.click();
     }
 
     @When("the user enters an incorrectly formatted email address in the Email address field")
     public void enterInvalidCreateEmail()
     {
-        // TODO mdroz / Data for this parameter
-        authenticationPage.enterCreateEmailAddress("INVALID MAIL");
+        authenticationPage.enterCreateEmailAddress("bad-email");
     }
 
     @And("the user clicks on the Create an account button")
@@ -69,7 +70,7 @@ public class AuthenticationSteps extends BaseSteps
     @And("the user enters an incorrect password")
     public void enterInvalidRegisterPassword()
     {
-        authenticationPage.enterSignInPassword("123456789");
+        authenticationPage.enterSignInPassword("bad-password");
     }
 
     @Then("an error message Invalid password is displayed")
@@ -103,7 +104,7 @@ public class AuthenticationSteps extends BaseSteps
     }
 
     @Given("the user has an account with a valid email address")
-    public void signIn()
+    public void connect()
     {
         // TODO mdroz / Parameters
         authenticationPage.enterSignInEmailAddress("admin13@gmail.com");
@@ -111,30 +112,28 @@ public class AuthenticationSteps extends BaseSteps
         authenticationPage.clickSignInButton();
         pageElement.clickLogoButton();
     }
-    @When("the user clicks on the 'Forgot your password?' link")
-    public void theUserClicksOnTheForgotYourPasswordLink() {
-        authenticationPage.getRecoverPasswordButton().click();
 
+    @When("the user clicks on the 'Forgot your password?' link")
+    public void clickForgotPasswordLink()
+    {
+        authenticationPage.getRecoverPasswordButton().click();
     }
 
     @Then("the user is redirected to the password reset page")
-    public void theUserIsRedirectedToThePasswordResetPage() {
+    public void checkForgottenPasswordText()
+    {
         assertTrue(authenticationPage.getForgottenPasswordText().isDisplayed());
     }
 
     @And("the user clicks on the 'Retrieve Password' button")
-    public void theUserClicksOnTheRetrievePasswordButton() {
+    public void clickRetrievePasswordButton()
+    {
         authenticationPage.getRetrievePasswordButton().click();
     }
 
     @Then("a confirmation message is displayed")
-    public void aConfirmationMessageIsDisplayed() {
+    public void checkConfirmationMessage()
+    {
         assertTrue(authenticationPage.getSuccessMessage().isDisplayed());
-    }
-
-    @Given("the user is on the 'Authentication' page")
-    public void theUserIsOnTheAuthenticationPage() {
-        pageElement.SignButton.click();
-        authenticationPage.getCreateAccountButton().isDisplayed();
     }
 }

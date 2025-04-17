@@ -3,11 +3,9 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class AuthenticationPage extends BasePage {
-
-
+public class AuthenticationPage extends BasePage
+{
     @FindBy(id = "SubmitCreate")
     private WebElement createAccountButton;
 
@@ -44,7 +42,6 @@ public class AuthenticationPage extends BasePage {
     public AuthenticationPage(WebDriver driver)
     {
         super(driver);
-        PageFactory.initElements(driver, this);
     }
 
     public void clickCreateAccountButton()
@@ -92,11 +89,23 @@ public class AuthenticationPage extends BasePage {
         return signInButton;
     }
 
-    public WebElement getRecoverPasswordButton(){   return RecoverPasswordButton; }
+    public WebElement getRecoverPasswordButton()
+    {
+        return RecoverPasswordButton;
+    }
 
-    public WebElement getForgottenPasswordText(){   return ForgottenPasswordText;}
+    public WebElement getForgottenPasswordText()
+    {
+        return ForgottenPasswordText;
+    }
 
-    public WebElement getRetrievePasswordButton(){  return RetrievePasswordButton;}
+    public WebElement getRetrievePasswordButton()
+    {
+        return RetrievePasswordButton;
+    }
 
-    public WebElement getSuccessMessage(){  return SuccessMessage;}
+    public WebElement getSuccessMessage()
+    {
+        return SuccessMessage;
+    }
 }
