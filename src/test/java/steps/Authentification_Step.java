@@ -13,6 +13,7 @@ public class Authentification_Step extends BaseStep{
     Authentification authentification = new Authentification(driver);
     PageElement pageElement = new PageElement(driver);
 
+
     @Given("the user is on the 'Authentication' page")
     public void theUserIsOnTheAuthenticationPage() {
         authentification.CreateAccountButton.isDisplayed();
@@ -56,4 +57,11 @@ public class Authentification_Step extends BaseStep{
         assertTrue(pageElement.AccountButton.getText().contains("Admin admin"));
     }
 
+    @Given("the user has an account with a valid email address")
+    public void theUserHasAnAccountWithAValidEmailAddress() {
+        authentification.enterCreateEmailAddress("admin13@gmail.com");
+        authentification.enterRegisterPassword("admin");
+        authentification.clickSignInButton();
+        pageElement.clickLogoButton();
+    }
 }

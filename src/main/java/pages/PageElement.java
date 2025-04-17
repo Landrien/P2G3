@@ -16,6 +16,9 @@ public class PageElement extends BasePage {
     @FindBy(xpath = "//a[@class= \"account\"]")
     public WebElement AccountButton;
 
+    @FindBy(xpath = "//a[@title= \"My Shop\"]")
+    public WebElement HomePageButton;
+
     public PageElement(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -27,5 +30,8 @@ public class PageElement extends BasePage {
     public void clickSignInButton() {
         SignInButton.click();
     }
+    public void clickLogoButton() {HomePageButton.click();
+    }
+
 
 }
