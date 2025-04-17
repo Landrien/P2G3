@@ -56,9 +56,4 @@ public class Authentification_Step extends BaseStep{
         assertTrue(pageElement.AccountButton.getText().contains("Admin admin"));
     }
 
-    @Given("The user is on the homepage")
-    public void theUserIsOnTheHomepage() {
-
-    }
-
 }
