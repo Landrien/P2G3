@@ -4,45 +4,44 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.Authentification;
+import pages.AuthenticationPage;
 import pages.PageElement;
 
 import static org.junit.Assert.assertTrue;
 
 public class Authentification_Step extends BaseSteps
 {
-    Authentification authentification = new Authentification(driver);
+    AuthenticationPage authenticationPage = new AuthenticationPage(driver);
     PageElement pageElement = new PageElement(driver);
-
 
     @Given("the user is on the 'Authentication' page")
     public void theUserIsOnTheAuthenticationPage() {
-        authentification.getCreateAccountButton().isDisplayed();
+        authenticationPage.getCreateAccountButton().isDisplayed();
     }
 
     @When("the user enters a valid email address")
     public void theUserEntersAValidEmailAddress() {
-        authentification.enterCreateEmailAddress("admin13@gmail.com");
+        authenticationPage.enterCreateEmailAddress("admin13@gmail.com");
     }
 
     @And("the user enters an incorrect password")
     public void theUserEntersAnIncorrectPassword() {
-        authentification.enterRegisterPassword("123456789");
+        authenticationPage.enterSignInPassword("123456789");
     }
 
     @Then("an error message Invalid password is displayed")
     public void anErrorMessageInvalidPasswordIsDisplayed() {
-        assertTrue(authentification.getInvalidPasswordErrorMessage().isDisplayed());
+        assertTrue(authenticationPage.getInvalidPasswordErrorMessage().isDisplayed());
     }
 
     @And("the user enters the password associated with their account")
     public void theUserEntersThePasswordAssociatedWithTheirAccount() {
-        authentification.enterRegisterPassword("admin");
+        authenticationPage.enterSignInPassword("admin");
     }
 
     @And("the user click on the button")
     public void theUserClickOnTheButton() {
-        authentification.clickSignInButton();
+        authenticationPage.clickSignInButton();
     }
 
     @Then("the My Account page is displayed")
@@ -57,9 +56,9 @@ public class Authentification_Step extends BaseSteps
 
     @Given("the user has an account with a valid email address")
     public void theUserHasAnAccountWithAValidEmailAddress() {
-        authentification.enterCreateEmailAddress("admin13@gmail.com");
-        authentification.enterRegisterPassword("admin");
-        authentification.clickSignInButton();
+        authenticationPage.enterSignInEmailAddress("admin13@gmail.com");
+        authenticationPage.enterSignInPassword("admin");
+        authenticationPage.clickSignInButton();
         pageElement.clickLogoButton();
     }
 }

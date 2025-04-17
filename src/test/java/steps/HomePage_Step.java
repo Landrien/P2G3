@@ -4,17 +4,17 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.Authentification;
+import pages.AuthenticationPage;
 import pages.HomePage;
 import pages.PageElement;
 
 import static org.junit.Assert.assertTrue;
 
-public class HomePage_Step extends BaseStep {
+public class HomePage_Step extends BaseSteps {
 
     HomePage homePage = new HomePage(driver);
     PageElement pageElement = new PageElement(driver);
-    Authentification authentification = new Authentification(driver);
+    AuthenticationPage authenticationPage = new AuthenticationPage(driver);
 
     @Given("the user is connected and on the homepage")
         public void theUserIsConnectedAndOnTheHomepage() {
@@ -33,7 +33,7 @@ public class HomePage_Step extends BaseStep {
 
     @And("the login page should contain 'Sign in'")
     public void theLoginPageShouldContainSignIn() {
-        assertTrue(authentification.SignInButton.isDisplayed());
+        assertTrue(authenticationPage.getSignInButton().isDisplayed());
         assertTrue(pageElement.SignInButton.getText().contains("Sign in"));
     }
 }

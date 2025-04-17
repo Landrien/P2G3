@@ -5,8 +5,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import pages.Authentification;
+import pages.AuthenticationPage;
 import pages.CreateAccountPage;
+import pages.PageElement;
+
+import static org.junit.Assert.assertTrue;
 
 public class AuthenticationSteps extends BaseSteps
 {
@@ -20,15 +23,8 @@ public class AuthenticationSteps extends BaseSteps
         return createAccountPage;
     }
 
-    private Authentification authentificationPage;
-
-    private Authentification getAuthentificationPage()
-    {
-        if (authentificationPage == null)
-            authentificationPage = new Authentification(driver);
-
-        return authentificationPage;
-    }
+    AuthenticationPage authenticationPage = new AuthenticationPage(driver);
+    PageElement pageElement = new PageElement(driver);
 
     @Given("the user is on the Authentication page")
     public void startAtAuthenticationPage()
@@ -37,29 +33,30 @@ public class AuthenticationSteps extends BaseSteps
     }
 
     @When("the user enters an incorrectly formatted email address in the Email address field")
-    public void enterInvalidEmail()
+    public void enterInvalidCreateEmail()
     {
         // TODO mdroz / Data for this parameter
-        getAuthentificationPage().enterCreateEmailAddress("INVALID MAIL");
+        authenticationPage.enterCreateEmailAddress("INVALID MAIL");
     }
 
     @And("the user clicks on the Create an account button")
     public void clickCreateAccountButton()
     {
-        getAuthentificationPage().clickCreateAccountButton();
+        authenticationPage.clickCreateAccountButton();
     }
 
     @Then("an error message Invalid email address is displayed")
-    public void checkInvalidEmailMessage()
+    public void checkInvalidCreateEmailMessage()
     {
-        Assert.assertNotNull(getAuthentificationPage().getInvalidEmailErrorMessage());
+        Assert.assertNotNull(authenticationPage.getInvalidEmailErrorMessage());
     }
 
     @When("the user enters a valid email address in the Email address field")
-    public void enterValidEmail()
+    @When("the user enters a valid email address")
+    public void enterValidCreateEmail()
     {
         // TODO mdroz / Data for this parameter
-        getAuthentificationPage().enterCreateEmailAddress("valid.email@gmail.com");
+        authenticationPage.enterCreateEmailAddress("valid.email@gmail.com");
     }
 
     @Then("the Create an account page is displayed")
@@ -67,5 +64,51 @@ public class AuthenticationSteps extends BaseSteps
     {
         // TODO
         Assert.assertNotNull(getCreateAccountPage());
+    }
+
+    @And("the user enters an incorrect password")
+    public void enterInvalidRegisterPassword()
+    {
+        authenticationPage.enterSignInPassword("123456789");
+    }
+
+    @Then("an error message Invalid password is displayed")
+    public void checkInvalidPasswordErrorMessage()
+    {
+        assertTrue(authenticationPage.getInvalidPasswordErrorMessage().isDisplayed());
+    }
+
+    @And("the user enters the password associated with their account")
+    public void enterValidRegisterPassword()
+    {
+        authenticationPage.enterSignInPassword("admin");
+    }
+
+    @And("the user click on the button")
+    public void clickSignInButton()
+    {
+        authenticationPage.clickSignInButton();
+    }
+
+    @Then("the My Account page is displayed")
+    public void checkAccountPageDisplayed()
+    {
+        assertTrue(pageElement.SignOutButton.getText().contains("Sign out"));
+    }
+
+    @And("the user's first and last name appear in the menu bar")
+    public void checkFirstNameLastNameInMenuBar()
+    {
+        assertTrue(pageElement.AccountButton.getText().contains("Admin admin"));
+    }
+
+    @Given("the user has an account with a valid email address")
+    public void signIn()
+    {
+        // TODO mdroz / Parameters
+        authenticationPage.enterSignInEmailAddress("admin13@gmail.com");
+        authenticationPage.enterSignInPassword("admin");
+        authenticationPage.clickSignInButton();
+        pageElement.clickLogoButton();
     }
 }

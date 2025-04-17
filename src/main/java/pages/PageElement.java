@@ -30,8 +30,7 @@ public class PageElement extends BasePage {
     public void clickSignInButton() {
         SignInButton.click();
     }
-    public void clickLogoButton() {HomePageButton.click();
+    public void clickLogoButton() {
+        HomePageButton.click();
     }
-
-
 }
