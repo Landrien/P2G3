@@ -13,6 +13,9 @@ public class PageElement extends BasePage {
     @FindBy(xpath = "//a[@class= \"login\"]")
     public WebElement SignInButton;
 
+    @FindBy(xpath = "//div[@class= \"header_user_info\"]")
+    public WebElement SignButton;
+
     @FindBy(xpath = "//a[@class= \"account\"]")
     public WebElement AccountButton;
 
