@@ -11,33 +11,39 @@ public class CreateAccountPage extends BasePage
         super(driver);
     }
 
-    @FindBy(xpath = "")
-    private WebElement genderTitleSelect;
+    @FindBy(xpath = "//label[@for='id_gender1']")
+    private WebElement maleGenderRadioSelect;
 
-    @FindBy(xpath = "")
+    @FindBy(xpath = "//label[@for='id_gender2']")
+    private WebElement femaleGenderRadioSelect;
+
+    @FindBy(id = "customer_firstname")
     private WebElement firstNameField;
 
-    @FindBy(xpath = "")
+    @FindBy(id = "customer_lastname")
     private WebElement lastNameField;
 
-    @FindBy(xpath = "")
+    @FindBy(id = "email")
     private WebElement emailAddressField;
 
-    @FindBy(xpath = "")
+    @FindBy(id = "passwd")
     private WebElement passwordField;
 
-    @FindBy(xpath = "")
+    @FindBy(id = "submitAccount")
     private WebElement registerButton;
 
-    @FindBy(xpath = "")
+    @FindBy(xpath = "//b[text()='email']")
     private WebElement invalidEmailMessage;
 
-    @FindBy(xpath = "")
+    @FindBy(xpath = "//b[text()='passwd']")
     private WebElement invalidPasswordMessage;
 
     public void selectGenderTitle(boolean isMale)
     {
-
+        if (isMale == true)
+            maleGenderRadioSelect.click();
+        else
+            femaleGenderRadioSelect.click();
     }
 
     public void enterFirstName(String firstName)

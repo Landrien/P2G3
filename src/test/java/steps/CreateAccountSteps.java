@@ -7,6 +7,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import pages.AccountPage;
 import pages.CreateAccountPage;
+import pages.PageElement;
 
 public class CreateAccountSteps extends BaseSteps
 {
@@ -30,18 +31,19 @@ public class CreateAccountSteps extends BaseSteps
         return accountPage;
     }
 
-    // Create Account
+    PageElement pageElement = new PageElement(driver);
 
     @Given("the user is on the Create an account page")
     public void startAtCreateAccountPage()
     {
-        // TODO mdroz / Navigate towards the create account page
+        // TODO mdroz / Replace with an already defined step
+        pageElement.clickSignInButton();
     }
 
     @When("the user enters a <{string}> invalid password")
-    public void enterInvalidPassword(String password)
+    public void enterInvalidPassword(String badPassword)
     {
-        getCreateAccountPage().enterPassword(password);
+        getCreateAccountPage().enterPassword(badPassword);
     }
 
     @And("the user clicks on the REGISTER button")
@@ -53,60 +55,54 @@ public class CreateAccountSteps extends BaseSteps
     @Then("a password is invalid message is displayed")
     public void checkPasswordInvalidMessage()
     {
-        Assert.assertNotNull(getCreateAccountPage().getInvalidPasswordMessage());
+        Assert.assertTrue(getCreateAccountPage().getInvalidPasswordMessage().isDisplayed());
     }
 
     @When("the user modifies their email address to an invalid format")
     public void enterInvalidEmail()
     {
-        // TODO mdroz / Data for this parameter
-        getCreateAccountPage().enterEmailAddress("NOT A VALID EMAIL");
+        getCreateAccountPage().enterEmailAddress("bad-email");
     }
 
     @Then("an Email is invalid message is displayed")
     public void checkEmailInvalidMessage()
     {
-        Assert.assertNotNull(getCreateAccountPage().getInvalidEmailMessage());
+        Assert.assertTrue(getCreateAccountPage().getInvalidEmailMessage().isDisplayed());
     }
 
     @When("the user selects a gender")
     public void selectGenderTitle()
     {
-        // TODO mdroz / Do we need to check for both male and female ?
         getCreateAccountPage().selectGenderTitle(true);
     }
 
     @And("the user enters their last name")
     public void enterLastName()
     {
-        // TODO mdroz / Data for this parameter
         getCreateAccountPage().enterLastName("Doe");
     }
 
     @And("the user enters their first name")
     public void enterFirstName()
     {
-        // TODO mdroz / Data for this parameter
         getCreateAccountPage().enterFirstName("John");
     }
 
     @And("the user modifies the email address with a valid format")
     public void enterValidEmail()
     {
-        // TODO mdroz / Data for this parameter
         getCreateAccountPage().enterEmailAddress("myadress@gmail.com");
     }
 
     @And("the user enters a password with at least '5' characters")
     public void enterValidPassword()
     {
-        // TODO mdroz / Data for this parameter
-        getCreateAccountPage().enterPassword("test");
+        getCreateAccountPage().enterPassword("mypassword");
     }
 
-    @And("a message Your account has been created. appears")
+    @And("the message 'Your account has been created' is displayed")
     public void checkAccountCreatedMessage()
     {
-        Assert.assertNotNull(getAccountPage().getAccountCreatedMessage());
+        Assert.assertTrue(getAccountPage().getAccountCreatedMessage().isDisplayed());
     }
 }

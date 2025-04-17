@@ -11,9 +11,8 @@ public class AccountPage extends BasePage
         super(driver);
     }
 
-    @FindBy(xpath = "")
+    @FindBy(className = "alert alert-success")
     private WebElement accountCreatedMessage;
-
 
     public WebElement getAccountCreatedMessage()
     {

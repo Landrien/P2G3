@@ -25,7 +25,7 @@ public class AuthenticationPage extends BasePage {
     @FindBy(xpath = "//div[@class= \"alert alert-danger\"]")
     private WebElement invalidPasswordErrorMessage;
 
-    @FindBy(xpath = "")
+    @FindBy(id = "create_account_error")
     private WebElement invalidEmailErrorMessage;
 
     public AuthenticationPage(WebDriver driver)
