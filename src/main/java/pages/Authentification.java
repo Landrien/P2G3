@@ -8,23 +8,25 @@ import org.openqa.selenium.support.PageFactory;
 public class Authentification extends BasePage {
 
     @FindBy(id = "SubmitCreate")
-    public WebElement CreateAccountButton;
+    private WebElement CreateAccountButton;
 
     @FindBy(id = "email_create")
-    public WebElement CreateEmailAddressField;
+    private WebElement CreateEmailAddressField;
 
     @FindBy(id = "email")
-    public WebElement RegisterEmailAddressField;
+    private WebElement RegisterEmailAddressField;
 
     @FindBy(id = "passwd")
-    public WebElement RegisterPasswordField;
+    private WebElement RegisterPasswordField;
 
     @FindBy(id = "SubmitLogin")
-    public WebElement SignInButton;
+    private WebElement SignInButton;
 
     @FindBy(xpath = "//div[@class= \"alert alert-danger\"]")
-    public WebElement ErrorMessage;
+    private WebElement invalidPasswordErrorMessage;
 
+    @FindBy(xpath = "")
+    private WebElement invalidEmailErrorMessage;
 
     public Authentification(WebDriver driver) {
         super(driver);
@@ -34,18 +36,35 @@ public class Authentification extends BasePage {
     public void clickCreateAccountButton() {
         CreateAccountButton.click();
     }
+
     public void enterCreateEmailAddress(String email) {
         CreateEmailAddressField.sendKeys(email);
     }
+
     public void enterRegisterEmailAddress(String email) {
         RegisterEmailAddressField.sendKeys(email);
     }
+
     public void enterRegisterPassword(String password) {
         RegisterPasswordField.sendKeys(password);
     }
+
     public void clickSignInButton() {
         SignInButton.click();
     }
 
+    public WebElement getInvalidEmailErrorMessage()
+    {
+        return invalidEmailErrorMessage;
+    }
 
+    public WebElement getInvalidPasswordErrorMessage()
+    {
+        return invalidPasswordErrorMessage;
+    }
+
+    public WebElement getCreateAccountButton()
+    {
+        return CreateAccountButton;
+    }
 }

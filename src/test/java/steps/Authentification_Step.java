@@ -16,7 +16,7 @@ public class Authentification_Step extends BaseSteps
 
     @Given("the user is on the 'Authentication' page")
     public void theUserIsOnTheAuthenticationPage() {
-        authentification.CreateAccountButton.isDisplayed();
+        authentification.getCreateAccountButton().isDisplayed();
     }
 
     @When("the user enters a valid email address")
@@ -31,7 +31,7 @@ public class Authentification_Step extends BaseSteps
 
     @Then("an error message Invalid password is displayed")
     public void anErrorMessageInvalidPasswordIsDisplayed() {
-        assertTrue(authentification.ErrorMessage.isDisplayed());
+        assertTrue(authentification.getInvalidPasswordErrorMessage().isDisplayed());
     }
 
     @And("the user enters the password associated with their account")
@@ -44,17 +44,13 @@ public class Authentification_Step extends BaseSteps
         authentification.clickSignInButton();
     }
 
-
     @Then("the My Account page is displayed")
     public void theMyAccountPageIsDisplayed() {
         assertTrue(pageElement.SignOutButton.getText().contains("Sign out"));
-
-
     }
 
     @And("the user's first and last name appear in the menu bar")
     public void theUserSFirstAndLastNameAppearInTheMenuBar() {
         assertTrue(pageElement.AccountButton.getText().contains("Admin admin"));
     }
-
 }
