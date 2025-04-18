@@ -7,7 +7,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import pages.AuthenticationPage;
 import pages.CreateAccountPage;
-import pages.PageElement;
+import pages.HeaderPage;
 
 import static org.junit.Assert.assertTrue;
 
@@ -24,14 +24,14 @@ public class AuthenticationSteps extends BaseSteps
     }
 
     AuthenticationPage authenticationPage = new AuthenticationPage(driver);
-    PageElement pageElement = new PageElement(driver);
+    HeaderPage headerPage = new HeaderPage(driver);
 
     @Given("the user is on the Authentication page")
     @Given("the user is on the 'Authentication' page")
     public void startAtAuthenticationPage()
     {
         // TODO mdroz / Navigate towards the authentication page
-        pageElement.SignButton.click();
+        headerPage.SignButton.click();
     }
 
     @When("the user enters an incorrectly formatted email address in the Email address field")
@@ -94,13 +94,13 @@ public class AuthenticationSteps extends BaseSteps
     @Then("the My Account page is displayed")
     public void checkAccountPageDisplayed()
     {
-        assertTrue(pageElement.SignOutButton.getText().contains("Sign out"));
+        assertTrue(headerPage.SignOutButton.getText().contains("Sign out"));
     }
 
     @And("the user's first and last name appear in the menu bar")
     public void checkFirstNameLastNameInMenuBar()
     {
-        assertTrue(pageElement.AccountButton.getText().contains("Admin admin"));
+        assertTrue(headerPage.AccountButton.getText().contains("Admin admin"));
     }
 
     @Given("the user has an account with a valid email address")
@@ -110,7 +110,7 @@ public class AuthenticationSteps extends BaseSteps
         authenticationPage.enterSignInEmailAddress("admin13@gmail.com");
         authenticationPage.enterSignInPassword("admin");
         authenticationPage.clickSignInButton();
-        pageElement.clickLogoButton();
+        headerPage.clickLogoButton();
     }
 
     @When("the user clicks on the 'Forgot your password?' link")

@@ -3,10 +3,12 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class PageElement extends BasePage {
-
+/**
+ * The header part of any page on the website containing the logo, search bar, cart and connexion links
+ */
+public class HeaderPage extends BasePage
+{
     @FindBy(xpath = "//a[@class= \"logout\"]")
     public WebElement SignOutButton;
 
@@ -22,9 +24,9 @@ public class PageElement extends BasePage {
     @FindBy(xpath = "//a[@title= \"My Shop\"]")
     public WebElement HomePageButton;
 
-    public PageElement(WebDriver driver) {
+    public HeaderPage(WebDriver driver)
+    {
         super(driver);
-        PageFactory.initElements(driver, this);
     }
 
     public void clickSignOutButton() {

@@ -4,14 +4,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.AccountPage;
+import pages.HeaderPage;
 import pages.HomePage;
-import pages.PageElement;
 
 public class ManageAccountSteps extends BaseSteps
 {
     AccountPage accountPage = new AccountPage(driver);
     HomePage homePage = new HomePage(driver);
-    PageElement pageElement = new PageElement(driver);
+    HeaderPage headerPage = new HeaderPage(driver);
 
     @Given("the user is on the My Account page")
     public void startAtAccountPage()
@@ -22,7 +22,7 @@ public class ManageAccountSteps extends BaseSteps
     @When("the user clicks on the Home button")
     public void clickHomeButton()
     {
-        pageElement.clickLogoButton();
+        headerPage.clickLogoButton();
     }
 
     @Then("the user is redirected to the homepage")

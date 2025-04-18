@@ -7,7 +7,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import pages.AccountPage;
 import pages.CreateAccountPage;
-import pages.PageElement;
+import pages.HeaderPage;
 
 public class CreateAccountSteps extends BaseSteps
 {
@@ -31,13 +31,13 @@ public class CreateAccountSteps extends BaseSteps
         return accountPage;
     }
 
-    PageElement pageElement = new PageElement(driver);
+    HeaderPage headerPage = new HeaderPage(driver);
 
     @Given("the user is on the Create an account page")
     public void startAtCreateAccountPage()
     {
         // TODO mdroz / Replace with an already defined step
-        pageElement.clickSignInButton();
+        headerPage.clickSignInButton();
         enterValidEmail();
         clickRegisterButton();
     }

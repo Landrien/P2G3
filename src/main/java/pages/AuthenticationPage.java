@@ -4,6 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * The authentication page where the user can connect into the website or create a new account
+ */
 public class AuthenticationPage extends BasePage
 {
     @FindBy(id = "SubmitCreate")

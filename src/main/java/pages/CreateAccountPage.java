@@ -5,6 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+/**
+ * The create account page where the user can enter his info to register into the website
+ */
 public class CreateAccountPage extends BasePage
 {
     public CreateAccountPage(WebDriver driver)
