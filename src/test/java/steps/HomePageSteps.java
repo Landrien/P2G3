@@ -114,8 +114,6 @@ public class HomePageSteps extends BaseSteps
     private void goToNewTabUrl(String url)
     {
         String originalWindow = driver.getWindowHandle();
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(driver -> driver.getWindowHandles().size() > 1);
-
         for (String handle : driver.getWindowHandles())
         {
             if (handle.equals(originalWindow))

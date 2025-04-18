@@ -24,10 +24,4 @@ public class ManageAccountSteps extends BaseSteps
     {
         headerPage.clickLogoButton();
     }
-
-    @Then("the user is redirected to the homepage")
-    public void checkHomePageDisplayed()
-    {
-        // TODO mdroz / Check home page
-    }
 }
