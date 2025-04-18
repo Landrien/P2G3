@@ -5,14 +5,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.AccountPage;
 import pages.AuthenticationPage;
 import pages.CreateAccountPage;
 import pages.HeaderPage;
 
-import java.time.Duration;
+import java.nio.charset.StandardCharsets;
+import java.util.Random;
 
 public class CreateAccountSteps extends BaseSteps
 {
@@ -43,11 +42,15 @@ public class CreateAccountSteps extends BaseSteps
     @Given("the user is on the Create an account page")
     public void startAtCreateAccountPage()
     {
-        // TODO mdroz / Replace with an already defined step
         headerPage.clickSignInButton();
-        authenticationPage.enterCreateEmailAddress("valid.email@gmail.com");
+        String randomEmail = getRandomString() + "@gmail.com";
+        authenticationPage.enterCreateEmailAddress(randomEmail);
         authenticationPage.clickCreateAccountButton();
-        new WebDriverWait(driver, Duration.ofSeconds(2));
+    }
+
+    private String getRandomString()
+    {
+        return "test." + System.currentTimeMillis();
     }
 
     @When("the user enters a {string} invalid password")
@@ -101,7 +104,8 @@ public class CreateAccountSteps extends BaseSteps
     @And("the user modifies the email address with a valid format")
     public void enterValidEmail()
     {
-        getCreateAccountPage().enterEmailAddress("myadress@gmail.com");
+        String randomEmail = getRandomString() + "@gmail.com";
+        getCreateAccountPage().enterEmailAddress(randomEmail);
     }
 
     @And("the user enters a password with at least '5' characters")
