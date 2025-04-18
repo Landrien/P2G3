@@ -10,32 +10,58 @@ import org.openqa.selenium.support.FindBy;
 public class HeaderPage extends BasePage
 {
     @FindBy(xpath = "//a[@class= \"logout\"]")
-    public WebElement SignOutButton;
+    private WebElement signOutButton;
 
     @FindBy(xpath = "//a[@class= \"login\"]")
-    public WebElement SignInButton;
+    private WebElement signInButton;
 
     @FindBy(xpath = "//div[@class= \"header_user_info\"]")
-    public WebElement SignButton;
-
+    private WebElement userAccountButton;
     @FindBy(xpath = "//a[@class= \"account\"]")
-    public WebElement AccountButton;
+    private WebElement clickableUserAccountButton;
 
-    @FindBy(xpath = "//a[@title= \"My Shop\"]")
-    public WebElement HomePageButton;
+    @FindBy(xpath = "//a[@title = 'Contact us']")
+    private WebElement contactUs;
+
+    @FindBy(xpath = "//img[@class='logo img-responsive']")
+    private WebElement homePageLogoButton;
 
     public HeaderPage(WebDriver driver)
     {
         super(driver);
     }
 
-    public void clickSignOutButton() {
-        SignOutButton.click();
+    public void clickSignOutButton()
+    {
+        signOutButton.click();
     }
-    public void clickSignInButton() {
-        SignInButton.click();
+    public void clickSignInButton()
+    {
+        signInButton.click();
     }
-    public void clickLogoButton() {
-        HomePageButton.click();
+
+    public void clickLogoButton()
+    {
+        homePageLogoButton.click();
+    }
+
+    public void clickContactUs()
+    {
+        contactUs.click();
+    }
+
+    public WebElement getSignInButton()
+    {
+        return signInButton;
+    }
+
+    public WebElement getSignOutButton()
+    {
+        return signOutButton;
+    }
+
+    public WebElement getUserAccountButton()
+    {
+        return userAccountButton;
     }
 }

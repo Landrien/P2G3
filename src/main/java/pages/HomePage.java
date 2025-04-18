@@ -10,53 +10,42 @@ import org.openqa.selenium.support.FindBy;
 public class HomePage extends BasePage{
 
     @FindBy(xpath = "//a[@class=\"homefeatured\"]")
-    public WebElement PopularButton;
+    private WebElement popularButton;
 
-    public HomePage(WebDriver driver) {
-        super(driver);
-    }
     @FindBy(xpath = "//a[@title='Blog']")
     private WebElement blogTab;
-
-    @FindBy(className = "login")
-    private WebElement signInLink;
-
-    @FindBy(xpath = "//a[@title = 'Contact us']")
-    private WebElement contactUs;
 
     @FindBy(id="homepage-slider")
     private WebElement featuredAd;
 
-
     @FindBy(xpath = "//a[@title='Women']")
     private WebElement womenTab;
 
-    @FindBy(xpath = "//a[@title='Dresses']")
+    @FindBy(xpath = "//div[@id = 'block_top_menu']/ul/li[2]/a")
     private WebElement dressesTab;
 
-
-    @FindBy(xpath = "//a[@title='T-shirts']")
+    @FindBy(xpath = "//div[@id = 'block_top_menu']/ul/li[3]/a")
     private WebElement tshirtsTab;
 
+    public HomePage(WebDriver driver)
+    {
+        super(driver);
+    }
 
-    public void clickBlogTab() {
+    public void clickBlogTab()
+    {
         blogTab.click();
     }
 
-    public void clickSignIn() {
-        signInLink.click();
-    }
-
-    public void clickContactUs() {
-        contactUs.click();
-    }
-
-    public void clickFeaturedAd() {
+    public void clickFeaturedAd()
+    {
         featuredAd.click();
     }
 
-    public void clickOnCategoryTab(String tabName) {
-        switch (tabName.toLowerCase()) {
+    public void clickOnCategoryTab(String tabName)
+    {
+        switch (tabName.toLowerCase())
+        {
             case "women":
                 womenTab.click();
                 break;
@@ -70,6 +59,11 @@ public class HomePage extends BasePage{
             default:
                 throw new IllegalArgumentException("Unknown tab: " + tabName);
         }
+    }
+
+    public WebElement getPopularButton()
+    {
+        return popularButton;
     }
 }
 

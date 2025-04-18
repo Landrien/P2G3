@@ -31,7 +31,7 @@ public class AuthenticationSteps extends BaseSteps
     public void startAtAuthenticationPage()
     {
         // TODO mdroz / Navigate towards the authentication page
-        headerPage.SignButton.click();
+        headerPage.clickSignInButton();
     }
 
     @When("the user enters an incorrectly formatted email address in the Email address field")
@@ -94,13 +94,13 @@ public class AuthenticationSteps extends BaseSteps
     @Then("the My Account page is displayed")
     public void checkAccountPageDisplayed()
     {
-        assertTrue(headerPage.SignOutButton.getText().contains("Sign out"));
+        assertTrue(headerPage.getSignOutButton().getText().contains("Sign out"));
     }
 
     @And("the user's first and last name appear in the menu bar")
     public void checkFirstNameLastNameInMenuBar()
     {
-        assertTrue(headerPage.AccountButton.getText().contains("Admin admin"));
+        assertTrue(headerPage.getUserAccountButton().getText().contains("Admin admin"));
     }
 
     @Given("the user has an account with a valid email address")

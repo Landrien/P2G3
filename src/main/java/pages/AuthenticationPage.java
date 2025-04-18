@@ -31,16 +31,19 @@ public class AuthenticationPage extends BasePage
     private WebElement invalidEmailErrorMessage;
 
     @FindBy(xpath = "//p[@class=\"lost_password form-group\"]")
-    private WebElement RecoverPasswordButton;
+    private WebElement RecoverPasswordButton; // TODO Move to recover password page
 
     @FindBy(xpath = "//h1[@class=\"page-subheading\"]")
-    private WebElement ForgottenPasswordText;
+    private WebElement ForgottenPasswordText; // TODO Move to recover password page
 
     @FindBy(xpath = "//button[@class=\"btn btn-default button button-medium\"]")
-    private WebElement RetrievePasswordButton;
+    private WebElement RetrievePasswordButton; // TODO Move to recover password page
 
     @FindBy(xpath = "//p[@class=\"alert alert-success\"]")
-    private WebElement SuccessMessage;
+    private WebElement SuccessMessage; // TODO Move to recover password page
+
+    @FindBy(xpath = "//h1[text()='Authentication']")
+    private WebElement authenticationTitle;
 
     public AuthenticationPage(WebDriver driver)
     {
@@ -110,5 +113,10 @@ public class AuthenticationPage extends BasePage
     public WebElement getSuccessMessage()
     {
         return SuccessMessage;
+    }
+
+    public WebElement getAuthenticationTitle()
+    {
+        return authenticationTitle;
     }
 }
