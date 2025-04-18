@@ -1,23 +1,45 @@
 package steps;
 
-import hooks.Hooks;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.AuthenticationPage;
+import pages.HeaderPage;
 import pages.HomePage;
 
 import java.time.Duration;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-public class HomePageSteps {
+public class HomePageSteps extends BaseSteps
+{
+    HomePage homePage = new HomePage(driver);
+    HeaderPage headerPage = new HeaderPage(driver);
+    AuthenticationPage authenticationPage = new AuthenticationPage(driver);
 
-    private WebDriver driver = Hooks.getDriver();
-    private HomePage homePage;
+    @Given("the user is connected and on the homepage")
+    public void theUserIsConnectedAndOnTheHomepage() {
+        assertTrue(homePage.PopularButton.isDisplayed());
+    }
+
+    @When("the user clicks on the 'Sign out' link")
+    public void theUserClicksOnTheSignOutLink() {
+        headerPage.SignOutButton.click();
+    }
+
+    @Then("the user should be logged out")
+    public void theUserShouldBeLoggedOut() {
+        assertTrue(headerPage.SignInButton.isDisplayed());
+    }
+
+    @And("the login page should contain 'Sign in'")
+    public void theLoginPageShouldContainSignIn() {
+        assertTrue(authenticationPage.getSignInButton().isDisplayed());
+        assertTrue(headerPage.SignInButton.getText().contains("Sign in"));
+    }
 
     @Given("The user is on the {string} page")
     public void theUserIsOnThePage(String page) {
