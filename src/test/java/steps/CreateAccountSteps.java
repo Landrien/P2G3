@@ -5,9 +5,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.AccountPage;
+import pages.AuthenticationPage;
 import pages.CreateAccountPage;
 import pages.HeaderPage;
+
+import java.time.Duration;
 
 public class CreateAccountSteps extends BaseSteps
 {
@@ -33,13 +38,16 @@ public class CreateAccountSteps extends BaseSteps
 
     HeaderPage headerPage = new HeaderPage(driver);
 
+    AuthenticationPage authenticationPage = new AuthenticationPage(driver);
+
     @Given("the user is on the Create an account page")
     public void startAtCreateAccountPage()
     {
         // TODO mdroz / Replace with an already defined step
         headerPage.clickSignInButton();
-        enterValidEmail();
-        clickRegisterButton();
+        authenticationPage.enterCreateEmailAddress("valid.email@gmail.com");
+        authenticationPage.clickCreateAccountButton();
+        new WebDriverWait(driver, Duration.ofSeconds(2));
     }
 
     @When("the user enters a {string} invalid password")
@@ -112,13 +120,13 @@ public class CreateAccountSteps extends BaseSteps
     public void selectBirthDate()
     {
         getCreateAccountPage().selectBirthDateDay("11");
-        getCreateAccountPage().selectBirthDateMonth("October");
+        getCreateAccountPage().selectBirthDateMonth("10");
         getCreateAccountPage().selectBirthDateYear("2001");
     }
 
     @And("the user checks Sign up for our newsletter!")
-    public void theUserChecksSignUpForOurNewsletter()
+    public void clickNewsletterSignUpCheckbox()
     {
-
+        getCreateAccountPage().clickNewsletterSignUpCheckbox();
     }
 }

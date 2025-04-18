@@ -63,8 +63,7 @@ public class AuthenticationSteps extends BaseSteps
     @Then("the Create an account page is displayed")
     public void checkCreateAccountPage()
     {
-        // TODO
-        Assert.assertNotNull(getCreateAccountPage());
+        Assert.assertTrue(getCreateAccountPage().getCreateAccountTitle().isDisplayed());
     }
 
     @And("the user enters an incorrect password")

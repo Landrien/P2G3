@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
  */
 public class AddressesPage extends BasePage
 {
+    public static final String pageUrlId = "controller=addresses";
+
     public AddressesPage(WebDriver driver)
     {
         super(driver);

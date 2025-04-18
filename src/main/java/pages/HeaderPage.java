@@ -23,7 +23,7 @@ public class HeaderPage extends BasePage
     @FindBy(xpath = "//a[@title = 'Contact us']")
     private WebElement contactUs;
 
-    @FindBy(xpath = "//img[@class='logo img-responsive']")
+    @FindBy(xpath = "//a[@title='My Shop']")
     private WebElement homePageLogoButton;
 
     public HeaderPage(WebDriver driver)

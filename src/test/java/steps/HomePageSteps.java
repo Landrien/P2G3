@@ -22,13 +22,6 @@ public class HomePageSteps extends BaseSteps
 
     AuthenticationPage authenticationPage = new AuthenticationPage(driver);
 
-    @Given("the user is connected and on the homepage")
-    public void theUserIsConnectedAndOnTheHomepage()
-    {
-        // TODO connect the user and put him in the homepage
-        assertTrue(homePage.getPopularButton().isDisplayed());
-    }
-
     @When("the user clicks on the 'Sign out' link")
     public void theUserClicksOnTheSignOutLink()
     {
@@ -161,7 +154,7 @@ public class HomePageSteps extends BaseSteps
     @Then("the Contact us link redirects the user to the contact page")
     public void theContactUsLinkRedirectsTheUserToTheContactPage()
     {
-        Assert.assertTrue(driver.getCurrentUrl().contains(ContactPage.getPageUrlId()));
+        Assert.assertTrue(driver.getCurrentUrl().contains(ContactPage.pageUrlId));
     }
 
     @When("the user clicks on the logo")
@@ -171,7 +164,7 @@ public class HomePageSteps extends BaseSteps
     }
 
     @Then("the user is redirected to the homepage")
-    public void theUserIsRedirectedToTheHomepage()
+    public void checkHomePageDisplayed()
     {
         String currentUrl = driver.getCurrentUrl();
         Assert.assertTrue("L'utilisateur n'est pas sur la page d'accueil. URL actuelle : " + currentUrl,

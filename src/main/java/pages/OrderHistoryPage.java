@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
  */
 public class OrderHistoryPage extends BasePage
 {
+    public static final String pageUrlId = "controller=history";
+
     public OrderHistoryPage(WebDriver driver)
     {
         super(driver);
