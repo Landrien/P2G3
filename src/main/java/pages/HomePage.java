@@ -28,12 +28,14 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//a[@title='Women']")
     private WebElement womenTab;
 
-    @FindBy(xpath = "//a[@title='Dresses']")
+    @FindBy(xpath = "//div[@id = 'block_top_menu']/ul/li[2]/a")
     private WebElement dressesTab;
 
-
-    @FindBy(xpath = "//a[@title='T-shirts']")
+    @FindBy(xpath = "//div[@id = 'block_top_menu']/ul/li[3]/a")
     private WebElement tshirtsTab;
+
+    @FindBy(xpath = "//img[@class='logo img-responsive']")
+     private WebElement logo;
 
 
     public void clickBlogTab() {
@@ -68,6 +70,11 @@ public class HomePage extends BasePage{
                 throw new IllegalArgumentException("Unknown tab: " + tabName);
         }
     }
+
+    public void clickLogo() {
+        logo.click();
+    }
+
 }
 
 

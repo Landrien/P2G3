@@ -41,6 +41,9 @@ public class AuthenticationPage extends BasePage {
     @FindBy(xpath = "//p[@class=\"alert alert-success\"]")
     private WebElement SuccessMessage;
 
+    @FindBy(xpath = "//img[@class='logo img-responsive']")
+    private WebElement logo;
+
     public AuthenticationPage(WebDriver driver)
     {
         super(driver);
@@ -99,4 +102,8 @@ public class AuthenticationPage extends BasePage {
     public WebElement getRetrievePasswordButton(){  return RetrievePasswordButton;}
 
     public WebElement getSuccessMessage(){  return SuccessMessage;}
+
+    public void clickLogo() {
+        logo.click();
+    }
 }

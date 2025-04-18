@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.AuthenticationPage;
 import pages.HomePage;
 
 import java.time.Duration;
@@ -18,11 +19,37 @@ public class HomePageSteps {
 
     private WebDriver driver = Hooks.getDriver();
     private HomePage homePage;
+    private AuthenticationPage authenticationPage;
+
+
+    /*@Given("The user is on the {string} page")
+    public void theUserIsOnThePage(String page) {
+        homePage = new HomePage(driver);
+    }*/
 
     @Given("The user is on the {string} page")
     public void theUserIsOnThePage(String page) {
-        homePage = new HomePage(driver);
+        switch (page.toLowerCase()) {
+            case "homepage":
+                driver.get("http://www.automationpractice.pl/index.php");
+                homePage = new HomePage(driver);
+                break;
+            case "authentication":
+                driver.get("http://www.automationpractice.pl/index.php?controller=authentication");
+                authenticationPage = new AuthenticationPage(driver);
+                break;
+            case "search_results":
+                driver.get("http://www.automationpractice.pl/index.php?controller=search&search_query=dress&submit_search=");
+                break;
+            case "article_detail":
+                driver.get("http://www.automationpractice.pl/index.php?id_product=1&controller=product");
+                break;
+            default:
+                throw new IllegalArgumentException("Page inconnue : " + page);
+        }
     }
+
+
 
     @When("The user clicks on the 'BLOG' tab")
     public void theUserClicksOnTheBLOGTab() {
@@ -119,4 +146,23 @@ public class HomePageSteps {
         Assert.assertTrue(driver.getCurrentUrl().contains("controller=contact"));
     }
 
+    @When("the user clicks on the logo")
+    public void theUserClicksOnTheLogo() {
+        if (homePage != null) {
+            homePage.clickLogo();  // Si on est sur la page d'accueil, on clique sur le logo dans homePage
+        } else if (authenticationPage != null) {
+            authenticationPage.clickLogo();  // Si on est sur la page d'authentification, tu peux aussi implémenter le clickLogo() dans cette page
+        } else {
+            throw new IllegalStateException("L'utilisateur n'est sur aucune page valide !");
+        }
+    }
+
+
+    @Then("the user is redirected to the homepage")
+    public void theUserIsRedirectedToTheHomepage() {
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertTrue("L'utilisateur n'est pas sur la page d'accueil. URL actuelle : " + currentUrl,
+                currentUrl.equals("http://www.automationpractice.pl/index.php"));
+    }
 }
+
