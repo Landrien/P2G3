@@ -15,6 +15,9 @@ public class CreateAccountPage extends BasePage
         super(driver);
     }
 
+    @FindBy(xpath = "//h1[text()='Create an account']")
+    private WebElement createAccountTitle;
+
     @FindBy(xpath = "//label[@for='id_gender1']")
     private WebElement maleGenderRadioSelect;
 
@@ -35,6 +38,9 @@ public class CreateAccountPage extends BasePage
 
     @FindBy(id = "submitAccount")
     private WebElement registerButton;
+
+    @FindBy(className = "alert-danger")
+    private WebElement errorBox;
 
     @FindBy(xpath = "//b[text()='email']")
     private WebElement invalidEmailMessage;
@@ -101,7 +107,7 @@ public class CreateAccountPage extends BasePage
 
     public void clickNewsletterSignUpCheckbox()
     {
-        // TODO
+        newsletterSignUpCheckbox.click();
     }
 
     public void selectBirthDateDay(String day)
@@ -121,5 +127,15 @@ public class CreateAccountPage extends BasePage
     {
         Select select = new Select(element);
         select.selectByValue(value);
+    }
+
+    public WebElement getErrorBox()
+    {
+        return errorBox;
+    }
+
+    public WebElement getCreateAccountTitle()
+    {
+        return createAccountTitle;
     }
 }

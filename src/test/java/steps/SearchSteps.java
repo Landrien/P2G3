@@ -1,7 +1,6 @@
 package steps;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -12,7 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.SearchPage;
 
 import java.time.Duration;
-
 
 public class SearchSteps extends BaseSteps {
 
@@ -35,8 +33,8 @@ public class SearchSteps extends BaseSteps {
 
     @Then("the user should be redirected to the {string} article page")
     public void theUserShouldBeRedirectedToTheArticlePage(String article_name) {
-            String actualTitle = searchPage.getProductTitle();
-            Assert.assertEquals("Le titre de l'article ne correspond pas", article_name, actualTitle);
+        String actualTitle = searchPage.getProductTitle();
+        Assert.assertEquals("Le titre de l'article ne correspond pas", article_name, actualTitle);
     }
 
     @And("the user clicks on the magnifying glass")
@@ -57,7 +55,6 @@ public class SearchSteps extends BaseSteps {
     public void pageShouldCountainTheSearchField(String page) {
         WebElement searchField = searchPage.getSearchField();
         Assert.assertTrue("Le champ de recherche n'est pas visible sur la page " + page, searchField.isDisplayed());
-
     }
 
     @And("{string} page should countain the magnifying glass")

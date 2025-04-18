@@ -6,8 +6,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import pages.AccountPage;
+import pages.AuthenticationPage;
 import pages.CreateAccountPage;
 import pages.HeaderPage;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Random;
 
 public class CreateAccountSteps extends BaseSteps
 {
@@ -33,13 +37,20 @@ public class CreateAccountSteps extends BaseSteps
 
     HeaderPage headerPage = new HeaderPage(driver);
 
+    AuthenticationPage authenticationPage = new AuthenticationPage(driver);
+
     @Given("the user is on the Create an account page")
     public void startAtCreateAccountPage()
     {
-        // TODO mdroz / Replace with an already defined step
         headerPage.clickSignInButton();
-        enterValidEmail();
-        clickRegisterButton();
+        String randomEmail = getRandomString() + "@gmail.com";
+        authenticationPage.enterCreateEmailAddress(randomEmail);
+        authenticationPage.clickCreateAccountButton();
+    }
+
+    private String getRandomString()
+    {
+        return "test." + System.currentTimeMillis();
     }
 
     @When("the user enters a {string} invalid password")
@@ -93,7 +104,8 @@ public class CreateAccountSteps extends BaseSteps
     @And("the user modifies the email address with a valid format")
     public void enterValidEmail()
     {
-        getCreateAccountPage().enterEmailAddress("myadress@gmail.com");
+        String randomEmail = getRandomString() + "@gmail.com";
+        getCreateAccountPage().enterEmailAddress(randomEmail);
     }
 
     @And("the user enters a password with at least '5' characters")
@@ -112,13 +124,13 @@ public class CreateAccountSteps extends BaseSteps
     public void selectBirthDate()
     {
         getCreateAccountPage().selectBirthDateDay("11");
-        getCreateAccountPage().selectBirthDateMonth("October");
+        getCreateAccountPage().selectBirthDateMonth("10");
         getCreateAccountPage().selectBirthDateYear("2001");
     }
 
     @And("the user checks Sign up for our newsletter!")
-    public void theUserChecksSignUpForOurNewsletter()
+    public void clickNewsletterSignUpCheckbox()
     {
-
+        getCreateAccountPage().clickNewsletterSignUpCheckbox();
     }
 }

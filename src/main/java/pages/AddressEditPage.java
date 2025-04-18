@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
  */
 public class AddressEditPage extends BasePage
 {
+    public static final String pageUrlId = "controller=address";
+
     public AddressEditPage(WebDriver driver)
     {
         super(driver);

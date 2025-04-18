@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
  */
 public class AccountInfoPage extends BasePage
 {
+    public static final String pageUrlId = "controller=identity";
+
     public AccountInfoPage(WebDriver driver)
     {
         super(driver);
