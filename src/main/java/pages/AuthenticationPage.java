@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utils.ConfigReader;
 
 /**
  * The authentication page where the user can connect into the website or create a new account
@@ -118,5 +119,22 @@ public class AuthenticationPage extends BasePage
     public WebElement getAuthenticationTitle()
     {
         return authenticationTitle;
+    }
+
+    public void connectNoAddressAccount()
+    {
+        connect("email-account-no-address", "password-account-no-address");
+    }
+
+    public void connectAddressesAccount()
+    {
+        connect("email-account-addresses", "password-account-addresses");
+    }
+
+    public void connect(String email, String password)
+    {
+        enterSignInEmailAddress(ConfigReader.getProperty(email));
+        enterSignInPassword(ConfigReader.getProperty(password));
+        clickSignInButton();
     }
 }

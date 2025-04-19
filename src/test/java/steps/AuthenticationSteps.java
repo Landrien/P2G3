@@ -8,23 +8,22 @@ import org.junit.Assert;
 import pages.AuthenticationPage;
 import pages.CreateAccountPage;
 import pages.HeaderPage;
+import utils.ConfigReader;
 
 import static org.junit.Assert.assertTrue;
+import static utils.RandomString.getRandomString;
 
 public class AuthenticationSteps extends BaseSteps
 {
-    private CreateAccountPage createAccountPage;
-
-    private CreateAccountPage getCreateAccountPage()
-    {
-        if (createAccountPage == null)
-            createAccountPage = new CreateAccountPage(driver);
-
-        return createAccountPage;
-    }
-
+    CreateAccountPage createAccountPage = new CreateAccountPage(driver);
     AuthenticationPage authenticationPage = new AuthenticationPage(driver);
     HeaderPage headerPage = new HeaderPage(driver);
+
+    private String registeredAccountEmail = ConfigReader.getProperty("email-account-addresses");
+    private String registeredAccountPassword = ConfigReader.getProperty("password-account-addresses");
+
+    private String registeredAccountFirstName = "Admin";
+    private String registeredAccountLastName = "admin";
 
     @Given("the user is on the Authentication page")
     @Given("the user is on the 'Authentication' page")
@@ -46,7 +45,7 @@ public class AuthenticationSteps extends BaseSteps
     }
 
     @Then("an error message Invalid email address is displayed")
-    public void checkInvalidCreateEmailMessage()
+    public void checkInvalidCreateEmailErrorMessage()
     {
         Assert.assertNotNull(authenticationPage.getInvalidEmailErrorMessage());
     }
@@ -55,13 +54,14 @@ public class AuthenticationSteps extends BaseSteps
     @When("the user enters a valid email address")
     public void enterValidCreateEmail()
     {
-        authenticationPage.enterCreateEmailAddress("valid.email@gmail.com");
+        String randomEmail = getRandomString() + "@gmail.com";
+        authenticationPage.enterCreateEmailAddress(randomEmail);
     }
 
     @Then("the Create an account page is displayed")
     public void checkCreateAccountPage()
     {
-        Assert.assertTrue(getCreateAccountPage().getCreateAccountTitle().isDisplayed());
+        Assert.assertTrue(createAccountPage.getCreateAccountTitle().isDisplayed());
     }
 
     @And("the user enters an incorrect password")
@@ -104,9 +104,8 @@ public class AuthenticationSteps extends BaseSteps
     @Given("the user is connected and on the homepage")
     public void connect()
     {
-        // TODO mdroz / Parameters
-        authenticationPage.enterSignInEmailAddress("admin13@gmail.com");
-        authenticationPage.enterSignInPassword("admin");
+        authenticationPage.enterSignInEmailAddress(registeredAccountEmail);
+        authenticationPage.enterSignInPassword(registeredAccountPassword);
         authenticationPage.clickSignInButton();
         headerPage.clickLogoButton();
     }

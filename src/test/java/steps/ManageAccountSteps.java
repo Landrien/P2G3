@@ -7,7 +7,6 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import pages.*;
-import utils.ConfigReader;
 
 import java.util.Arrays;
 import java.util.List;
@@ -58,21 +57,7 @@ public class ManageAccountSteps extends BaseSteps
     public void startAtAccountPage()
     {
         headerPage.clickSignInButton();
-        connectWithAccountNoAddresses();
-    }
-
-    private void connectWithAccountNoAddresses()
-    {
-        authenticationPage.enterSignInEmailAddress(ConfigReader.getProperty("email-account-no-address"));
-        authenticationPage.enterSignInPassword(ConfigReader.getProperty("password-account-no-address"));
-        authenticationPage.clickSignInButton();
-    }
-
-    private void connectWithAccountWithAddresses()
-    {
-        authenticationPage.enterSignInEmailAddress(ConfigReader.getProperty("email-account-addresses"));
-        authenticationPage.enterSignInPassword(ConfigReader.getProperty("password-account-addresses"));
-        authenticationPage.clickSignInButton();
+        authenticationPage.connectNoAddressAccount();
     }
 
     @When("the user clicks on the Home button")
@@ -141,7 +126,7 @@ public class ManageAccountSteps extends BaseSteps
     public void startAtAddressesPage()
     {
         headerPage.clickSignInButton();
-        connectWithAccountWithAddresses();
+        authenticationPage.connectAddressesAccount();
         accountPage.clickMyAddressesButton();
     }
 

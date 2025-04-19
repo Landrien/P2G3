@@ -10,6 +10,8 @@ import pages.AuthenticationPage;
 import pages.CreateAccountPage;
 import pages.HeaderPage;
 
+import static utils.RandomString.getRandomString;
+
 public class CreateAccountSteps extends BaseSteps
 {
     private CreateAccountPage createAccountPage;
@@ -43,11 +45,6 @@ public class CreateAccountSteps extends BaseSteps
         String randomEmail = getRandomString() + "@gmail.com";
         authenticationPage.enterCreateEmailAddress(randomEmail);
         authenticationPage.clickCreateAccountButton();
-    }
-
-    private String getRandomString()
-    {
-        return "test." + System.currentTimeMillis();
     }
 
     @When("the user enters a {string} invalid password")
