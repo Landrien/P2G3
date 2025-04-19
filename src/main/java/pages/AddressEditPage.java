@@ -79,10 +79,10 @@ public class AddressEditPage extends BasePage
         cityField.sendKeys(value);
     }
 
-    public void selectState(String value)
+    public void selectState(String text)
     {
         Select select = new Select(stateSelect);
-        select.selectByValue(value);
+        select.selectByVisibleText(text);
     }
 
     public void enterPostalCodeField(String value)
@@ -91,10 +91,10 @@ public class AddressEditPage extends BasePage
         postalCodeField.sendKeys(value);
     }
 
-    public void selectCountry(String value)
+    public void selectCountry(String text)
     {
         Select select = new Select(countrySelect);
-        select.selectByValue(value);
+        select.selectByVisibleText(text);
     }
 
     public void enterHomePhoneField(String value)
