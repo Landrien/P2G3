@@ -14,10 +14,11 @@ Feature: US 7 - Logo
 	@POEI25P2G3-33 @POEI25P2G3-83 @TNR
 	Scenario Outline: Logo - Redirection page d'accueil
 		Given the user is on the "<page>" page
-		When the user clicks on the logo  
+		When the user clicks on the home logo
 		Then the user is redirected to the homepage
 		
 		Scenarios:
 		  | page |
 		  | homepage |
 		
+	# TESTED : VALID

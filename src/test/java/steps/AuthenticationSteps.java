@@ -19,11 +19,11 @@ public class AuthenticationSteps extends BaseSteps
     AuthenticationPage authenticationPage = new AuthenticationPage(driver);
     HeaderPage headerPage = new HeaderPage(driver);
 
-    private String registeredAccountEmail = ConfigReader.getProperty("email-account-addresses");
-    private String registeredAccountPassword = ConfigReader.getProperty("password-account-addresses");
+    private final String registeredAccountEmail = ConfigReader.getProperty("email-account-addresses");
+    private final String registeredAccountPassword = ConfigReader.getProperty("password-account-addresses");
 
-    private String registeredAccountFirstName = "Admin";
-    private String registeredAccountLastName = "admin";
+    private final String registeredAccountFirstName = "Admin";
+    private final String registeredAccountLastName = "admin";
 
     @Given("the user is on the Authentication page")
     public void startAtAuthenticationPage()
@@ -77,7 +77,7 @@ public class AuthenticationSteps extends BaseSteps
     @And("the user enters the password associated with their account")
     public void enterValidRegisterPassword()
     {
-        authenticationPage.enterSignInPassword("admin");
+        authenticationPage.enterSignInPassword(registeredAccountPassword);
     }
 
     @And("the user click on the button")
@@ -95,7 +95,7 @@ public class AuthenticationSteps extends BaseSteps
     @And("the user's first and last name appear in the menu bar")
     public void checkFirstNameLastNameInMenuBar()
     {
-        assertTrue(headerPage.getUserAccountButton().getText().contains("Admin admin"));
+        assertTrue(headerPage.getUserAccountButton().getText().contains(registeredAccountFirstName + " " + registeredAccountLastName));
     }
 
     @Given("the user has an account with a valid email address")

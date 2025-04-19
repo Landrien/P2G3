@@ -17,7 +17,7 @@ Feature: US3 : Gestion du compte client
 	@POEI25P2G3-46 @POEI25P2G3-85 @TNR
 	Scenario: Redirection page d'accueil
 		Given the user is connected with an account and no registered addresses
-		When the user clicks on the Home button
+		When the user clicks on the home logo
 		Then the user is redirected to the homepage
 
 	# TESTED : TO DEBUG

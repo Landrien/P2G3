@@ -59,12 +59,6 @@ public class ManageAccountSteps extends BaseSteps
         authenticationPage.connectNoAddressAccount();
     }
 
-    @When("the user clicks on the Home button")
-    public void clickHomeButton()
-    {
-        headerPage.clickLogoButton();
-    }
-
     @When("the user clicks on Add my first Address button")
     public void clickAddMyFirstAddressButton()
     {

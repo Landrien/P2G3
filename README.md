@@ -9,6 +9,6 @@ Feature Addresses : To Debug
 
 Feature Cart : Good
 
-Feature Homepage :  
+Feature Homepage : Good
 
 Feature Connexion :
