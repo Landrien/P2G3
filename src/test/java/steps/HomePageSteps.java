@@ -9,6 +9,7 @@ import pages.AuthenticationPage;
 import pages.ContactPage;
 import pages.HeaderPage;
 import pages.HomePage;
+import utils.ConfigReader;
 
 import static org.junit.Assert.assertTrue;
 
@@ -37,28 +38,6 @@ public class HomePageSteps extends BaseSteps
         assertTrue(headerPage.getSignInButton().getText().contains("Sign in"));
     }
 
-    @Given("The user is on the {string} page")
-    public void theUserIsOnThePage(String page)
-    {
-        switch (page.toLowerCase())
-        {
-            case "homepage":
-                driver.get("http://www.automationpractice.pl/index.php");
-                break;
-            case "authentication":
-                driver.get("http://www.automationpractice.pl/index.php?controller=authentication");
-                break;
-            case "search_results":
-                driver.get("http://www.automationpractice.pl/index.php?controller=search&search_query=dress&submit_search=");
-                break;
-            case "article_detail":
-                driver.get("http://www.automationpractice.pl/index.php?id_product=1&controller=product");
-                break;
-            default:
-                throw new IllegalArgumentException("Page inconnue : " + page);
-        }
-    }
-
     @When("The user clicks on the 'BLOG' tab")
     public void theUserClicksOnTheBLOGTab()
     {
@@ -84,9 +63,9 @@ public class HomePageSteps extends BaseSteps
     }
 
     @Given("the user is on the homepage")
-    public void theUserIsOnTheHomepage()
+    public void startAtHomepage()
     {
-        // TODO To remove
+        driver.get(ConfigReader.getProperty("url"));
     }
 
     @When("the user clicks on a featured advertisement")

@@ -26,9 +26,20 @@ public class HeaderPage extends BasePage
     @FindBy(xpath = "//a[@title='My Shop']")
     private WebElement homePageLogoButton;
 
+    @FindBy(xpath = "//a[@title = 'View my shopping cart']")
+    private WebElement cartLogoButton;
+
+    private SearchBarPage searchBarPage;
+
     public HeaderPage(WebDriver driver)
     {
         super(driver);
+        searchBarPage = new SearchBarPage(driver);
+    }
+
+    public void clickCartLogo()
+    {
+        cartLogoButton.click();
     }
 
     public void clickSignOutButton()
@@ -63,5 +74,10 @@ public class HeaderPage extends BasePage
     public WebElement getUserAccountButton()
     {
         return userAccountButton;
+    }
+
+    public SearchBarPage getSearchBarPage()
+    {
+        return searchBarPage;
     }
 }
