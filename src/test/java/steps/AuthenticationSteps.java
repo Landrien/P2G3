@@ -30,7 +30,6 @@ public class AuthenticationSteps extends BaseSteps
     @Given("the user is on the 'Authentication' page")
     public void startAtAuthenticationPage()
     {
-        // TODO mdroz / Navigate towards the authentication page
         headerPage.clickSignInButton();
     }
 
@@ -56,7 +55,6 @@ public class AuthenticationSteps extends BaseSteps
     @When("the user enters a valid email address")
     public void enterValidCreateEmail()
     {
-        // TODO mdroz / Data for this parameter
         authenticationPage.enterCreateEmailAddress("valid.email@gmail.com");
     }
 
@@ -103,6 +101,7 @@ public class AuthenticationSteps extends BaseSteps
     }
 
     @Given("the user has an account with a valid email address")
+    @Given("the user is connected and on the homepage")
     public void connect()
     {
         // TODO mdroz / Parameters
