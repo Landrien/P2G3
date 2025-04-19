@@ -6,9 +6,9 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class SearchBarPage extends BasePage
+public class SearchBarPageElement extends BasePage
 {
-    public SearchBarPage(WebDriver driver)
+    public SearchBarPageElement(WebDriver driver)
     {
         super(driver);
     }

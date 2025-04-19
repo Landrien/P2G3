@@ -7,24 +7,24 @@ import org.openqa.selenium.support.FindBy;
 /**
  * The home page of the application, this is where the user lands when accessing the website url
  */
-public class HomePage extends BasePage{
-
-    @FindBy(xpath = "//a[@class=\"homefeatured\"]")
+public class HomePage extends BasePage
+{
+    @FindBy(xpath = "//a[@class='homefeatured']")
     private WebElement popularButton;
 
     @FindBy(xpath = "//a[@title='Blog']")
     private WebElement blogTab;
 
-    @FindBy(id="homepage-slider")
+    @FindBy(id = "homepage-slider")
     private WebElement featuredAd;
 
     @FindBy(xpath = "//a[@title='Women']")
     private WebElement womenTab;
 
-    @FindBy(xpath = "//div[@id = 'block_top_menu']/ul/li[2]/a")
+    @FindBy(xpath = "//div[@id='block_top_menu']/ul/li[2]/a")
     private WebElement dressesTab;
 
-    @FindBy(xpath = "//div[@id = 'block_top_menu']/ul/li[3]/a")
+    @FindBy(xpath = "//div[@id='block_top_menu']/ul/li[3]/a")
     private WebElement tshirtsTab;
 
     public HomePage(WebDriver driver)
@@ -66,7 +66,3 @@ public class HomePage extends BasePage{
         return popularButton;
     }
 }
-
-
-
-

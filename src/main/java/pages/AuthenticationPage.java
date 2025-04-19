@@ -25,7 +25,7 @@ public class AuthenticationPage extends BasePage
     @FindBy(id = "SubmitLogin")
     private WebElement signInButton;
 
-    @FindBy(xpath = "//div[@class= \"alert alert-danger\"]")
+    @FindBy(xpath = "//div[@class='alert alert-danger']")
     private WebElement invalidPasswordErrorMessage;
 
     @FindBy(id = "create_account_error")
@@ -72,16 +72,6 @@ public class AuthenticationPage extends BasePage
     public WebElement getInvalidPasswordErrorMessage()
     {
         return invalidPasswordErrorMessage;
-    }
-
-    public WebElement getCreateAccountButton()
-    {
-        return createAccountButton;
-    }
-
-    public WebElement getSignInButton()
-    {
-        return signInButton;
     }
 
     public WebElement getAuthenticationTitle()
