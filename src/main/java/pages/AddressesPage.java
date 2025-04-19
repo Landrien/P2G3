@@ -31,4 +31,14 @@ public class AddressesPage extends BasePage
     {
         updateAddressButton.click();
     }
+
+    public WebElement getAddAddressButton()
+    {
+        return addAddressButton;
+    }
+
+    public WebElement getUpdateAddressButton()
+    {
+        return updateAddressButton;
+    }
 }
