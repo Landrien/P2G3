@@ -11,32 +11,30 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.AuthenticationPage;
 import pages.CreateAccountPage;
 import pages.HeaderPage;
+import utils.ConfigReader;
 
 import static org.junit.Assert.assertTrue;
+import static utils.RandomString.getRandomString;
 
 public class AuthenticationSteps extends BaseSteps
 {
-    private CreateAccountPage createAccountPage;
-
-    private CreateAccountPage getCreateAccountPage()
-    {
-        if (createAccountPage == null)
-            createAccountPage = new CreateAccountPage(driver);
-
-        return createAccountPage;
-    }
-
+    CreateAccountPage createAccountPage = new CreateAccountPage(driver);
     AuthenticationPage authenticationPage = new AuthenticationPage(driver);
     HeaderPage headerPage = new HeaderPage(driver);
 
+    private final String registeredAccountEmail = ConfigReader.getProperty("email-account-addresses");
+    private final String registeredAccountPassword = ConfigReader.getProperty("password-account-addresses");
+
+    private final String registeredAccountFirstName = "Admin";
+    private final String registeredAccountLastName = "admin";
+
     @Given("the user is on the Authentication page")
-    @Given("the user is on the 'Authentication' page")
     public void startAtAuthenticationPage()
     {
         headerPage.clickSignInButton();
     }
 
-    @When("the user enters an incorrectly formatted email address in the Email address field")
+    @When("the user enters an email address with an invalid format")
     public void enterInvalidCreateEmail()
     {
         authenticationPage.enterCreateEmailAddress("bad-email");
@@ -49,7 +47,7 @@ public class AuthenticationSteps extends BaseSteps
     }
 
     @Then("an error message Invalid email address is displayed")
-    public void checkInvalidCreateEmailMessage()
+    public void checkInvalidCreateEmailErrorMessage()
     {
         Assert.assertNotNull(authenticationPage.getInvalidEmailErrorMessage());
     }
@@ -57,7 +55,8 @@ public class AuthenticationSteps extends BaseSteps
     @When("the user enters a valid email address in the Email address field")
     public void enterValidCreateEmail()
     {
-        authenticationPage.enterCreateEmailAddress("valid.email@gmail.com");
+        String randomEmail = getRandomString() + "@gmail.com";
+        authenticationPage.enterCreateEmailAddress(randomEmail);
     }
 
     @When("the user enters a valid email address")
@@ -69,7 +68,7 @@ public class AuthenticationSteps extends BaseSteps
     @Then("the Create an account page is displayed")
     public void checkCreateAccountPage()
     {
-        Assert.assertTrue(getCreateAccountPage().getCreateAccountTitle().isDisplayed());
+        Assert.assertTrue(createAccountPage.getCreateAccountTitle().isDisplayed());
     }
 
     @And("the user enters an incorrect password")
@@ -88,7 +87,7 @@ public class AuthenticationSteps extends BaseSteps
     @And("the user enters the password associated with their account")
     public void enterValidRegisterPassword()
     {
-        authenticationPage.enterSignInPassword("admin");
+        authenticationPage.enterSignInPassword(registeredAccountPassword);
     }
 
     @And("the user click on the button")
@@ -106,7 +105,7 @@ public class AuthenticationSteps extends BaseSteps
     @And("the user's first and last name appear in the menu bar")
     public void checkFirstNameLastNameInMenuBar()
     {
-        assertTrue(headerPage.getUserAccountButton().getText().contains("Admin admin"));
+        assertTrue(headerPage.getUserAccountButton().getText().contains(registeredAccountFirstName + " " + registeredAccountLastName));
     }
 
     @Given("the user has an account with a valid email address")
@@ -114,11 +113,9 @@ public class AuthenticationSteps extends BaseSteps
     public void connect() {
         // TODO mdroz / Parameters
         headerPage.clickSignInButton();
-        authenticationPage.enterSignInEmailAddress("admin13@gmail.com");
-        authenticationPage.enterSignInPassword("admin");
+        authenticationPage.enterSignInEmailAddress(registeredAccountEmail);
+        authenticationPage.enterSignInPassword(registeredAccountPassword);
         authenticationPage.clickSignInButton();
-        WebElement okButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='OK']")));
-        okButton.click();
         headerPage.clickLogoButton();
     }
 

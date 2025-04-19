@@ -4,22 +4,21 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import pages.CartPage;
+import pages.HeaderPage;
 
 public class CartSteps extends BaseSteps
 {
-    CartPage cartPage = new CartPage(driver);
+    HeaderPage headerPage = new HeaderPage(driver);
 
     @When("the user clicks on the cart logo")
-    public void theUserClicksOnTheCartLogo()
+    public void clickCartLogo()
     {
-        cartPage.clickCartLogo();
+        headerPage.clickCartLogo();
     }
 
-    @Then("the user is redirected to the {string} page")
-    public void theUserIsRedirectedToTheShoppingCartSummaryPage(String page)
+    @Then("the user is redirected to the 'Shopping Cart Summary' page")
+    public void checkUserIsOnCartPage()
     {
-        String currentUrl = driver.getCurrentUrl();
-        Assert.assertTrue("L'URL de la page du panier ne correspond pas. URL actuelle : " + currentUrl,
-                currentUrl.contains("controller=order"));
+        Assert.assertTrue(driver.getCurrentUrl().contains(CartPage.pageUrlId));
     }
 }

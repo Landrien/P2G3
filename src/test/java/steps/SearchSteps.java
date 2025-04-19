@@ -7,45 +7,49 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.ArticlePage;
+import pages.SearchBarPage;
 import pages.SearchPage;
 
 public class SearchSteps extends BaseSteps
 {
-    SearchPage searchPage = new SearchPage(driver);
+    SearchBarPage searchBarPage = new SearchBarPage(driver);
+    ArticlePage articlePage = new ArticlePage(driver);
 
     @When("the user clicks on the search field")
-    public void theUserClicksOnTheSearchField()
+    public void clickSearchField()
     {
-        searchPage.getSearchField().click();
+        searchBarPage.clickSearchField();
     }
 
-    @And("the user types {string}")
-    public void theUserTypes(String article)
+    @And("the user enters the text {string} in the search bar")
+    public void enterSearchElement(String article)
     {
-        searchPage.enter_element(article);
+        searchBarPage.enterSearchElement(article);
     }
 
     @And("the user clicks on the suggestion {string}")
-    public void theUserClicksOnTheSuggestion(String suggestion)
+    public void clickOnSuggestion(String suggestion)
     {
-        searchPage.clickOnSuggestion(suggestion);
+        searchBarPage.clickOnSuggestion(suggestion);
     }
 
     @Then("the user should be redirected to the {string} article page")
-    public void theUserShouldBeRedirectedToTheArticlePage(String article_name)
+    public void checkUserIsOnArticlePage(String articleName)
     {
-        String actualTitle = searchPage.getProductTitle();
-        Assert.assertEquals("Le titre de l'article ne correspond pas", article_name, actualTitle);
+        String actualTitle = articlePage.getProductTitle();
+        Assert.assertEquals("Le titre de l'article ne correspond pas", articleName, actualTitle);
     }
 
     @And("the user clicks on the magnifying glass")
-    public void theUserClicksOnTheMagnifyingGlass()
+    public void clickSearchButton()
     {
-        searchPage.clickSearchButton();
+        searchBarPage.clickSearchButton();
     }
 
     @Then("the user should be redirected to the {string} search results page")
-    public void theUserShouldBeRedirectedToTheSearchResultsPage(String searchQuery)
+    public void checkUserIsONSearchResultsPage(String searchQuery)
     {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("search_query_top")));
@@ -54,17 +58,17 @@ public class SearchSteps extends BaseSteps
                 currentUrl.contains("search_query=" + searchQuery));
     }
 
-    @Then("{string} page should countain the search field")
-    public void pageShouldCountainTheSearchField(String page)
+    @Then("the {string} page should contain the search field")
+    public void checkPageContainsSearchField(String page)
     {
-        WebElement searchField = searchPage.getSearchField();
+        WebElement searchField = searchBarPage.getSearchField();
         Assert.assertTrue("Le champ de recherche n'est pas visible sur la page " + page, searchField.isDisplayed());
     }
 
-    @And("{string} page should countain the magnifying glass")
-    public void pageShouldCountainTheMagnifyingGlass(String page)
+    @And("the {string} page should contain the magnifying glass")
+    public void checkPageContainsSearchButton(String page)
     {
-        WebElement searchButton = searchPage.getSearchButton();
+        WebElement searchButton = searchBarPage.getSearchButton();
         Assert.assertTrue("La loupe de recherche n'est pas visible sur la page " + page, searchButton.isDisplayed());
     }
 }

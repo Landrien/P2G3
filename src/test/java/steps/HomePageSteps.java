@@ -11,6 +11,7 @@ import pages.AuthenticationPage;
 import pages.ContactPage;
 import pages.HeaderPage;
 import pages.HomePage;
+import utils.ConfigReader;
 
 import static org.junit.Assert.assertTrue;
 
@@ -42,71 +43,49 @@ public class HomePageSteps extends BaseSteps
         assertTrue(headerPage.getSignInButton().getText().contains("Sign in"));
     }
 
-    @Given("The user is on the {string} page")
-    public void theUserIsOnThePage(String page)
-    {
-        switch (page.toLowerCase())
-        {
-            case "homepage":
-                driver.get("http://www.automationpractice.pl/index.php");
-                break;
-            case "authentication":
-                driver.get("http://www.automationpractice.pl/index.php?controller=authentication");
-                break;
-            case "search_results":
-                driver.get("http://www.automationpractice.pl/index.php?controller=search&search_query=dress&submit_search=");
-                break;
-            case "article_detail":
-                driver.get("http://www.automationpractice.pl/index.php?id_product=1&controller=product");
-                break;
-            default:
-                throw new IllegalArgumentException("Page inconnue : " + page);
-        }
-    }
-
-    @When("The user clicks on the 'BLOG' tab")
-    public void theUserClicksOnTheBLOGTab()
+    @When("The user clicks on the Blog tab")
+    public void clickBlogTab()
     {
         homePage.clickBlogTab();
     }
 
-    @Then("the user is redirected to the Prestashop website")
-    public void theUserIsRedirectedToThePrestashopWebsite()
+    @Then("the user is redirected to the Prestashop blog website")
+    public void checkUserIsOnPrestashopBlog()
     {
-        goToNewTabUrl("prestashop.com/blog");
+        checkNewTabUrl("prestashop.com/blog");
     }
 
     @When ("the user clicks on the links Sign in")
-    public void theUserClicksOnTheLinksSignIn()
+    public void clickSignInButton()
     {
         headerPage.clickSignInButton();
     }
 
-    @Then("the Sign in link redirects the user to the authentication page")
-    public void theSignInLinkRedirectsTheUserToTheAuthenticationPage()
+    @Then("the user is redirected to the Authentication page")
+    public void checkUserIsOnAuthenticationPage()
     {
         Assert.assertNotNull(authenticationPage.getAuthenticationTitle());
     }
 
     @Given("the user is on the homepage")
-    public void theUserIsOnTheHomepage()
+    public void startAtHomepage()
     {
-        // TODO To remove
+        driver.get(ConfigReader.getProperty("url"));
     }
 
     @When("the user clicks on a featured advertisement")
-    public void theUserClicksOnAFeaturedAdvertisement()
+    public void clickFeaturedAd()
     {
         homePage.clickFeaturedAd();
     }
 
-    @Then("the user is redirected to the Prestashop partner website")
-    public void theUserIsRedirectedToThePrestashopPartnerWebsite()
+    @Then("the user is redirected to the Prestashop website")
+    public void checkUserIsOnPrestashop()
     {
-        goToNewTabUrl("https://prestashop.com/");
+        checkNewTabUrl("https://prestashop.com/");
     }
 
-    private void goToNewTabUrl(String url)
+    private void checkNewTabUrl(String url)
     {
         String originalWindow = driver.getWindowHandle();
         for (String handle : driver.getWindowHandles())
@@ -120,13 +99,13 @@ public class HomePageSteps extends BaseSteps
     }
 
     @When("the user clicks on the {string} tab")
-    public void theUserClicksOnTheTab(String tabName)
+    public void clickOnTab(String tabName)
     {
         homePage.clickOnCategoryTab(tabName);
     }
 
     @Then("the user is redirected to a page displaying {string} items")
-    public void theUserIsRedirectedToAPageDisplayingItems(String tabName)
+    public void checkUserIsRedirectedToCategory(String tabName)
     {
         String currentUrl = driver.getCurrentUrl().toLowerCase();
         switch (tabName.toLowerCase()) {
@@ -146,25 +125,25 @@ public class HomePageSteps extends BaseSteps
     }
 
     @And("the user clicks on the links Contact us")
-    public void theUserClicksOnTheLinksContactUs()
+    public void clickContactUs()
     {
         headerPage.clickContactUs();
     }
 
-    @Then("the Contact us link redirects the user to the contact page")
-    public void theContactUsLinkRedirectsTheUserToTheContactPage()
+    @Then("the user is redirected to the Contact page")
+    public void checkUserIsOnContactPage()
     {
         Assert.assertTrue(driver.getCurrentUrl().contains(ContactPage.pageUrlId));
     }
 
-    @When("the user clicks on the logo")
-    public void theUserClicksOnTheLogo()
+    @When("the user clicks on the home logo")
+    public void clickHomePageLogo()
     {
         headerPage.clickLogoButton();
     }
 
     @Then("the user is redirected to the homepage")
-    public void checkHomePageDisplayed()
+    public void checkUserIsOnHomepage()
     {
         String currentUrl = driver.getCurrentUrl();
         Assert.assertEquals("L'utilisateur n'est pas sur la page d'accueil. URL actuelle : " + currentUrl, "http://www.automationpractice.pl/index.php", currentUrl);

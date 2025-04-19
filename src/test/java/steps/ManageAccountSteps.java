@@ -5,9 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import pages.*;
-import utils.ConfigReader;
 
 import java.util.Arrays;
 import java.util.List;
@@ -54,31 +52,11 @@ public class ManageAccountSteps extends BaseSteps
         "My address"
     );
 
-    @Given("the user is on the My Account page")
-    public void startAtAccountPage()
+    @Given("the user is connected with an account and no registered addresses")
+    public void connectNoAddressesAccount()
     {
         headerPage.clickSignInButton();
-        connectWithAccountNoAddresses();
-    }
-
-    private void connectWithAccountNoAddresses()
-    {
-        authenticationPage.enterSignInEmailAddress(ConfigReader.getProperty("email-account-no-address"));
-        authenticationPage.enterSignInPassword(ConfigReader.getProperty("password-account-no-address"));
-        authenticationPage.clickSignInButton();
-    }
-
-    private void connectWithAccountWithAddresses()
-    {
-        authenticationPage.enterSignInEmailAddress(ConfigReader.getProperty("email-account-addresses"));
-        authenticationPage.enterSignInPassword(ConfigReader.getProperty("password-account-addresses"));
-        authenticationPage.clickSignInButton();
-    }
-
-    @When("the user clicks on the Home button")
-    public void clickHomeButton()
-    {
-        headerPage.clickLogoButton();
+        authenticationPage.connectNoAddressAccount();
     }
 
     @When("the user clicks on Add my first Address button")
@@ -137,11 +115,16 @@ public class ManageAccountSteps extends BaseSteps
         }
     }
 
-    @Given("the user is on the My Addresses page")
-    public void startAtAddressesPage()
+    @Given("the user is connected with an account with addresses")
+    public void connectWithAddressesAccount()
     {
         headerPage.clickSignInButton();
-        connectWithAccountWithAddresses();
+        authenticationPage.connectAddressesAccount();
+    }
+
+    @And("the user is on the My Addresses page")
+    public void goToAddressesPage()
+    {
         accountPage.clickMyAddressesButton();
     }
 
@@ -163,7 +146,7 @@ public class ManageAccountSteps extends BaseSteps
         addressEditPage.clickValidateAddressButton();
     }
 
-    @And("the user enters the new contact details")
+    @And("the user enters the address details")
     public void enterNewAddressInfo()
     {
         addressEditPage.enterFirstNameField(newAddressFirstName);
@@ -177,10 +160,10 @@ public class ManageAccountSteps extends BaseSteps
         addressEditPage.enterAddressTitleField(newAddressTitle);
     }
 
-    @Then("the new contact details should be added")
+    @Then("the address details should be added")
     public void checkNewAddressInfo()
     {
-        checkDataIsPresent(newAddressInfo);
+        checkTextsArePresent(newAddressInfo);
     }
 
     @And("the user modifies their name")
@@ -189,28 +172,15 @@ public class ManageAccountSteps extends BaseSteps
         addressEditPage.enterFirstNameField("Mike");
     }
 
-    @Then("the contact details should be updated")
+    @Then("the address details should be updated")
     public void checkUpdatedAddressFirstName()
     {
         Assert.assertTrue(checkTextIsPresent("Mike"));
     }
 
-    @And("the page should contain the user's contact detail")
+    @And("the page should contain the address details of the user")
     public void checkRegisteredAddressInfo()
     {
-        checkDataIsPresent(registeredAddressInfo);
-    }
-
-    private boolean checkTextIsPresent(String text)
-    {
-        return driver.findElements(By.xpath("//*[contains(text(),'" + text + "')]")).isEmpty() == false;
-    }
-
-    private void checkDataIsPresent(List<String> data)
-    {
-        for (String value : data)
-        {
-            Assert.assertTrue(checkTextIsPresent(value));
-        }
+        checkTextsArePresent(registeredAddressInfo);
     }
 }
