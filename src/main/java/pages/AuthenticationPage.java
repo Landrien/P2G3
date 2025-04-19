@@ -31,18 +31,6 @@ public class AuthenticationPage extends BasePage
     @FindBy(id = "create_account_error")
     private WebElement invalidEmailErrorMessage;
 
-    @FindBy(xpath = "//p[@class=\"lost_password form-group\"]/a")
-    private WebElement RecoverPasswordButton; // TODO Move to recover password page
-
-    @FindBy(xpath = "//h1[@class=\"page-subheading\"]")
-    private WebElement ForgottenPasswordText; // TODO Move to recover password page
-
-    @FindBy(xpath = "//button[@class=\"btn btn-default button button-medium\"]")
-    private WebElement RetrievePasswordButton; // TODO Move to recover password page
-
-    @FindBy(xpath = "//p[@class=\"alert alert-success\"]")
-    private WebElement SuccessMessage; // TODO Move to recover password page
-
     @FindBy(xpath = "//h1[text()='Authentication']")
     private WebElement authenticationTitle;
 
@@ -95,26 +83,6 @@ public class AuthenticationPage extends BasePage
     public WebElement getSignInButton()
     {
         return signInButton;
-    }
-
-    public WebElement getRecoverPasswordButton()
-    {
-        return RecoverPasswordButton;
-    }
-
-    public WebElement getForgottenPasswordText()
-    {
-        return ForgottenPasswordText;
-    }
-
-    public WebElement getRetrievePasswordButton()
-    {
-        return RetrievePasswordButton;
-    }
-
-    public WebElement getSuccessMessage()
-    {
-        return SuccessMessage;
     }
 
     public WebElement getAuthenticationTitle()
