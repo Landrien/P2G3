@@ -5,7 +5,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -112,7 +111,7 @@ public class AuthenticationSteps extends BaseSteps
 
     @Given("the user has an account with a valid email address")
     @Given("the user is connected and on the homepage")
-    public void connect() throws InterruptedException {
+    public void connect() {
         // TODO mdroz / Parameters
         headerPage.clickSignInButton();
         authenticationPage.enterSignInEmailAddress("admin13@gmail.com");

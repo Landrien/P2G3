@@ -6,7 +6,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.AuthenticationPage;
 import pages.ContactPage;
@@ -168,7 +167,6 @@ public class HomePageSteps extends BaseSteps
     public void checkHomePageDisplayed()
     {
         String currentUrl = driver.getCurrentUrl();
-        Assert.assertTrue("L'utilisateur n'est pas sur la page d'accueil. URL actuelle : " + currentUrl,
-                currentUrl.equals("http://www.automationpractice.pl/index.php"));
+        Assert.assertEquals("L'utilisateur n'est pas sur la page d'accueil. URL actuelle : " + currentUrl, "http://www.automationpractice.pl/index.php", currentUrl);
     }
 }
