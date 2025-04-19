@@ -52,14 +52,14 @@ public class AuthenticationSteps extends BaseSteps
         Assert.assertNotNull(authenticationPage.getInvalidEmailErrorMessage());
     }
 
-    @When("the user enters a valid email address")
+    @When("the user enters a valid create email address")
     public void enterValidCreateEmail()
     {
         String randomEmail = getRandomString() + "@gmail.com";
         authenticationPage.enterCreateEmailAddress(randomEmail);
     }
 
-    @When("the user enters a valid email address")
+    @When("the user enters a valid sign in email address")
     public void enterValidSignInEmail()
     {
         authenticationPage.enterSignInEmailAddress("admin13@gmail.com");

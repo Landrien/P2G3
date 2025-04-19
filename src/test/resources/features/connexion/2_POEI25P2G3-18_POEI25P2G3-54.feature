@@ -21,7 +21,7 @@ Feature: US4 : Connexion au compte client
 	@POEI25P2G3-53 @POEI25P2G3-86 @Confirmation @TNR
 	Scenario: Connexion échouée mot de passe invalide
 		Given the user is on the Authentication page
-		When the user enters a valid email address
+		When the user enters a valid sign in email address
 		And the user enters an incorrect password
 		Then an error message Invalid password is displayed
 		
@@ -33,7 +33,7 @@ Feature: US4 : Connexion au compte client
 	@POEI25P2G3-52 @POEI25P2G3-86 @TNR
 	Scenario: Connexion réussie
 		Given the user is on the Authentication page
-		When the user enters a valid email address  
+		When the user enters a valid sign in email address
 		And the user enters the password associated with their account
 		And the user click on the button
 		Then the My Account page is displayed  

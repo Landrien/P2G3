@@ -18,4 +18,3 @@ Feature: US5 : Ré-initialiser le mot de passe oublié
 	Scenario: Lien Forgot your password
 		When the user clicks on the 'Forgot your password?' link
 		Then the user is redirected to the password reset page
-		
