@@ -30,7 +30,7 @@ public class AuthenticationPage extends BasePage
     @FindBy(id = "create_account_error")
     private WebElement invalidEmailErrorMessage;
 
-    @FindBy(xpath = "//p[@class=\"lost_password form-group\"]")
+    @FindBy(xpath = "//p[@class=\"lost_password form-group\"]/a")
     private WebElement RecoverPasswordButton; // TODO Move to recover password page
 
     @FindBy(xpath = "//h1[@class=\"page-subheading\"]")
