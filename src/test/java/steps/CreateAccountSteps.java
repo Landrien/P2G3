@@ -10,9 +10,6 @@ import pages.AuthenticationPage;
 import pages.CreateAccountPage;
 import pages.HeaderPage;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Random;
-
 public class CreateAccountSteps extends BaseSteps
 {
     private CreateAccountPage createAccountPage;

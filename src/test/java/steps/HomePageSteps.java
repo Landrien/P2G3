@@ -5,13 +5,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.AuthenticationPage;
 import pages.ContactPage;
 import pages.HeaderPage;
 import pages.HomePage;
-
-import java.time.Duration;
 
 import static org.junit.Assert.assertTrue;
 

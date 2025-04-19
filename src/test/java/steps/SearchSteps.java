@@ -12,38 +12,44 @@ import pages.SearchPage;
 
 import java.time.Duration;
 
-public class SearchSteps extends BaseSteps {
-
+public class SearchSteps extends BaseSteps
+{
     SearchPage searchPage = new SearchPage(driver);
 
     @When("the user clicks on the search field")
-    public void theUserClicksOnTheSearchField() {
+    public void theUserClicksOnTheSearchField()
+    {
         searchPage.getSearchField().click();
     }
 
     @And("the user types {string}")
-    public void theUserTypes(String article) {
+    public void theUserTypes(String article)
+    {
         searchPage.enter_element(article);
     }
 
     @And("the user clicks on the suggestion {string}")
-    public void theUserClicksOnTheSuggestion(String suggestion) {
+    public void theUserClicksOnTheSuggestion(String suggestion)
+    {
         searchPage.clickOnSuggestion(suggestion);
     }
 
     @Then("the user should be redirected to the {string} article page")
-    public void theUserShouldBeRedirectedToTheArticlePage(String article_name) {
+    public void theUserShouldBeRedirectedToTheArticlePage(String article_name)
+    {
         String actualTitle = searchPage.getProductTitle();
         Assert.assertEquals("Le titre de l'article ne correspond pas", article_name, actualTitle);
     }
 
     @And("the user clicks on the magnifying glass")
-    public void theUserClicksOnTheMagnifyingGlass() {
+    public void theUserClicksOnTheMagnifyingGlass()
+    {
         searchPage.clickSearchButton();
     }
 
     @Then("the user should be redirected to the {string} search results page")
-    public void theUserShouldBeRedirectedToTheSearchResultsPage(String searchQuery) {
+    public void theUserShouldBeRedirectedToTheSearchResultsPage(String searchQuery)
+    {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("search_query_top")));
         String currentUrl = driver.getCurrentUrl();
@@ -52,13 +58,15 @@ public class SearchSteps extends BaseSteps {
     }
 
     @Then("{string} page should countain the search field")
-    public void pageShouldCountainTheSearchField(String page) {
+    public void pageShouldCountainTheSearchField(String page)
+    {
         WebElement searchField = searchPage.getSearchField();
         Assert.assertTrue("Le champ de recherche n'est pas visible sur la page " + page, searchField.isDisplayed());
     }
 
     @And("{string} page should countain the magnifying glass")
-    public void pageShouldCountainTheMagnifyingGlass(String page) {
+    public void pageShouldCountainTheMagnifyingGlass(String page)
+    {
         WebElement searchButton = searchPage.getSearchButton();
         Assert.assertTrue("La loupe de recherche n'est pas visible sur la page " + page, searchButton.isDisplayed());
     }
