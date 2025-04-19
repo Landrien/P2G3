@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.ArticlePage;
 import pages.SearchBarPage;
-import pages.SearchPage;
 
 public class SearchSteps extends BaseSteps
 {

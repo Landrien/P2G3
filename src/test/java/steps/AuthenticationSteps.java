@@ -93,6 +93,7 @@ public class AuthenticationSteps extends BaseSteps
     @And("the user click on the button")
     public void clickSignInButton()
     {
+
         authenticationPage.clickSignInButton();
     }
 
