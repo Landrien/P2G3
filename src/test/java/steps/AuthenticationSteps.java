@@ -63,7 +63,7 @@ public class AuthenticationSteps extends BaseSteps
         headerPage.clickSignOutButton();
     }
 
-    @Then("the user should be logged out")
+    @Then("the user should be logged out and 'Sign in' displayed")
     public void checkUserIsLoggedOut()
     {
         assertTrue(headerPage.getSignInButton().getText().contains("Sign in"));
@@ -81,14 +81,14 @@ public class AuthenticationSteps extends BaseSteps
         authenticationPage.clickCreateAccountButton();
     }
 
-    @When("the user enters a valid create email address")
+    @When("the user enters a valid account creation email address")
     public void enterValidCreateEmail()
     {
         String randomEmail = getRandomString() + "@gmail.com";
         authenticationPage.enterCreateEmailAddress(randomEmail);
     }
 
-    @When("the user enters an email address with an invalid format")
+    @When("the user enters an account creation email address with an invalid format")
     public void enterInvalidCreateEmail()
     {
         authenticationPage.enterCreateEmailAddress("bad-email");
