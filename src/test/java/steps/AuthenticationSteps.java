@@ -5,6 +5,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.AuthenticationPage;
 import pages.CreateAccountPage;
 import pages.HeaderPage;
@@ -52,10 +54,15 @@ public class AuthenticationSteps extends BaseSteps
     }
 
     @When("the user enters a valid email address in the Email address field")
-    @When("the user enters a valid email address")
     public void enterValidCreateEmail()
     {
         authenticationPage.enterCreateEmailAddress("valid.email@gmail.com");
+    }
+
+    @When("the user enters a valid email address")
+    public void enterValidSignInEmail()
+    {
+        authenticationPage.enterSignInEmailAddress("admin13@gmail.com");
     }
 
     @Then("the Create an account page is displayed")
@@ -73,6 +80,7 @@ public class AuthenticationSteps extends BaseSteps
     @Then("an error message Invalid password is displayed")
     public void checkInvalidPasswordErrorMessage()
     {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class= \"alert alert-danger\"]")));
         assertTrue(authenticationPage.getInvalidPasswordErrorMessage().isDisplayed());
     }
 
