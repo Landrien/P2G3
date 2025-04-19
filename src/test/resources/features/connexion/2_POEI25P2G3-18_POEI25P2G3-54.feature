@@ -11,10 +11,6 @@ Feature: US4 : Connexion au compte client
 	#
 	#RG4 : En cas de connexion avec un mot de passe erroné, un message "Invalid password" s'affiche
 
-	Background:
-		#@POEI25P2G3-54
-		Given the user has an account with a valid email address
-
 	#Tests En tant qu' Utilisateur Je souhaite Me connecter à mon compte Afin de Gérer mon compte client Règles de gestion : 
 	#
 	#RG4 : En cas de connexion avec un mot de passe erroné, un message "Invalid password" s'affiche
@@ -23,6 +19,7 @@ Feature: US4 : Connexion au compte client
 		Given the user is on the Authentication page
 		When the user enters a valid sign in email address
 		And the user enters an incorrect password
+		And the user clicks on the sign in button
 		Then an error message Invalid password is displayed
 		
 	#Tests En tant qu' Utilisateur Je souhaite Me connecter à mon compte Afin de Gérer mon compte client Règles de gestion : 
@@ -35,7 +32,7 @@ Feature: US4 : Connexion au compte client
 		Given the user is on the Authentication page
 		When the user enters a valid sign in email address
 		And the user enters the password associated with their account
-		And the user click on the button
+		And the user clicks on the sign in button
 		Then the My Account page is displayed  
 		And the user's first and last name appear in the menu bar
 		

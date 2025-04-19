@@ -6,10 +6,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.AuthenticationPage;
-import pages.CreateAccountPage;
 import pages.HeaderPage;
 import utils.ConfigReader;
 
@@ -18,9 +16,8 @@ import static utils.RandomString.getRandomString;
 
 public class AuthenticationSteps extends BaseSteps
 {
-    CreateAccountPage createAccountPage = new CreateAccountPage(driver);
-    AuthenticationPage authenticationPage = new AuthenticationPage(driver);
     HeaderPage headerPage = new HeaderPage(driver);
+    AuthenticationPage authenticationPage = new AuthenticationPage(driver);
 
     private final String registeredAccountEmail = ConfigReader.getProperty("email-account-addresses");
     private final String registeredAccountPassword = ConfigReader.getProperty("password-account-addresses");
@@ -28,28 +25,58 @@ public class AuthenticationSteps extends BaseSteps
     private final String registeredAccountFirstName = "Admin";
     private final String registeredAccountLastName = "admin";
 
+    @Given("the user is connected with an account and no registered addresses")
+    public void connectNoAddressesAccount()
+    {
+        headerPage.clickSignInButton();
+        authenticationPage.connectNoAddressAccount();
+    }
+
+    @Given("the user is connected with an account with addresses")
+    public void connectWithAddressesAccount()
+    {
+        headerPage.clickSignInButton();
+        authenticationPage.connectAddressesAccount();
+    }
+
     @Given("the user is on the Authentication page")
     public void startAtAuthenticationPage()
     {
         headerPage.clickSignInButton();
     }
 
-    @When("the user enters an email address with an invalid format")
-    public void enterInvalidCreateEmail()
+    @Given("the user is on the Create an account page")
+    public void startAtCreateAccountPage()
     {
-        authenticationPage.enterCreateEmailAddress("bad-email");
+        headerPage.clickSignInButton();
+
+        String randomEmail = getRandomString() + "@gmail.com";
+        authenticationPage.enterCreateEmailAddress(randomEmail);
+        authenticationPage.clickCreateAccountButton();
+    }
+
+    @When("the user clicks on the 'Sign out' button")
+    public void clickSignOutButton()
+    {
+        headerPage.clickSignOutButton();
+    }
+
+    @Then("the user should be logged out")
+    public void checkUserIsLoggedOut()
+    {
+        assertTrue(headerPage.getSignInButton().getText().contains("Sign in"));
+    }
+
+    @Then("the user is redirected to the Authentication page")
+    public void checkUserIsOnAuthenticationPage()
+    {
+        Assert.assertNotNull(authenticationPage.getAuthenticationTitle());
     }
 
     @And("the user clicks on the Create an account button")
     public void clickCreateAccountButton()
     {
         authenticationPage.clickCreateAccountButton();
-    }
-
-    @Then("an error message Invalid email address is displayed")
-    public void checkInvalidCreateEmailErrorMessage()
-    {
-        Assert.assertNotNull(authenticationPage.getInvalidEmailErrorMessage());
     }
 
     @When("the user enters a valid create email address")
@@ -59,16 +86,22 @@ public class AuthenticationSteps extends BaseSteps
         authenticationPage.enterCreateEmailAddress(randomEmail);
     }
 
+    @When("the user enters an email address with an invalid format")
+    public void enterInvalidCreateEmail()
+    {
+        authenticationPage.enterCreateEmailAddress("bad-email");
+    }
+
+    @Then("an error message Invalid email address is displayed")
+    public void checkInvalidCreateEmailErrorMessage()
+    {
+        Assert.assertNotNull(authenticationPage.getInvalidEmailErrorMessage());
+    }
+
     @When("the user enters a valid sign in email address")
     public void enterValidSignInEmail()
     {
         authenticationPage.enterSignInEmailAddress("admin13@gmail.com");
-    }
-
-    @Then("the Create an account page is displayed")
-    public void checkCreateAccountPage()
-    {
-        Assert.assertTrue(createAccountPage.getCreateAccountTitle().isDisplayed());
     }
 
     @And("the user enters an incorrect password")
@@ -90,7 +123,7 @@ public class AuthenticationSteps extends BaseSteps
         authenticationPage.enterSignInPassword(registeredAccountPassword);
     }
 
-    @And("the user click on the button")
+    @And("the user clicks on the sign in button")
     public void clickSignInButton()
     {
         authenticationPage.clickSignInButton();
@@ -106,18 +139,6 @@ public class AuthenticationSteps extends BaseSteps
     public void checkFirstNameLastNameInMenuBar()
     {
         assertTrue(headerPage.getUserAccountButton().getText().contains(registeredAccountFirstName + " " + registeredAccountLastName));
-    }
-
-    @Given("the user has an account with a valid email address")
-    @Given("the user is connected and on the homepage")
-    public void connect()
-    {
-        authenticationPage.enterSignInEmailAddress(registeredAccountEmail);
-        authenticationPage.enterSignInPassword(registeredAccountPassword);
-        authenticationPage.clickSignInButton();
-        WebElement okButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='OK']")));
-        okButton.click();
-        headerPage.clickLogoButton();
     }
 
     @When("the user clicks on the 'Forgot your password?' link")
@@ -139,7 +160,7 @@ public class AuthenticationSteps extends BaseSteps
     }
 
     @Then("a confirmation message is displayed")
-    public void checkConfirmationMessage()
+    public void checkPasswordResetConfirmationMessage()
     {
         assertTrue(authenticationPage.getSuccessMessage().isDisplayed());
     }

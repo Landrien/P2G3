@@ -24,3 +24,5 @@ Feature: US  9 - Accès panier d'achat
 		    | homepage       |
 		    | search_results |
 		    | article_detail |
+
+	# TESTED : VALID

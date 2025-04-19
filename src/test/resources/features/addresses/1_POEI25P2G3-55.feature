@@ -19,3 +19,5 @@ Feature: US 10 - Gérer mes coordonnées
         Given the user is connected with an account with addresses
         And the user is on the My Addresses page
         Then the page should contain the address details of the user
+
+    # TESTED : VALID

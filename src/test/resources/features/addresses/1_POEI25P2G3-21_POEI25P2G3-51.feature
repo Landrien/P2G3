@@ -22,6 +22,8 @@ Feature: US 10 - Gérer mes coordonnées
 		And the user enters the address details
 		And the user clicks on the 'Validate' button
 		Then the address details should be added
+
+	# TESTED : ERROR
 		
 	#Dans l'espace page "My Address" l'utilisateur doit avoir la possibilité de mettre à jour ses informations
 	@POEI25P2G3-58 @POEI25P2G3-89 @Confirmation @TNR
@@ -33,3 +35,4 @@ Feature: US 10 - Gérer mes coordonnées
 		And the user clicks on the 'Validate' button
 		Then the address details should be updated
 
+	# TESTED : ERROR
