@@ -19,6 +19,6 @@ Feature: US 6 - Déconnexion
 	Scenario: Déconnexion - Barre Menu
 		Given the user is connected with an account and no registered addresses
 		When the user clicks on the 'Sign out' button
-		Then the user should be logged out
+		Then the user should be logged out and 'Sign in' displayed
 		
 	# TESTED : VALID

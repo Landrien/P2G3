@@ -44,6 +44,8 @@ Feature: US 8 - Champ Recherche
 		
 		  Examples:
 		    | page           |
+			| homepage       |
+			| authentication |
 		    | search_results |
 		    | article_detail |
 

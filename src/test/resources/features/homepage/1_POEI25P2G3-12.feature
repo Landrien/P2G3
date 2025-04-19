@@ -19,7 +19,9 @@ Feature: US1 : Accès à la page d’accueil
 		Scenarios:
 		  | page |
 		  | homepage|
+		  | authentication |
 		  | search_results |
+		  | article_detail |
 
 	# TESTED : VALID
 
@@ -36,6 +38,7 @@ Feature: US1 : Accès à la page d’accueil
 		  | page |
 		  | homepage |
 		  | search_results |
+		  | article_detail |
 
 	# TESTED : VALID
 
@@ -81,6 +84,8 @@ Feature: US1 : Accès à la page d’accueil
 		Scenarios:
 		  | page |
 		  | homepage |
+		  | authentication |
+		  | search_results |
 		  | article_detail |
 
 	# TESTED : VALID

@@ -22,6 +22,7 @@ Feature: US  9 - Accès panier d'achat
 		  Examples:
 		    | page           |
 		    | homepage       |
+			| authentication |
 		    | search_results |
 		    | article_detail |
 
