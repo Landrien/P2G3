@@ -15,9 +15,9 @@ public class CreateAccountSteps extends BaseSteps
     AccountPage accountPage = new AccountPage(driver);
 
     @When("the user enters a {string} invalid password")
-    public void enterInvalidPassword(String badPassword)
+    public void enterInvalidPassword(String invalidPassword)
     {
-        createAccountPage.enterPassword(badPassword);
+        createAccountPage.enterPassword(invalidPassword);
     }
 
     @And("the user clicks on the Register button")
@@ -26,7 +26,7 @@ public class CreateAccountSteps extends BaseSteps
         createAccountPage.clickRegisterButton();
     }
 
-    @Then("a password is invalid message is displayed")
+    @Then("a Password is invalid message is displayed")
     public void checkPasswordInvalidErrorMessage()
     {
         Assert.assertTrue(createAccountPage.getInvalidPasswordMessage().isDisplayed());
@@ -35,7 +35,7 @@ public class CreateAccountSteps extends BaseSteps
     @When("the user modifies their email address to an invalid format")
     public void enterInvalidEmail()
     {
-        createAccountPage.enterEmailAddress("bad-email");
+        createAccountPage.enterEmailAddress("invalid-email");
     }
 
     @Then("an Email is invalid message is displayed")
@@ -89,14 +89,14 @@ public class CreateAccountSteps extends BaseSteps
         createAccountPage.selectBirthDateYear("2001");
     }
 
-    @And("the user checks Sign up for our newsletter!")
+    @And("the user checks the Sign up for our newsletter checkbox")
     public void clickNewsletterSignUpCheckbox()
     {
         createAccountPage.clickNewsletterSignUpCheckbox();
     }
 
-    @Then("the Create an account page is displayed")
-    public void checkCreateAccountPage()
+    @Then("the user is redirected to the Create account page")
+    public void checkUserIsOnCreateAccountPage()
     {
         Assert.assertTrue(createAccountPage.getCreateAccountTitle().isDisplayed());
     }

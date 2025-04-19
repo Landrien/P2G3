@@ -17,12 +17,12 @@ Feature: US2 : Création d’un compte client
 	@POEI25P2G3-39 @POEI25P2G3-84 @TNR
 	Scenario Outline: Enregistrer un compte client avec un mot de passe invalide
 		Given the user is on the Create an account page
-		When the user enters a "<bad-password>" invalid password
+		When the user enters a "<invalid-password>" invalid password
 		And the user clicks on the Register button
-		Then a password is invalid message is displayed  
+		Then a Password is invalid message is displayed
 		
 		Examples: 
-		  | bad-password  |
+		  | invalid-password  |
 		  | abcd      |
 		  |           |
 
@@ -80,7 +80,7 @@ Feature: US2 : Création d’un compte client
 		And the user modifies their email address with a valid format
 		And the user enters a password with at least '5' characters
 		And the user enters their date of birth
-		And the user checks Sign up for our newsletter!
+		And the user checks the Sign up for our newsletter checkbox
 		And the user clicks on the Register button
 		Then the message 'Your account has been created' is displayed
 

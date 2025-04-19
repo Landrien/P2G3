@@ -27,10 +27,10 @@ public class SearchBarPageElement extends BasePage
         searchButton.click();
     }
 
-    public void enterSearchElement(String article)
+    public void enterSearchText(String text)
     {
         searchField.clear();
-        searchField.sendKeys(article);
+        searchField.sendKeys(text);
     }
 
     public WebElement getSearchField()

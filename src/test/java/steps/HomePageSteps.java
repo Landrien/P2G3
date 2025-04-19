@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import pages.CategoryPage;
 import pages.ContactPage;
 import pages.HeaderPage;
 import pages.HomePage;
@@ -27,8 +28,8 @@ public class HomePageSteps extends BaseSteps
         checkNewTabUrl("prestashop.com/blog");
     }
 
-    @When ("the user clicks on the links Sign in")
-    public void clickSignInButton()
+    @When ("the user clicks on the Sign in link")
+    public void clickSignIn()
     {
         headerPage.clickSignInButton();
     }
@@ -76,24 +77,23 @@ public class HomePageSteps extends BaseSteps
         String currentUrl = driver.getCurrentUrl().toLowerCase();
         switch (tabName.toLowerCase()) {
             case "women":
-                Assert.assertTrue(currentUrl.contains("id_category=3"));
+                Assert.assertTrue(currentUrl.contains(CategoryPage.womenCategoryId));
                 break;
             case "dresses":
-                Assert.assertTrue(currentUrl.contains("id_category=8"));
+                Assert.assertTrue(currentUrl.contains(CategoryPage.dressesCategoryId));
                 break;
             case "t-shirts":
-            case "tshirts":
-                Assert.assertTrue(currentUrl.contains("id_category=5"));
+                Assert.assertTrue(currentUrl.contains(CategoryPage.tShirtsCategoryId));
                 break;
             default:
                 Assert.fail("Unknown tab name: " + tabName);
         }
     }
 
-    @And("the user clicks on the links Contact us")
+    @And("the user clicks on the Contact us link")
     public void clickContactUs()
     {
-        headerPage.clickContactUs();
+        headerPage.clickContactUsButton();
     }
 
     @Then("the user is redirected to the Contact page")

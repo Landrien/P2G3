@@ -15,6 +15,8 @@ public class ManageAccountSteps extends BaseSteps
     AddressesPage addressesPage = new AddressesPage(driver);
     AddressEditPage addressEditPage = new AddressEditPage(driver);
 
+    // TODO Put this into json / config files to manage the data sets better
+
     String newAddressFirstName = "John";
     String newAddressLastName = "Doe";
     String newAddress = "8 Main Street";

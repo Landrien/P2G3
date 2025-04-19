@@ -21,7 +21,7 @@ public class HeaderPage extends BasePage
     private WebElement clickableUserAccountButton;
 
     @FindBy(xpath = "//a[@title='Contact us']")
-    private WebElement contactUs;
+    private WebElement contactUsButton;
 
     @FindBy(xpath = "//a[@title='My Shop']")
     private WebElement homePageLogoButton;
@@ -56,9 +56,9 @@ public class HeaderPage extends BasePage
         homePageLogoButton.click();
     }
 
-    public void clickContactUs()
+    public void clickContactUsButton()
     {
-        contactUs.click();
+        contactUsButton.click();
     }
 
     public WebElement getSignInButton()

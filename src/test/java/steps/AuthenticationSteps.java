@@ -21,6 +21,8 @@ public class AuthenticationSteps extends BaseSteps
     AuthenticationPage authenticationPage = new AuthenticationPage(driver);
     ResetPasswordPage resetPasswordPage = new ResetPasswordPage(driver);
 
+    // TODO / Manage this data better
+
     private final String registeredAccountEmail = ConfigReader.getProperty("email-account-addresses");
     private final String registeredAccountPassword = ConfigReader.getProperty("password-account-addresses");
 
@@ -138,13 +140,13 @@ public class AuthenticationSteps extends BaseSteps
         assertTrue(headerPage.getSignOutButton().getText().contains("Sign out"));
     }
 
-    @And("the user's first and last name appear in the menu bar")
-    public void checkFirstNameLastNameInMenuBar()
+    @And("the first name and last name of the user are displayed")
+    public void checkFirstNameLastDisplayed()
     {
         assertTrue(headerPage.getUserAccountButton().getText().contains(registeredAccountFirstName + " " + registeredAccountLastName));
     }
 
-    @When("the user clicks on the 'Forgot your password?' link")
+    @When("the user clicks on the 'Forgot your password' link")
     public void clickForgotPasswordLink()
     {
         resetPasswordPage.clickForgotPasswordButton();

@@ -1,7 +1,7 @@
 # P2G3
 Feature Search : Good
 
-Feature Create Account : Good / Homepage Redirect to Debug
+Feature Create Account : Good
 
 Feature Manage Account : Good
 
