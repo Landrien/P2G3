@@ -5,6 +5,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.AuthenticationPage;
 import pages.ContactPage;
 import pages.HeaderPage;
@@ -23,6 +25,9 @@ public class HomePageSteps extends BaseSteps
     @When("the user clicks on the 'Sign out' link")
     public void theUserClicksOnTheSignOutLink()
     {
+        wait.until (ExpectedConditions.alertIsPresent());
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
         headerPage.clickSignOutButton();
     }
 
@@ -141,7 +146,6 @@ public class HomePageSteps extends BaseSteps
     public void checkUserIsOnHomepage()
     {
         String currentUrl = driver.getCurrentUrl();
-        Assert.assertTrue("L'utilisateur n'est pas sur la page d'accueil. URL actuelle : " + currentUrl,
-                currentUrl.equals("http://www.automationpractice.pl/index.php"));
+        Assert.assertEquals("L'utilisateur n'est pas sur la page d'accueil. URL actuelle : " + currentUrl, "http://www.automationpractice.pl/index.php", currentUrl);
     }
 }
