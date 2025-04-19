@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.AuthenticationPage;
 import pages.HeaderPage;
+import pages.ResetPasswordPage;
 import utils.ConfigReader;
 
 import static org.junit.Assert.assertTrue;
@@ -18,6 +19,7 @@ public class AuthenticationSteps extends BaseSteps
 {
     HeaderPage headerPage = new HeaderPage(driver);
     AuthenticationPage authenticationPage = new AuthenticationPage(driver);
+    ResetPasswordPage resetPasswordPage = new ResetPasswordPage(driver);
 
     private final String registeredAccountEmail = ConfigReader.getProperty("email-account-addresses");
     private final String registeredAccountPassword = ConfigReader.getProperty("password-account-addresses");
@@ -145,24 +147,24 @@ public class AuthenticationSteps extends BaseSteps
     @When("the user clicks on the 'Forgot your password?' link")
     public void clickForgotPasswordLink()
     {
-        authenticationPage.getRecoverPasswordButton().click();
+        resetPasswordPage.clickForgotPasswordButton();
     }
 
     @Then("the user is redirected to the password reset page")
     public void checkForgottenPasswordText()
     {
-        assertTrue(authenticationPage.getForgottenPasswordText().isDisplayed());
+        assertTrue(resetPasswordPage.getForgotPasswordTitle().isDisplayed());
     }
 
     @And("the user clicks on the 'Retrieve Password' button")
     public void clickRetrievePasswordButton()
     {
-        authenticationPage.getRetrievePasswordButton().click();
+        resetPasswordPage.clickRetrievePasswordButton();
     }
 
     @Then("a confirmation message is displayed")
     public void checkPasswordResetConfirmationMessage()
     {
-        assertTrue(authenticationPage.getSuccessMessage().isDisplayed());
+        assertTrue(resetPasswordPage.getRetrievePasswordConfirmationMessage().isDisplayed());
     }
 }
