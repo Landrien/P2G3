@@ -21,7 +21,9 @@ Feature: US4 : Connexion au compte client
 		And the user enters an incorrect password
 		And the user clicks on the sign in button
 		Then an error message Invalid password is displayed
-		
+
+	# TESTED : VALID
+
 	#Tests En tant qu' Utilisateur Je souhaite Me connecter à mon compte Afin de Gérer mon compte client Règles de gestion : 
 	#
 	#RG2 : En se connectant à son compte l'écran "My Account" doit s'afficher 
@@ -36,3 +38,4 @@ Feature: US4 : Connexion au compte client
 		Then the My Account page is displayed  
 		And the user's first and last name appear in the menu bar
 		
+	# TESTED : VALID

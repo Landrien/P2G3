@@ -15,3 +15,4 @@ Feature: Mot de passe
 		And the user clicks on the sign in button
 		Then an error message Invalid password is displayed
 		
+	# TESTED : VALID

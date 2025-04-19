@@ -21,3 +21,4 @@ Feature: US 6 - Déconnexion
 		When the user clicks on the 'Sign out' button
 		Then the user should be logged out
 		
+	# TESTED : VALID
