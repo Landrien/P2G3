@@ -1,14 +1,11 @@
 package steps;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import pages.AccountPage;
-import pages.AuthenticationPage;
 import pages.CreateAccountPage;
-import pages.HeaderPage;
 
 import static utils.RandomString.getRandomString;
 
@@ -16,17 +13,6 @@ public class CreateAccountSteps extends BaseSteps
 {
     CreateAccountPage createAccountPage = new CreateAccountPage(driver);
     AccountPage accountPage = new AccountPage(driver);
-    HeaderPage headerPage = new HeaderPage(driver);
-    AuthenticationPage authenticationPage = new AuthenticationPage(driver);
-
-    @Given("the user is on the Create an account page")
-    public void startAtCreateAccountPage()
-    {
-        headerPage.clickSignInButton();
-        String randomEmail = getRandomString() + "@gmail.com";
-        authenticationPage.enterCreateEmailAddress(randomEmail);
-        authenticationPage.clickCreateAccountButton();
-    }
 
     @When("the user enters a {string} invalid password")
     public void enterInvalidPassword(String badPassword)
@@ -107,5 +93,11 @@ public class CreateAccountSteps extends BaseSteps
     public void clickNewsletterSignUpCheckbox()
     {
         createAccountPage.clickNewsletterSignUpCheckbox();
+    }
+
+    @Then("the Create an account page is displayed")
+    public void checkCreateAccountPage()
+    {
+        Assert.assertTrue(createAccountPage.getCreateAccountTitle().isDisplayed());
     }
 }

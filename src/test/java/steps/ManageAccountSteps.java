@@ -1,7 +1,6 @@
 package steps;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -13,8 +12,6 @@ import java.util.List;
 public class ManageAccountSteps extends BaseSteps
 {
     AccountPage accountPage = new AccountPage(driver);
-    HeaderPage headerPage = new HeaderPage(driver);
-    AuthenticationPage authenticationPage = new AuthenticationPage(driver);
     AddressesPage addressesPage = new AddressesPage(driver);
     AddressEditPage addressEditPage = new AddressEditPage(driver);
 
@@ -51,13 +48,6 @@ public class ManageAccountSteps extends BaseSteps
         "02558754",
         "My address"
     );
-
-    @Given("the user is connected with an account and no registered addresses")
-    public void connectNoAddressesAccount()
-    {
-        headerPage.clickSignInButton();
-        authenticationPage.connectNoAddressAccount();
-    }
 
     @When("the user clicks on Add my first Address button")
     public void clickAddMyFirstAddressButton()
@@ -113,13 +103,6 @@ public class ManageAccountSteps extends BaseSteps
             default:
                 Assert.fail("Unknown section : " + section);
         }
-    }
-
-    @Given("the user is connected with an account with addresses")
-    public void connectWithAddressesAccount()
-    {
-        headerPage.clickSignInButton();
-        authenticationPage.connectAddressesAccount();
     }
 
     @And("the user is on the My Addresses page")

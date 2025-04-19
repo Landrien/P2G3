@@ -4,10 +4,6 @@ Feature: Mot de passe
 	#En saisissant un mot de passe erroné, l'utilisateur peut tout de même accéder à son espace.
 	#Test effectué avec plusieurs mots de passe différents
 
-	Background:
-		#@POEI25P2G3-54
-		Given the user has an account with a valid email address
-
 	#Tests En tant qu' Utilisateur Je souhaite Me connecter à mon compte Afin de Gérer mon compte client Règles de gestion : 
 	#
 	#RG4 : En cas de connexion avec un mot de passe erroné, un message "Invalid password" s'affiche
@@ -16,5 +12,6 @@ Feature: Mot de passe
 		Given the user is on the Authentication page
 		When the user enters a valid sign in email address
 		And the user enters an incorrect password
+		And the user clicks on the sign in button
 		Then an error message Invalid password is displayed
 		

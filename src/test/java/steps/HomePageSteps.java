@@ -5,41 +5,15 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import pages.AuthenticationPage;
 import pages.ContactPage;
 import pages.HeaderPage;
 import pages.HomePage;
 import utils.ConfigReader;
 
-import static org.junit.Assert.assertTrue;
-
 public class HomePageSteps extends BaseSteps
 {
     HomePage homePage = new HomePage(driver);
     HeaderPage headerPage = new HeaderPage(driver);
-
-    AuthenticationPage authenticationPage = new AuthenticationPage(driver);
-
-    @When("the user clicks on the 'Sign out' link")
-    public void theUserClicksOnTheSignOutLink()
-    {
-        headerPage.clickSignOutButton();
-        headerPage.clickSignOutButton();
-    }
-
-    @Then("the user should be logged out")
-    public void theUserShouldBeLoggedOut()
-    {
-        assertTrue(headerPage.getSignInButton().isDisplayed());
-    }
-
-    @And("the login page should contain 'Sign in'")
-    public void theLoginPageShouldContainSignIn()
-    {
-        assertTrue(headerPage.getSignInButton().getText().contains("Sign in"));
-    }
 
     @When("The user clicks on the Blog tab")
     public void clickBlogTab()
@@ -57,12 +31,6 @@ public class HomePageSteps extends BaseSteps
     public void clickSignInButton()
     {
         headerPage.clickSignInButton();
-    }
-
-    @Then("the user is redirected to the Authentication page")
-    public void checkUserIsOnAuthenticationPage()
-    {
-        Assert.assertNotNull(authenticationPage.getAuthenticationTitle());
     }
 
     @Given("the user is on the homepage")
