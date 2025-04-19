@@ -29,7 +29,7 @@ Feature: US2 : Création d’un compte client
 	@POEI25P2G3-32 @POEI25P2G3-84 @TNR
 	Scenario: Création de compte avec adresse email valide
 		Given the user is on the Authentication page
-		When the user enters a valid email address
+		When the user enters a valid create email address
 		And the user clicks on the Create an account button
 		Then the Create an account page is displayed
 

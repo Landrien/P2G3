@@ -52,14 +52,14 @@ public class AuthenticationSteps extends BaseSteps
         Assert.assertNotNull(authenticationPage.getInvalidEmailErrorMessage());
     }
 
-    @When("the user enters a valid email address in the Email address field")
+    @When("the user enters a valid create email address")
     public void enterValidCreateEmail()
     {
         String randomEmail = getRandomString() + "@gmail.com";
         authenticationPage.enterCreateEmailAddress(randomEmail);
     }
 
-    @When("the user enters a valid email address")
+    @When("the user enters a valid sign in email address")
     public void enterValidSignInEmail()
     {
         authenticationPage.enterSignInEmailAddress("admin13@gmail.com");
@@ -93,7 +93,6 @@ public class AuthenticationSteps extends BaseSteps
     @And("the user click on the button")
     public void clickSignInButton()
     {
-
         authenticationPage.clickSignInButton();
     }
 
@@ -111,12 +110,13 @@ public class AuthenticationSteps extends BaseSteps
 
     @Given("the user has an account with a valid email address")
     @Given("the user is connected and on the homepage")
-    public void connect() {
-        // TODO mdroz / Parameters
-        headerPage.clickSignInButton();
+    public void connect()
+    {
         authenticationPage.enterSignInEmailAddress(registeredAccountEmail);
         authenticationPage.enterSignInPassword(registeredAccountPassword);
         authenticationPage.clickSignInButton();
+        WebElement okButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='OK']")));
+        okButton.click();
         headerPage.clickLogoButton();
     }
 

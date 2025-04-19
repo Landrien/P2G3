@@ -14,7 +14,7 @@ Feature: Mot de passe
 	@POEI25P2G3-53 @POEI25P2G3-86 @Confirmation @TNR
 	Scenario: Connexion échouée mot de passe invalide
 		Given the user is on the Authentication page
-		When the user enters a valid email address
+		When the user enters a valid sign in email address
 		And the user enters an incorrect password
 		Then an error message Invalid password is displayed
 		

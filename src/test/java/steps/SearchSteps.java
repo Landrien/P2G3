@@ -50,7 +50,6 @@ public class SearchSteps extends BaseSteps
     @Then("the user should be redirected to the {string} search results page")
     public void checkUserIsONSearchResultsPage(String searchQuery)
     {
-
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("search_query_top")));
         String currentUrl = driver.getCurrentUrl();
         Assert.assertTrue("L'URL des résultats de recherche ne correspond pas. URL actuelle : " + currentUrl,
