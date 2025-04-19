@@ -91,8 +91,7 @@ public class AuthenticationSteps extends BaseSteps
     }
 
     @And("the user click on the button")
-    public void clickSignInButton()
-    {
+    public void clickSignInButton(){
         authenticationPage.clickSignInButton();
     }
 
@@ -112,11 +111,10 @@ public class AuthenticationSteps extends BaseSteps
     @Given("the user is connected and on the homepage")
     public void connect()
     {
+        headerPage.clickSignInButton();
         authenticationPage.enterSignInEmailAddress(registeredAccountEmail);
         authenticationPage.enterSignInPassword(registeredAccountPassword);
-        authenticationPage.clickSignInButton();
-        WebElement okButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='OK']")));
-        okButton.click();
+        authenticationPage.getSignInButton().click();
         headerPage.clickLogoButton();
     }
 

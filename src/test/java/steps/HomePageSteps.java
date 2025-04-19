@@ -25,9 +25,7 @@ public class HomePageSteps extends BaseSteps
     @When("the user clicks on the 'Sign out' link")
     public void theUserClicksOnTheSignOutLink()
     {
-        wait.until (ExpectedConditions.alertIsPresent());
-        Alert alert = driver.switchTo().alert();
-        alert.accept();
+        headerPage.clickSignOutButton();
         headerPage.clickSignOutButton();
     }
 
