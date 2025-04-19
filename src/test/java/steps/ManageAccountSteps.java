@@ -4,6 +4,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.*;
 
 import java.util.Arrays;
@@ -116,12 +120,24 @@ public class ManageAccountSteps extends BaseSteps
     @When("the user clicks on the 'Add' button")
     public void clickAddAddressButton()
     {
+        //wait.until (ExpectedConditions.alertIsPresent());
+        //Alert alert = driver.switchTo().alert();
+        //alert.accept();
+
+        //Assert.assertTrue(addressesPage.getAddAddressButton().isEnabled());
+        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", addressesPage.getAddAddressButton());
         addressesPage.clickAddAddressButton();
     }
 
     @When("the user clicks on the 'Update' button")
     public void clickUpdateAddressButton()
     {
+        //wait.until (ExpectedConditions.alertIsPresent());
+        //Alert alert = driver.switchTo().alert();
+        //alert.accept();
+
+        //Assert.assertTrue(addressesPage.getUpdateAddressButton().isEnabled());
+        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", addressesPage.getUpdateAddressButton());
         addressesPage.clickUpdateAddressButton();
     }
 

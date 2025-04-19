@@ -20,4 +20,4 @@ Feature: US3 : Gestion du compte client
 		When the user clicks on the home logo
 		Then the user is redirected to the homepage
 
-	# TESTED : SOMETIMES FAILS OTHERWISE VALID
+	# TESTED : VALID BUT CAN FAIL
