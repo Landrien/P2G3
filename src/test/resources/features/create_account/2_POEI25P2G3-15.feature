@@ -17,7 +17,7 @@ Feature: US2 : Création d’un compte client
 	@POEI25P2G3-34 @POEI25P2G3-84 @TNR
 	Scenario: Création de compte avec adresse email invalide
 		Given the user is on the Authentication page
-		When the user enters an email address with an invalid format
+		When the user enters an account creation email address with an invalid format
 		And the user clicks on the Create an account button
 		Then an error message Invalid email address is displayed
 
@@ -29,7 +29,7 @@ Feature: US2 : Création d’un compte client
 	@POEI25P2G3-32 @POEI25P2G3-84 @TNR
 	Scenario: Création de compte avec adresse email valide
 		Given the user is on the Authentication page
-		When the user enters a valid create email address
+		When the user enters a valid account creation email address
 		And the user clicks on the Create an account button
 		Then the Create an account page is displayed
 

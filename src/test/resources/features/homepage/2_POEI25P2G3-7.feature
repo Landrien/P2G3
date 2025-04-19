@@ -20,5 +20,8 @@ Feature: US 7 - Logo
 		Scenarios:
 		  | page |
 		  | homepage |
+		  | authentication |
+		  | search_results |
+		  | article_detail |
 		
 	# TESTED : VALID

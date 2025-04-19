@@ -11,4 +11,4 @@ Feature Cart : Good
 
 Feature Homepage : Good
 
-Feature Connexion :
+Feature Connexion : Good
