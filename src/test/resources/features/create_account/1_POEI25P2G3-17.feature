@@ -16,8 +16,8 @@ Feature: US3 : Gestion du compte client
 	#RG3 : Un bouton "Home" redirige le site sur la page d'accueil
 	@POEI25P2G3-46 @POEI25P2G3-85 @TNR
 	Scenario: Redirection page d'accueil
-		Given the user is on the My Account page
+		Given the user is connected with an account and no registered addresses
 		When the user clicks on the Home button
 		Then the user is redirected to the homepage
 
-	# TESTED : SOMETIMES FAILS
+	# TESTED : TO DEBUG

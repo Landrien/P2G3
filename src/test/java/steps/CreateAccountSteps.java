@@ -14,28 +14,9 @@ import static utils.RandomString.getRandomString;
 
 public class CreateAccountSteps extends BaseSteps
 {
-    private CreateAccountPage createAccountPage;
-
-    private CreateAccountPage getCreateAccountPage()
-    {
-        if (createAccountPage == null)
-            createAccountPage = new CreateAccountPage(driver);
-
-        return createAccountPage;
-    }
-
-    private AccountPage accountPage;
-
-    private AccountPage getAccountPage()
-    {
-        if (accountPage == null)
-            accountPage = new AccountPage(driver);
-
-        return accountPage;
-    }
-
+    CreateAccountPage createAccountPage = new CreateAccountPage(driver);
+    AccountPage accountPage = new AccountPage(driver);
     HeaderPage headerPage = new HeaderPage(driver);
-
     AuthenticationPage authenticationPage = new AuthenticationPage(driver);
 
     @Given("the user is on the Create an account page")
@@ -50,81 +31,81 @@ public class CreateAccountSteps extends BaseSteps
     @When("the user enters a {string} invalid password")
     public void enterInvalidPassword(String badPassword)
     {
-        getCreateAccountPage().enterPassword(badPassword);
+        createAccountPage.enterPassword(badPassword);
     }
 
-    @And("the user clicks on the REGISTER button")
+    @And("the user clicks on the Register button")
     public void clickRegisterButton()
     {
-        getCreateAccountPage().clickRegisterButton();
+        createAccountPage.clickRegisterButton();
     }
 
     @Then("a password is invalid message is displayed")
-    public void checkPasswordInvalidMessage()
+    public void checkPasswordInvalidErrorMessage()
     {
-        Assert.assertTrue(getCreateAccountPage().getInvalidPasswordMessage().isDisplayed());
+        Assert.assertTrue(createAccountPage.getInvalidPasswordMessage().isDisplayed());
     }
 
     @When("the user modifies their email address to an invalid format")
     public void enterInvalidEmail()
     {
-        getCreateAccountPage().enterEmailAddress("bad-email");
+        createAccountPage.enterEmailAddress("bad-email");
     }
 
     @Then("an Email is invalid message is displayed")
-    public void checkEmailInvalidMessage()
+    public void checkEmailInvalidErrorMessage()
     {
-        Assert.assertTrue(getCreateAccountPage().getInvalidEmailMessage().isDisplayed());
+        Assert.assertTrue(createAccountPage.getInvalidEmailMessage().isDisplayed());
     }
 
     @When("the user selects a gender")
     public void selectGenderTitle()
     {
-        getCreateAccountPage().selectGenderTitle(true);
+        createAccountPage.selectGenderTitle(true);
     }
 
     @And("the user enters their last name")
     public void enterLastName()
     {
-        getCreateAccountPage().enterLastName("Doe");
+        createAccountPage.enterLastName("Doe");
     }
 
     @And("the user enters their first name")
     public void enterFirstName()
     {
-        getCreateAccountPage().enterFirstName("John");
+        createAccountPage.enterFirstName("John");
     }
 
-    @And("the user modifies the email address with a valid format")
+    @And("the user modifies their email address with a valid format")
     public void enterValidEmail()
     {
         String randomEmail = getRandomString() + "@gmail.com";
-        getCreateAccountPage().enterEmailAddress(randomEmail);
+        createAccountPage.enterEmailAddress(randomEmail);
     }
 
     @And("the user enters a password with at least '5' characters")
     public void enterValidPassword()
     {
-        getCreateAccountPage().enterPassword("mypassword");
+        createAccountPage.enterPassword("mypassword");
     }
 
     @And("the message 'Your account has been created' is displayed")
     public void checkAccountCreatedMessage()
     {
-        Assert.assertTrue(getAccountPage().getAccountCreatedMessage().isDisplayed());
+        Assert.assertTrue(accountPage.getAccountCreatedMessage().isDisplayed());
     }
 
     @And("the user enters their date of birth")
     public void selectBirthDate()
     {
-        getCreateAccountPage().selectBirthDateDay("11");
-        getCreateAccountPage().selectBirthDateMonth("10");
-        getCreateAccountPage().selectBirthDateYear("2001");
+        createAccountPage.selectBirthDateDay("11");
+        createAccountPage.selectBirthDateMonth("10");
+        createAccountPage.selectBirthDateYear("2001");
     }
 
     @And("the user checks Sign up for our newsletter!")
     public void clickNewsletterSignUpCheckbox()
     {
-        getCreateAccountPage().clickNewsletterSignUpCheckbox();
+        createAccountPage.clickNewsletterSignUpCheckbox();
     }
 }

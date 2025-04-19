@@ -26,13 +26,12 @@ public class AuthenticationSteps extends BaseSteps
     private String registeredAccountLastName = "admin";
 
     @Given("the user is on the Authentication page")
-    @Given("the user is on the 'Authentication' page")
     public void startAtAuthenticationPage()
     {
         headerPage.clickSignInButton();
     }
 
-    @When("the user enters an incorrectly formatted email address in the Email address field")
+    @When("the user enters an email address with an invalid format")
     public void enterInvalidCreateEmail()
     {
         authenticationPage.enterCreateEmailAddress("bad-email");
@@ -50,7 +49,6 @@ public class AuthenticationSteps extends BaseSteps
         Assert.assertNotNull(authenticationPage.getInvalidEmailErrorMessage());
     }
 
-    @When("the user enters a valid email address in the Email address field")
     @When("the user enters a valid email address")
     public void enterValidCreateEmail()
     {

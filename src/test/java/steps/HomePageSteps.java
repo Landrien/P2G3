@@ -138,7 +138,7 @@ public class HomePageSteps extends BaseSteps
     }
 
     @Then("the user is redirected to the homepage")
-    public void checkHomePageDisplayed()
+    public void checkUserIsOnHomepage()
     {
         String currentUrl = driver.getCurrentUrl();
         Assert.assertTrue("L'utilisateur n'est pas sur la page d'accueil. URL actuelle : " + currentUrl,

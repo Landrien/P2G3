@@ -21,7 +21,9 @@ Feature: US 8 - Champ Recherche
 		And the user enters the text "dres" in the search bar
 		And the user clicks on the suggestion "Printed Dress"
 		Then the user should be redirected to the "Printed Dress" article page
-		
+
+	# TESTED : VALID
+
 	#En cas de saisie "libre" (non séléction d'un article suggéré). La loupe de recherche renvoie vers la page "Search" avec des résultats d'articles pertinents en fonction de la saisie
 	@POEI25P2G3-41 @POEI25P2G3-87 @TNR
 	Scenario: Proposition de recherche libre
@@ -30,7 +32,9 @@ Feature: US 8 - Champ Recherche
 		And the user enters the text "dresse" in the search bar
 		And the user clicks on the magnifying glass
 		Then the user should be redirected to the "dresse" search results page
-		
+
+	# TESTED : VALID
+
 	#Le champ et la loupe doivent être ancrés en entête (présent sur toutes les pages du site)
 	@POEI25P2G3-40 @POEI25P2G3-87 @TNR
 	Scenario Outline: Champ Recherche sur toute les pages
@@ -42,3 +46,5 @@ Feature: US 8 - Champ Recherche
 		    | page           |
 		    | search_results |
 		    | article_detail |
+
+	# TESTED : VALID
