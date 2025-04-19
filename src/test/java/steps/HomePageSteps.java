@@ -5,6 +5,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.AuthenticationPage;
 import pages.ContactPage;
 import pages.HeaderPage;
@@ -22,6 +25,9 @@ public class HomePageSteps extends BaseSteps
     @When("the user clicks on the 'Sign out' link")
     public void theUserClicksOnTheSignOutLink()
     {
+        wait.until (ExpectedConditions.alertIsPresent());
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
         headerPage.clickSignOutButton();
     }
 
