@@ -173,7 +173,7 @@ public class AuthenticationSteps extends BaseSteps
 
     @When("the user enters a valid email address associated with an account")
     public void EntersAValidEmailAddress() {
-        resetPasswordPage.getEmailField().sendKeys(disposableAccountEmail);
+        resetPasswordPage.getEmailField().sendKeys(randomEmail);
 
     }
 
@@ -189,7 +189,7 @@ public class AuthenticationSteps extends BaseSteps
         yopmail.openYopmail();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class = 'fc-dialog-container']")));
         yopmail.getAcceptCookiesButton().click();
-        yopmail.enterEmail(disposableAccountEmail);
+        yopmail.enterEmail(randomEmail);
         yopmail.clickSearchButton();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='bname']")));
 
@@ -232,7 +232,7 @@ public class AuthenticationSteps extends BaseSteps
 
     @And("enters their email address")
     public void entersTheirEmailAddress() {
-        authenticationPage.enterSignInEmailAddress(disposableAccountEmail);
+        authenticationPage.enterSignInEmailAddress(randomEmail);
     }
 
     @And("the user enters the new password")
