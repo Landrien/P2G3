@@ -20,12 +20,15 @@ public class Yopmail extends BasePage {
     private WebElement iframe;
     @FindBy(id = "refresh")
     private WebElement refreshButton;
-    @FindBy(xpath = "//span/text()[4]")
+    //@FindBy(xpath = "//span/text()[4]")
+    @FindBy(xpath = "//strong[text()='Password:']/parent::span/parent::span")
     private WebElement password;
     @FindBy(xpath = "//div[@class = 'fc-dialog-container']")
     private WebElement pageCookies;
     @FindBy(xpath = "//p[contains(text(), 'Autoriser')]/..")
     private WebElement acceptCookiesButton;
+    @FindBy(xpath = "//div[@id='nbmail']")
+    private WebElement nbrMail;
 
 
 
@@ -83,5 +86,25 @@ public class Yopmail extends BasePage {
 
     public WebElement getPageCookies() {
         return pageCookies;
+    }
+    public void waitmail1() {
+        while (!nbrMail.getText().contains("1 mail")) {
+            try {
+                Thread.sleep(1000); // Wait for 1 second before checking again
+                getRefreshButton().click();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void waitmail2() {
+        while (!nbrMail.getText().contains("2 mails")) {
+            try {
+                Thread.sleep(1000); // Wait for 1 second before checking again
+                getRefreshButton().click();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

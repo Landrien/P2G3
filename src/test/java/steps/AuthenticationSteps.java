@@ -33,6 +33,7 @@ public class AuthenticationSteps extends BaseSteps
     private final String registeredAccountLastName = "admin";
     private final String disposableAccountEmail = "kemeufexauqua-6861@yopmail.com";
     private final String randomEmail = getRandomEmail();
+    private String newPassword = "";
 
     @Given("the user is connected with an account and no registered addresses")
     public void connectNoAddressesAccount()
@@ -134,7 +135,6 @@ public class AuthenticationSteps extends BaseSteps
     @And("the user clicks on the sign in button")
     public void clickSignInButton()
     {
-
         authenticationPage.clickSignInButton();
     }
 
@@ -200,7 +200,7 @@ public class AuthenticationSteps extends BaseSteps
 
     @And("the user clicks on the reset link in the email")
     public void ClicksOnTheResetLink() {
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[@id='nbmail']"),"1 mail"));
+        yopmail.waitmail1();
         yopmail.switchToIframe();
         yopmail.getEmailLink().click();
     }
@@ -216,17 +216,20 @@ public class AuthenticationSteps extends BaseSteps
     }
 
     @And("the user returns to their mailbox")
-    public void ReturnsToTheirMailbox() throws InterruptedException {
+    public void ReturnsToTheirMailbox(){
         yopmail.switchToMailTab();
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[@id='nbmail']"),"2 mails"));
+        yopmail.waitmail2();
         yopmail.getRefreshButton().click();
     }
 
     @And("the user obtains the new password")
     public String ObtainsTheNewPassword(){
         yopmail.switchToIframe();
-        Logger.getLogger("ObtainsTheNewPassword").info("Obtaining the new password" + yopmail.getPassword());
-        return yopmail.getPassword();
+        String fullPassword = yopmail.getPassword();
+        String[] parts = fullPassword.split(" ");
+        String password = parts[3];
+        Logger.getLogger("ObtainsTheNewPassword").info("Obtaining the new password " + password);
+        return newPassword = password;
     }
 
     @Then("the user returns to the Authentication page")
@@ -242,6 +245,6 @@ public class AuthenticationSteps extends BaseSteps
 
     @And("the user enters the new password")
     public void theUserEntersTheNewPassword(){
-        authenticationPage.enterSignInPassword(ObtainsTheNewPassword());
+        authenticationPage.enterSignInPassword(newPassword);
     }
 }
