@@ -5,16 +5,16 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Classe pour lire les propriétés de configuration à partir d'un fichier `config.properties`.
+ * Utility class to read configuration properties from a {@code config.properties} file.
  */
 public class ConfigReader
 {
     /**
-     * Objet {@link Properties} contenant les propriétés chargées depuis le fichier de configuration.
+     * {@link Properties} object containing loaded configuration values.
      */
     private static final Properties properties;
 
-    // Chargement statique des propriétés dès le chargement de la classe
+    // Static block to load properties when the class is first loaded
     static
     {
         try (FileInputStream fileInputStream = new FileInputStream("src/main/resources/config.properties"))
@@ -30,10 +30,10 @@ public class ConfigReader
     }
 
     /**
-     * Récupère la valeur d'une propriété à partir de sa clé.
+     * Retrieves the value of a property by its key.
      *
-     * @param key La clé de la propriété
-     * @return La valeur associée à la clé, ou {@code null} si la clé n'existe pas.
+     * @param key The key of the property.
+     * @return The corresponding value, or {@code null} if the key is not found.
      */
     public static String getProperty(String key)
     {

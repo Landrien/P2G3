@@ -1,14 +1,14 @@
 package utils;
 
 /**
- * Classe pour générer des données aléatoires.
+ * Utility class for generating random data.
  */
 public class RandomUtils
 {
     /**
-     * Génère une adresse e-mail temporaire.
+     * Generates a temporary email address.
      *
-     * @return Une adresse e-mail basée sur l'horodatage actuel.
+     * @return A unique email address based on the current timestamp.
      */
     public static String getRandomEmail()
     {

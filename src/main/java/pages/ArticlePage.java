@@ -9,10 +9,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 /**
- * The article page with all the details regarding a specific product
+ * The article page with all the details regarding a specific product.
+ * Extends BasePage to inherit shared behavior and WebDriver support.
  */
 public class ArticlePage extends BasePage
 {
+    /**
+     * Constructor for the ArticlePage.
+     *
+     * @param driver the WebDriver instance used to interact with the browser.
+     */
     public ArticlePage(WebDriver driver)
     {
         super(driver);
@@ -21,6 +27,12 @@ public class ArticlePage extends BasePage
     @FindBy(xpath = "//h1[@itemprop='name']")
     private WebElement productTitle;
 
+    /**
+     * Retrieves the title of the product displayed on the page.
+     * Waits until the title element is visible before getting its text.
+     *
+     * @return the product title as a String
+     */
     public String getProductTitle()
     {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
