@@ -28,6 +28,7 @@ public class AuthenticationSteps extends BaseSteps
 
     private final String registeredAccountFirstName = "Admin";
     private final String registeredAccountLastName = "admin";
+    String randomEmail = getRandomString() + "@gmail.com";
     private final String disposableAccountEmail = "kemeufexauqua-6861@yopmail.com";
 
     @Given("the user is connected with an account and no registered addresses")
@@ -55,7 +56,7 @@ public class AuthenticationSteps extends BaseSteps
     {
         headerPage.clickSignInButton();
 
-        String randomEmail = getRandomString() + "@gmail.com";
+
         authenticationPage.enterCreateEmailAddress(randomEmail);
         authenticationPage.clickCreateAccountButton();
     }
