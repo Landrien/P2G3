@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Yopmail extends BasePage {
 
-    @FindBy(id = "ycptcpt")
+    @FindBy(id = "login")
     private WebElement emailField;
     @FindBy(xpath = "//button[@class = 'md']")
     private WebElement searchButton;
@@ -20,11 +20,11 @@ public class Yopmail extends BasePage {
     private WebElement iframe;
     @FindBy(id = "refresh")
     private WebElement refreshButton;
-    @FindBy(xpath = "//span/span[2]")
+    @FindBy(xpath = "//span/text()[4]")
     private WebElement password;
     @FindBy(xpath = "//div[@class = 'fc-dialog-container']")
     private WebElement pageCookies;
-    @FindBy(xpath = "//button[@class = 'fc-button fc-cta-consent fc-primary-button']")
+    @FindBy(xpath = "//p[contains(text(), 'Autoriser')]/..")
     private WebElement acceptCookiesButton;
 
 
@@ -73,8 +73,8 @@ public class Yopmail extends BasePage {
         return refreshButton;
     }
 
-    public WebElement getPassword() {
-        return password;
+    public String getPassword() {
+        return password.getText();
     }
 
     public WebElement getAcceptCookiesButton() {

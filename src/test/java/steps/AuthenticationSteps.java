@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.AuthenticationPage;
 import pages.HeaderPage;
@@ -187,11 +188,11 @@ public class AuthenticationSteps extends BaseSteps
     public void ReceivesAnEmailContainingAResetLink() {
 
         yopmail.openYopmail();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class = 'fc-dialog-container']")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//p[contains(text(), 'Autoriser')]/..")));
         yopmail.getAcceptCookiesButton().click();
         yopmail.enterEmail(randomEmail);
         yopmail.clickSearchButton();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='bname']")));
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='bname']")));
 
     }
 
@@ -220,8 +221,7 @@ public class AuthenticationSteps extends BaseSteps
 
     @And("the user obtains the new password")
     public String ObtainsTheNewPassword(){
-        return yopmail.getPassword().getText();
-
+        return yopmail.getPassword();
     }
 
     @Then("the user returns to the Authentication page")
