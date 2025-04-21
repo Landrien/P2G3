@@ -14,6 +14,8 @@ import pages.ResetPasswordPage;
 import utils.ConfigReader;
 import utils.Yopmail;
 
+import java.util.logging.Logger;
+
 import static org.junit.Assert.assertTrue;
 import static utils.RandomUtils.getRandomEmail;
 
@@ -185,19 +187,20 @@ public class AuthenticationSteps extends BaseSteps
     }
 
     @And("the user receives an email containing a reset link")
-    public void ReceivesAnEmailContainingAResetLink() {
+    public void ReceivesAnEmailContainingAResetLink() throws InterruptedException {
 
         yopmail.openYopmail();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//p[contains(text(), 'Autoriser')]/..")));
         yopmail.getAcceptCookiesButton().click();
         yopmail.enterEmail(randomEmail);
         yopmail.clickSearchButton();
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='bname']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='wmmail']")));
 
     }
 
     @And("the user clicks on the reset link in the email")
     public void ClicksOnTheResetLink() {
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[@id='nbmail']"),"1 mail"));
         yopmail.switchToIframe();
         yopmail.getEmailLink().click();
     }
@@ -215,12 +218,14 @@ public class AuthenticationSteps extends BaseSteps
     @And("the user returns to their mailbox")
     public void ReturnsToTheirMailbox() throws InterruptedException {
         yopmail.switchToMailTab();
-        Thread.sleep(5000);
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[@id='nbmail']"),"2 mails"));
         yopmail.getRefreshButton().click();
     }
 
     @And("the user obtains the new password")
     public String ObtainsTheNewPassword(){
+        yopmail.switchToIframe();
+        Logger.getLogger("ObtainsTheNewPassword").info("Obtaining the new password" + yopmail.getPassword());
         return yopmail.getPassword();
     }
 

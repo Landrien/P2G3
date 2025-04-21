@@ -1,4 +1,4 @@
-Feature: Forgot Email
+Feature: Forgot Password
   Scenario: LinkEmail
     Given the user is on the Create an account page
     When the user selects a gender
