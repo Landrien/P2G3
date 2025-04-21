@@ -14,7 +14,7 @@ import utils.ConfigReader;
 import utils.Yopmail;
 
 import static org.junit.Assert.assertTrue;
-import static utils.RandomString.getRandomString;
+import static utils.RandomUtils.getRandomEmail;
 
 public class AuthenticationSteps extends BaseSteps
 {
@@ -28,8 +28,8 @@ public class AuthenticationSteps extends BaseSteps
 
     private final String registeredAccountFirstName = "Admin";
     private final String registeredAccountLastName = "admin";
-    String randomEmail = getRandomString() + "@gmail.com";
     private final String disposableAccountEmail = "kemeufexauqua-6861@yopmail.com";
+    private final String randomEmail = getRandomEmail();
 
     @Given("the user is connected with an account and no registered addresses")
     public void connectNoAddressesAccount()
@@ -88,8 +88,7 @@ public class AuthenticationSteps extends BaseSteps
     @When("the user enters a valid account creation email address")
     public void enterValidCreateEmail()
     {
-        String randomEmail = getRandomString() + "@gmail.com";
-        authenticationPage.enterCreateEmailAddress(randomEmail);
+        authenticationPage.enterCreateEmailAddress(getRandomEmail());
     }
 
     @When("the user enters an account creation email address with an invalid format")
