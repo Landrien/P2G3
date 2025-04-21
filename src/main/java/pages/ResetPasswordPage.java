@@ -14,6 +14,9 @@ public class ResetPasswordPage extends BasePage
         super(driver);
     }
 
+    @FindBy(id = "email")
+    private WebElement emailField;
+
     @FindBy(xpath = "//a[@title='Recover your forgotten password']")
     private WebElement forgotPasswordButton;
 
@@ -44,5 +47,9 @@ public class ResetPasswordPage extends BasePage
     public WebElement getRetrievePasswordConfirmationMessage()
     {
         return retrievePasswordConfirmationMessage;
+    }
+
+    public WebElement getEmailField() {
+        return emailField;
     }
 }

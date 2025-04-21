@@ -11,6 +11,7 @@ import pages.AuthenticationPage;
 import pages.HeaderPage;
 import pages.ResetPasswordPage;
 import utils.ConfigReader;
+import utils.Yopmail;
 
 import static org.junit.Assert.assertTrue;
 import static utils.RandomString.getRandomString;
@@ -20,6 +21,7 @@ public class AuthenticationSteps extends BaseSteps
     HeaderPage headerPage = new HeaderPage(driver);
     AuthenticationPage authenticationPage = new AuthenticationPage(driver);
     ResetPasswordPage resetPasswordPage = new ResetPasswordPage(driver);
+    Yopmail yopmail = new Yopmail(driver);
 
     // TODO / Manage this data better
 
@@ -28,6 +30,7 @@ public class AuthenticationSteps extends BaseSteps
 
     private final String registeredAccountFirstName = "Admin";
     private final String registeredAccountLastName = "admin";
+    private final String disposableAccountEmail = "kemeufexauqua-6861@yopmail.com";
 
     @Given("the user is connected with an account and no registered addresses")
     public void connectNoAddressesAccount()
@@ -168,5 +171,74 @@ public class AuthenticationSteps extends BaseSteps
     public void checkPasswordResetConfirmationMessage()
     {
         assertTrue(resetPasswordPage.getRetrievePasswordConfirmationMessage().isDisplayed());
+    }
+
+    @When("the user enters a valid email address associated with an account")
+    public void EntersAValidEmailAddress() {
+        resetPasswordPage.getEmailField().sendKeys(disposableAccountEmail);
+
+    }
+
+
+    @Then("a confirmation message is displayed indicating that an email has been sent")
+    public void ConfirmationMessage() {
+        resetPasswordPage.getRetrievePasswordConfirmationMessage().isDisplayed();
+    }
+
+    @And("the user receives an email containing a reset link")
+    public void ReceivesAnEmailContainingAResetLink() {
+
+        yopmail.openYopmail();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class = 'fc-dialog-container']")));
+        yopmail.getAcceptCookiesButton().click();
+        yopmail.enterEmail(disposableAccountEmail);
+        yopmail.clickSearchButton();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='bname']")));
+
+    }
+
+    @And("the user clicks on the reset link in the email")
+    public void ClicksOnTheResetLink() {
+        yopmail.switchToIframe();
+        yopmail.getEmailLink().click();
+    }
+
+    @Then("the user open the new page")
+    public void OpenTheNewPage() {
+        yopmail.switchToDefaultContent();
+        yopmail.switchToNewTab();
+    }
+    @And("the user sees a confirmation message")
+    public void SeesAConfirmationMessage() {
+        assertTrue(resetPasswordPage.getRetrievePasswordConfirmationMessage().isDisplayed());
+    }
+
+    @And("the user returns to their mailbox")
+    public void ReturnsToTheirMailbox() throws InterruptedException {
+        yopmail.switchToMailTab();
+        Thread.sleep(5000);
+        yopmail.getRefreshButton().click();
+    }
+
+    @And("the user obtains the new password")
+    public String ObtainsTheNewPassword(){
+        return yopmail.getPassword().getText();
+
+    }
+
+    @Then("the user returns to the Authentication page")
+    public void ReturnsToTheAuthenticationPage() {
+        yopmail.switchToOriginTab();
+        headerPage.clickSignInButton();
+    }
+
+    @And("enters their email address")
+    public void entersTheirEmailAddress() {
+        authenticationPage.enterSignInEmailAddress(disposableAccountEmail);
+    }
+
+    @And("the user enters the new password")
+    public void theUserEntersTheNewPassword(){
+        authenticationPage.enterSignInPassword(ObtainsTheNewPassword());
     }
 }

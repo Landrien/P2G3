@@ -1,8 +1,10 @@
 pipeline {
     agent any
+    parameters {
+        string(name: 'TICKET_KEYS', defaultValue: 'POEI25P2G3-75', description: 'Liste des tickets séparés par des virgules, ex: TICKET-1,TICKET-2')
+    }
     environment {
         XRAY_AUTH_URL = "https://xray.cloud.getxray.app/api/v2/authenticate"
-        XRAY_IMPORT_FEATURE = "https://xray.cloud.getxray.app/api/v2/export/cucumber?keys=POEI25P2G3-75"
         XRAY_REPORT_JSON = "https://xray.cloud.getxray.app/api/v2/import/execution/cucumber"
         CLIENT_ID = "81C7FEA9A5464340974B1548E5ADFA37"
         CLIENT_SECRET = "c3d20d2db84ce7fd05f4ca00bdd07d9aae16fe14b59b96712af9a1bf8c6171fe"
@@ -21,9 +23,6 @@ pipeline {
                         returnStdout: true
                     ).trim()
 
-                    //echo "Xray Authentication Response: ${authResponse}"
-
-                    // Récupère la dernière ligne = le token
                     def lines = authResponse.readLines()
                     def token = lines[1].replaceAll('"', '').trim()
 
@@ -35,21 +34,25 @@ pipeline {
 
         stage('Import des Features') {
             steps {
-
                 script {
-                    def importResponse = bat(
-                        script: """
-                            curl -H "Content-Type: application/json" ^
-                            -X GET -H "Authorization: Bearer ${XRAY_TOKEN}" ^
-                            ${XRAY_IMPORT_FEATURE} > features.zip
-                        """,
-                        returnStdout: true
-                    ).trim()
+                    def tickets = params.TICKET_KEYS.tokenize(',')
+                    for (ticket in tickets) {
+                        def ticketKey = ticket.trim()
+                        def importUrl = "https://xray.cloud.getxray.app/api/v2/export/cucumber?keys=${ticketKey}"
 
-                    echo "Xray import response: ${importResponse}"
-                }
-                script {
-                        powershell 'Expand-Archive -Path features.zip -DestinationPath src/test/resources/features/ -Force'
+                        echo "Importing features for ticket: ${ticketKey}"
+
+                        bat(
+                            script: """
+                                curl -H "Content-Type: application/json" ^
+                                -X GET -H "Authorization: Bearer ${XRAY_TOKEN}" ^
+                                "${importUrl}" > features_${ticketKey}.zip
+                            """,
+                            returnStdout: true
+                        ).trim()
+
+                        powershell "Expand-Archive -Path features_${ticketKey}.zip -DestinationPath src/test/resources/features/ -Force"
+                    }
                 }
             }
         }
@@ -80,7 +83,6 @@ pipeline {
 
     post {
         always {
-            junit 'target/surefire-reports/*.xml'
             cucumber fileIncludePattern: 'target/cucumber.json'
         }
     }

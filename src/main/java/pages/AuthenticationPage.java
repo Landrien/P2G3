@@ -62,6 +62,7 @@ public class AuthenticationPage extends BasePage
     public void clickSignInButton()
     {
         signInButton.click();
+        signInButton.click();
     }
 
     public WebElement getInvalidEmailErrorMessage()
