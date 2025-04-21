@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import static utils.AddressJsonUtils.getAddressElement;
+
 /**
  * The address page where the user can modify the info for an existing or new address
  */
@@ -113,5 +115,21 @@ public class AddressEditPage extends BasePage
     {
         addressTitleField.clear();
         addressTitleField.sendKeys(value);
+    }
+
+    public void enterAddressInfo(String addressKey)
+    {
+        enterFirstNameField(getAddressElement(addressKey, "first_name"));
+        enterLastNameField(getAddressElement(addressKey, "last_name"));
+
+        enterAddressField(getAddressElement(addressKey, "address"));
+        enterCityField(getAddressElement(addressKey, "city"));
+        selectState(getAddressElement(addressKey, "state"));
+        enterPostalCodeField(getAddressElement(addressKey, "postal_code"));
+
+        enterHomePhoneField(getAddressElement(addressKey, "home_phone"));
+        enterMobilePhoneField(getAddressElement(addressKey, "mobile_phone"));
+
+        enterAddressTitleField(getAddressElement(addressKey, "title"));
     }
 }

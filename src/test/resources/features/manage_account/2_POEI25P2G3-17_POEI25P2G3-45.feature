@@ -16,7 +16,9 @@ Feature: US3 : Gestion du compte client
 	#RG2 : Si aucune adresse n'a encore été sauvegardée, un bouton "Add my first Address" est disponible" nous redirigeant vers la page de saisie d'adresse
 	@POEI25P2G3-44 @POEI25P2G3-85 @TNR
 	Scenario: Bouton Add my first Address
-		Given the user is connected with an account and no registered addresses
+		Given the user is connected with the default account
+		And there are no registered addresses
+		And the user is on the My account page
 		When the user clicks on Add my first Address button 
 		Then the user is redirected to the address entry page
 

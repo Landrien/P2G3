@@ -61,6 +61,11 @@ public class HeaderPage extends BasePage
         contactUsButton.click();
     }
 
+    public void clickUserAccountButton()
+    {
+        clickableUserAccountButton.click();
+    }
+
     public WebElement getSignInButton()
     {
         return signInButton;

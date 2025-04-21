@@ -18,7 +18,7 @@ Feature: US3 : Gestion du compte client
 	#RG1 : Dans l'espace "My Account", l'utilisateur doit pouvoir gérer : . Son historique de commande . Ses avoirs . Ses adresses de livraison. Ses informations personnelles
 	@POEI25P2G3-42 @POEI25P2G3-85 @TNR
 	Scenario Outline: Affichage des sections de gestion compte et commande
-		Given the user is connected with an account and no registered addresses
+		Given the user is connected with the default account
 		When the user clicks on "<section>" section
 		Then the user is redirected to the "<section>" section page
 		

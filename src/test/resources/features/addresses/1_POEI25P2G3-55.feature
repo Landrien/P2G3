@@ -16,7 +16,8 @@ Feature: US 10 - Gérer mes coordonnées
     #Dans la page "My Account", le site doit afficher un espace "My Adress" avec les coordonnées du client (nom prénom, addresse, téléphone)
     @POEI25P2G3-55 @POEI25P2G3-89 @TNR
     Scenario: Affichage des coordonnées
-        Given the user is connected with an account with addresses
+        Given the user is connected with the default account
+        And there is only one registered address
         And the user is on the My Addresses page
         Then the page should contain the address details of the user
 

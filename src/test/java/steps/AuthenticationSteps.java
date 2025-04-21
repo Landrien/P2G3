@@ -21,29 +21,22 @@ public class AuthenticationSteps extends BaseSteps
     HeaderPage headerPage = new HeaderPage(driver);
     AuthenticationPage authenticationPage = new AuthenticationPage(driver);
     ResetPasswordPage resetPasswordPage = new ResetPasswordPage(driver);
+
     Yopmail yopmail = new Yopmail(driver);
 
-    // TODO / Manage this data better
+    private final String defaultAccountEmail = ConfigReader.getProperty("default-account-email");
+    private final String defaultAccountPassword = ConfigReader.getProperty("default-account-password");
 
-    private final String registeredAccountEmail = ConfigReader.getProperty("email-account-addresses");
-    private final String registeredAccountPassword = ConfigReader.getProperty("password-account-addresses");
+    private final String defaultAccountFirstName = ConfigReader.getProperty("default-account-first-name");
+    private final String defaultAccountLastName = ConfigReader.getProperty("default-account-last-name");
 
-    private final String registeredAccountFirstName = "Admin";
-    private final String registeredAccountLastName = "admin";
     private final String disposableAccountEmail = "kemeufexauqua-6861@yopmail.com";
 
-    @Given("the user is connected with an account and no registered addresses")
-    public void connectNoAddressesAccount()
+    @Given("the user is connected with the default account")
+    public void connectDefaultAccount()
     {
         headerPage.clickSignInButton();
-        authenticationPage.connectNoAddressAccount();
-    }
-
-    @Given("the user is connected with an account with addresses")
-    public void connectWithAddressesAccount()
-    {
-        headerPage.clickSignInButton();
-        authenticationPage.connectAddressesAccount();
+        authenticationPage.connect(defaultAccountEmail, defaultAccountPassword);
     }
 
     @Given("the user is on the Authentication page")
@@ -106,7 +99,7 @@ public class AuthenticationSteps extends BaseSteps
     @When("the user enters a valid sign in email address")
     public void enterValidSignInEmail()
     {
-        authenticationPage.enterSignInEmailAddress("admin13@gmail.com");
+        authenticationPage.enterSignInEmailAddress(defaultAccountEmail);
     }
 
     @And("the user enters an incorrect password")
@@ -123,9 +116,9 @@ public class AuthenticationSteps extends BaseSteps
     }
 
     @And("the user enters the password associated with their account")
-    public void enterValidRegisterPassword()
+    public void enterValidSignInPassword()
     {
-        authenticationPage.enterSignInPassword(registeredAccountPassword);
+        authenticationPage.enterSignInPassword(defaultAccountPassword);
     }
 
     @And("the user clicks on the sign in button")
@@ -144,7 +137,7 @@ public class AuthenticationSteps extends BaseSteps
     @And("the first name and last name of the user are displayed")
     public void checkFirstNameLastDisplayed()
     {
-        assertTrue(headerPage.getUserAccountButton().getText().contains(registeredAccountFirstName + " " + registeredAccountLastName));
+        assertTrue(headerPage.getUserAccountButton().getText().contains(defaultAccountFirstName + " " + defaultAccountLastName));
     }
 
     @When("the user clicks on the 'Forgot your password' link")
