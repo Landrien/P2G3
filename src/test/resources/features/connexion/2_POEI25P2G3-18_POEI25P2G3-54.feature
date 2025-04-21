@@ -36,6 +36,6 @@ Feature: US4 : Connexion au compte client
 		And the user enters the password associated with their account
 		And the user clicks on the sign in button
 		Then the My Account page is displayed  
-		And the first name and last name of the user are displayed
+		And the user's first and last name appear in the menu bar
 		
 	# TESTED : VALID

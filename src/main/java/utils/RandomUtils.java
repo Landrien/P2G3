@@ -1,15 +1,17 @@
 package utils;
 
-
+/**
+ * Classe pour générer des données aléatoires.
+ */
 public class RandomUtils
 {
     /**
-     * Generates a random email address by appending the current system time in milliseconds
-     * to a fixed string and adding the "@gmail.com" domain.
-     * @return A randomly generated email address.
+     * Génère une adresse e-mail temporaire.
+     *
+     * @return Une adresse e-mail basée sur l'horodatage actuel.
      */
     public static String getRandomEmail()
     {
-        return "test." + System.currentTimeMillis() + "@gmail.com";
+        return "test." + System.currentTimeMillis() + "@yopmail.com";
     }
 }

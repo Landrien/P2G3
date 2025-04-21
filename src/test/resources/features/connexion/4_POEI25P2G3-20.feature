@@ -17,7 +17,7 @@ Feature: US5 : Ré-initialiser le mot de passe oublié
 	@POEI25P2G3-56 @TNR
 	Scenario: Lien Forgot your password
 		Given the user is on the Authentication page
-		When the user clicks on the 'Forgot your password' link
+		When the user clicks on the 'Forgot your password?' link
 		Then the user is redirected to the password reset page
 
 	# TESTED : VALID

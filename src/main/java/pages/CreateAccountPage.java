@@ -46,6 +46,9 @@ public class CreateAccountPage extends BasePage
     @FindBy(id = "submitAccount")
     private WebElement registerButton;
 
+    @FindBy(className = "alert-danger")
+    private WebElement errorBox;
+
     @FindBy(xpath = "//b[text()='email']")
     private WebElement invalidEmailMessage;
 
@@ -124,12 +127,10 @@ public class CreateAccountPage extends BasePage
     {
         selectValue(day, birthDateDaySelect);
     }
-
     public void selectBirthDateMonth(String month)
     {
         selectValue(month, birthDateMonthSelect);
     }
-
     public void selectBirthDateYear(String year)
     {
         selectValue(year, birthDateYearSelect);
@@ -145,6 +146,11 @@ public class CreateAccountPage extends BasePage
     {
         Select select = new Select(element);
         select.selectByValue(value);
+    }
+
+    public WebElement getErrorBox()
+    {
+        return errorBox;
     }
 
     public WebElement getCreateAccountTitle()

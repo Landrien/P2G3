@@ -31,7 +31,7 @@ Feature: US1 : Accès à la page d’accueil
 	@POEI25P2G3-78 @POEI25P2G3-83 @TNR
 	Scenario Outline: Accès à la page Sign in via la barre menu noire
 		Given the user is on the "<page>" page
-		When the user clicks on the Sign in link
+		When the user clicks on the links Sign in
 		Then the user is redirected to the Authentication page
 		
 		Scenarios:
@@ -78,7 +78,7 @@ Feature: US1 : Accès à la page d’accueil
 	@POEI25P2G3-24 @POEI25P2G3-83 @TNR
 	Scenario Outline: Accès à la page Contact us via la barre menu noire
 		Given the user is on the "<page>" page
-		When the user clicks on the Contact us link
+		When the user clicks on the links Contact us
 		Then the user is redirected to the Contact page
 		
 		Scenarios:

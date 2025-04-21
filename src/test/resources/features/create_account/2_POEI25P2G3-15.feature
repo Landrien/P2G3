@@ -31,6 +31,6 @@ Feature: US2 : Création d’un compte client
 		Given the user is on the Authentication page
 		When the user enters a valid account creation email address
 		And the user clicks on the Create an account button
-		Then the user is redirected to the Create account page
+		Then the Create an account page is displayed
 
 	# TESTED : VALID

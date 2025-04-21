@@ -1,6 +1,14 @@
-Feature: Forgot Email
+Feature: Forgot Password
   Scenario: LinkEmail
-    Given the user is on the Authentication page
+    Given the user is on the Create an account page
+    When the user selects a gender
+    And the user enters their last name
+    And the user enters their first name
+    And the user enters a password with at least '5' characters
+    And the user clicks on the Register button
+    Then the message 'Your account has been created' is displayed
+    When the user clicks on the 'Sign out' button
+    And the user is on the Authentication page
     When the user clicks on the 'Forgot your password' link
     Then the user is redirected to the password reset page
     When the user enters a valid email address associated with an account

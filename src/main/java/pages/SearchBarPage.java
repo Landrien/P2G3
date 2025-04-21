@@ -6,16 +6,18 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class SearchBarPageElement extends BasePage
+public class SearchBarPage extends BasePage
 {
     /**
      * Constructor to initialize the search bar.
      * @param driver The WebDriver used to interact with the browser.
      */
-    public SearchBarPageElement(WebDriver driver)
+
+    public SearchBarPage(WebDriver driver)
     {
         super(driver);
     }
+
 
     /**
      * Web elements on the search bar page.
@@ -34,10 +36,10 @@ public class SearchBarPageElement extends BasePage
         searchButton.click();
     }
 
-    public void enterSearchText(String text)
+    public void enterSearchElement(String article)
     {
         searchField.clear();
-        searchField.sendKeys(text);
+        searchField.sendKeys(article);
     }
 
     public WebElement getSearchField()

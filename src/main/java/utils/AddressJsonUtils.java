@@ -8,18 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Provides methods to retrieve and parse address data from a JSON file.
+ * Classe pour lire les données d'adresses depuis un fichier JSON.
  */
-
 public class AddressJsonUtils
 {
+    /**
+     * Parser JSON utilisé pour lire les fichiers.
+     */
     public static final JSONParser parser = new JSONParser();
+
+    /**
+     * Chemin du fichier JSON contenant les adresses.
+     */
     public static final String addressesFilePath = "src/main/resources/addresses.json";
 
     /**
-     * This method retrieves all information for a specific address from the JSON file.
-     * @param addressKey The key corresponding to the address in the JSON file
-     * @return A list of strings representing the values of the address elements
+     * Récupère toutes les valeurs (sous forme de liste) d'une adresse spécifique
+     * identifiée par sa clé dans le fichier JSON.
+     *
+     * @param addressKey La clé de l'adresse à récupérer
+     * @return Une liste des valeurs de l'adresse, ou {@code null} en cas d'erreur.
      */
     public static List<String> getAddressInfo(String addressKey)
     {
@@ -44,10 +52,11 @@ public class AddressJsonUtils
     }
 
     /**
-     * This method retrieves a specific element of an address from the JSON file.
-     * @param addressKey The key corresponding to the address in the JSON file
-     * @param elementKey The key corresponding to the specific element within the address
-     * @return The value of the requested address element as a string
+     * Récupère une valeur spécifique d'une adresse à partir du fichier JSON.
+     *
+     * @param addressKey La clé de l'adresse
+     * @param elementKey Le nom de l'élément à récupérer
+     * @return La valeur correspondante sous forme de chaîne, ou {@code null} en cas d'erreur.
      */
     public static String getAddressElement(String addressKey, String elementKey)
     {
