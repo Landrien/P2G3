@@ -13,7 +13,7 @@ import pages.ResetPasswordPage;
 import utils.ConfigReader;
 
 import static org.junit.Assert.assertTrue;
-import static utils.RandomString.getRandomString;
+import static utils.RandomUtils.getRandomEmail;
 
 public class AuthenticationSteps extends BaseSteps
 {
@@ -54,8 +54,7 @@ public class AuthenticationSteps extends BaseSteps
     {
         headerPage.clickSignInButton();
 
-        String randomEmail = getRandomString() + "@gmail.com";
-        authenticationPage.enterCreateEmailAddress(randomEmail);
+        authenticationPage.enterCreateEmailAddress(getRandomEmail());
         authenticationPage.clickCreateAccountButton();
     }
 
@@ -86,8 +85,7 @@ public class AuthenticationSteps extends BaseSteps
     @When("the user enters a valid account creation email address")
     public void enterValidCreateEmail()
     {
-        String randomEmail = getRandomString() + "@gmail.com";
-        authenticationPage.enterCreateEmailAddress(randomEmail);
+        authenticationPage.enterCreateEmailAddress(getRandomEmail());
     }
 
     @When("the user enters an account creation email address with an invalid format")

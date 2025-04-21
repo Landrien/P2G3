@@ -7,7 +7,7 @@ import org.junit.Assert;
 import pages.AccountPage;
 import pages.CreateAccountPage;
 
-import static utils.RandomString.getRandomString;
+import static utils.RandomUtils.getRandomEmail;
 
 public class CreateAccountSteps extends BaseSteps
 {
@@ -65,8 +65,7 @@ public class CreateAccountSteps extends BaseSteps
     @And("the user modifies their email address with a valid format")
     public void enterValidEmail()
     {
-        String randomEmail = getRandomString() + "@gmail.com";
-        createAccountPage.enterEmailAddress(randomEmail);
+        createAccountPage.enterEmailAddress(getRandomEmail());
     }
 
     @And("the user enters a password with at least '5' characters")
