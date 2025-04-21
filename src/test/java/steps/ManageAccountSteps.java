@@ -3,26 +3,19 @@ package steps;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.*;
 
-import java.io.FileReader;
-import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
+
+import static utils.AddressJsonUtils.getAddressInfo;
 
 public class ManageAccountSteps extends BaseSteps
 {
     AccountPage accountPage = new AccountPage(driver);
     AddressesPage addressesPage = new AddressesPage(driver);
     AddressEditPage addressEditPage = new AddressEditPage(driver);
-
-    JSONParser parser = new JSONParser();
-    String addressesFilePath = "src/main/resources/addresses.json";
+    HeaderPage headerPage = new HeaderPage(driver);
 
     @When("the user clicks on Add my first Address button")
     public void clickAddMyFirstAddressButton()
@@ -83,37 +76,20 @@ public class ManageAccountSteps extends BaseSteps
     @And("the user is on the My Addresses page")
     public void goToAddressesPage()
     {
+        headerPage.clickUserAccountButton();
         accountPage.clickMyAddressesButton();
     }
 
     @When("the user clicks on the 'Add' button")
     public void clickAddAddressButton()
     {
-        //wait.until (ExpectedConditions.alertIsPresent());
-        //Alert alert = driver.switchTo().alert();
-        //alert.accept();
-
-        //Assert.assertTrue(addressesPage.getAddAddressButton().isEnabled());
-        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", addressesPage.getAddAddressButton());
         addressesPage.clickAddAddressButton();
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        wait.until(ExpectedConditions.urlContains("controller=address"));
     }
 
     @When("the user clicks on the 'Update' button")
     public void clickUpdateAddressButton()
     {
-        //wait.until (ExpectedConditions.alertIsPresent());
-        //Alert alert = driver.switchTo().alert();
-        //alert.accept();
-
-        //Assert.assertTrue(addressesPage.getUpdateAddressButton().isEnabled());
-        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", addressesPage.getUpdateAddressButton());
         addressesPage.clickUpdateAddressButton();
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        wait.until(ExpectedConditions.urlContains("controller=address"));
     }
 
     @And("the user clicks on the 'Validate' button")
@@ -125,17 +101,7 @@ public class ManageAccountSteps extends BaseSteps
     @And("the user enters the address details")
     public void enterNewAddressInfo()
     {
-        String addressKey = "new_address";
-
-        addressEditPage.enterFirstNameField(getAddressElement(addressKey, "first_name"));
-        addressEditPage.enterLastNameField(getAddressElement(addressKey, "last_name"));
-        addressEditPage.enterAddressField(getAddressElement(addressKey, "address"));
-        addressEditPage.enterCityField(getAddressElement(addressKey, "city"));
-        addressEditPage.selectState(getAddressElement(addressKey, "state"));
-        addressEditPage.enterPostalCodeField(getAddressElement(addressKey, "postal_code"));
-        addressEditPage.enterHomePhoneField(getAddressElement(addressKey, "home_phone"));
-        addressEditPage.enterMobilePhoneField(getAddressElement(addressKey, "mobile_phone"));
-        addressEditPage.enterAddressTitleField(getAddressElement(addressKey, "title"));
+        addressEditPage.enterAddressInfo("new_address");
     }
 
     @Then("the address details should be added")
@@ -168,41 +134,31 @@ public class ManageAccountSteps extends BaseSteps
             checkTextsArePresent(registeredAddressInfo);
     }
 
-    private List<String> getAddressInfo(String addressKey)
+    @And("there are no registered addresses")
+    public void deleteRegisteredAddresses()
     {
-        try
-        {
-            JSONObject addresses = (JSONObject) parser.parse(new FileReader(addressesFilePath));
-            JSONObject address = (JSONObject) addresses.get(addressKey);
+        headerPage.clickUserAccountButton();
+        accountPage.clickMyAddressesButton();
 
-            List<String> addressInfo = new ArrayList<>();
-            for (Object key : address.keySet())
-            {
-                Object value = address.get(key);
-                addressInfo.add(String.valueOf(value));
-            }
-            return addressInfo;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return null;
-        }
+        addressesPage.deleteAddresses();
     }
 
-    private String getAddressElement(String addressKey, String elementKey)
+    @And("there is only one registered address")
+    public void deleteRegisteredAddressesAndCreateOne()
     {
-        try
-        {
-            JSONObject addresses = (JSONObject) parser.parse(new FileReader(addressesFilePath));
-            JSONObject address = (JSONObject) addresses.get(addressKey);
+        headerPage.clickUserAccountButton();
+        accountPage.clickMyAddressesButton();
 
-            return String.valueOf(address.get(elementKey));
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return null;
-        }
+        addressesPage.deleteAddresses();
+        addressesPage.clickAddAddressButton();
+
+        addressEditPage.enterAddressInfo("registered_address");
+        addressEditPage.clickValidateAddressButton();
+    }
+
+    @And("the user is on the My account page")
+    public void goToMyAccountPage()
+    {
+        headerPage.clickUserAccountButton();
     }
 }
