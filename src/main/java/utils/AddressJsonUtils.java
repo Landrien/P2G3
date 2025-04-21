@@ -7,11 +7,20 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Provides methods to retrieve and parse address data from a JSON file.
+ */
+
 public class AddressJsonUtils
 {
     public static final JSONParser parser = new JSONParser();
     public static final String addressesFilePath = "src/main/resources/addresses.json";
 
+    /**
+     * This method retrieves all information for a specific address from the JSON file.
+     * @param addressKey The key corresponding to the address in the JSON file
+     * @return A list of strings representing the values of the address elements
+     */
     public static List<String> getAddressInfo(String addressKey)
     {
         try
@@ -34,6 +43,12 @@ public class AddressJsonUtils
         }
     }
 
+    /**
+     * This method retrieves a specific element of an address from the JSON file.
+     * @param addressKey The key corresponding to the address in the JSON file
+     * @param elementKey The key corresponding to the specific element within the address
+     * @return The value of the requested address element as a string
+     */
     public static String getAddressElement(String addressKey, String elementKey)
     {
         try

@@ -8,6 +8,10 @@ import pages.BasePage;
 
 import java.util.ArrayList;
 
+/**
+ * This class is used to resetting an email by opening the temporary inbox, searching for an email,
+ * and handling cookies and iframes.
+ */
 public class Yopmail extends BasePage {
 
     @FindBy(id = "ycptcpt")
@@ -29,10 +33,18 @@ public class Yopmail extends BasePage {
 
 
 
+    /**
+     * Constructor for Yopmail class that initializes the WebDriver instance.
+     * @param driver The WebDriver instance used for interaction with the browser.
+     */
     public Yopmail(WebDriver driver) {
         super(driver);
     }
 
+    /**
+     * Opens the Yopmail website in a new browser tab.
+     * It uses JavaScript to open a new tab and switches to it.
+     */
     public void openYopmail() {
         ((JavascriptExecutor) driver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -40,9 +52,11 @@ public class Yopmail extends BasePage {
         driver.get("https://yopmail.com/fr/");
 
     }
+
     public void enterEmail(String email) {
         emailField.sendKeys(email);
     }
+
     public void clickSearchButton() {
         searchButton.click();
     }
@@ -50,20 +64,25 @@ public class Yopmail extends BasePage {
     public WebElement getEmailLink() {
         return emailLink;
     }
+
     public void switchToIframe() {
         driver.switchTo().frame(iframe);
     }
+
     public void switchToDefaultContent() {
         driver.switchTo().defaultContent();
     }
+
     public void switchToOriginTab() {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(0));
     }
+
     public void switchToMailTab() {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
     }
+
     public void switchToNewTab() {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(2));

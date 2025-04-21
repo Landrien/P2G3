@@ -10,6 +10,9 @@ import utils.ConfigReader;
  */
 public class AuthenticationPage extends BasePage
 {
+    /**
+     * Web elements on the authentication page.
+     */
     @FindBy(id = "SubmitCreate")
     private WebElement createAccountButton;
 
@@ -34,6 +37,10 @@ public class AuthenticationPage extends BasePage
     @FindBy(xpath = "//h1[text()='Authentication']")
     private WebElement authenticationTitle;
 
+    /**
+     * Constructor to initialize the authentication page.
+     * @param driver The WebDriver used to interact with the browser.
+     */
     public AuthenticationPage(WebDriver driver)
     {
         super(driver);
@@ -79,6 +86,11 @@ public class AuthenticationPage extends BasePage
         return authenticationTitle;
     }
 
+    /**
+     * Signs in using the provided email and password.
+     * @param email The email address used for login.
+     * @param password The password used for login.
+     */
     public void connect(String email, String password)
     {
         enterSignInEmailAddress(email);

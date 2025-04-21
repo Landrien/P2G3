@@ -10,6 +10,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.ArticlePage;
 import pages.SearchBarPageElement;
 
+/**
+ * Search bar and article page elements
+ */
 public class SearchSteps extends BaseSteps
 {
     SearchBarPageElement searchBarPageElement = new SearchBarPageElement(driver);
@@ -20,6 +23,7 @@ public class SearchSteps extends BaseSteps
     {
         searchBarPageElement.clickSearchField();
     }
+
 
     @And("the user enters the text {string} in the search bar")
     public void enterSearchText(String article)
@@ -33,6 +37,10 @@ public class SearchSteps extends BaseSteps
         searchBarPageElement.clickOnSuggestion(suggestion);
     }
 
+    /**
+     * Method to verify if the user is redirected to the correct article page.
+     * @param articleName The expected article name to check.
+     */
     @Then("the user should be redirected to the {string} article page")
     public void checkUserIsOnArticlePage(String articleName)
     {
@@ -40,12 +48,17 @@ public class SearchSteps extends BaseSteps
         Assert.assertEquals("Le titre de l'article ne correspond pas", articleName, actualTitle);
     }
 
+
     @And("the user clicks on the magnifying glass")
     public void clickSearchButton()
     {
         searchBarPageElement.clickSearchButton();
     }
 
+    /**
+     * Verify if the user is redirected to the correct search results page
+     * @param searchQuery The search query that should appear in the URL.
+     */
     @Then("the user should be redirected to the {string} search results page")
     public void checkUserIsOnSearchResultsPage(String searchQuery)
     {
@@ -55,6 +68,10 @@ public class SearchSteps extends BaseSteps
                 currentUrl.contains("search_query=" + searchQuery));
     }
 
+    /**
+     * Verify if the search field is visible on the page.
+     * @param page The page name to check.
+     */
     @Then("the {string} page should contain the search field")
     public void checkPageContainsSearchField(String page)
     {
@@ -62,6 +79,10 @@ public class SearchSteps extends BaseSteps
         Assert.assertTrue("Le champ de recherche n'est pas visible sur la page " + page, searchField.isDisplayed());
     }
 
+    /**
+     * Verify if the magnifying glass is visible
+     * @param page the page name to check
+     */
     @And("the {string} page should contain the magnifying glass")
     public void checkPageContainsSearchButton(String page)
     {

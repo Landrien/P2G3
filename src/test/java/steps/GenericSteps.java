@@ -2,8 +2,16 @@ package steps;
 
 import io.cucumber.java.en.Given;
 
+/**
+ * Generic step definitions allowing direct access
+ * to certain key pages of the application via their URL.
+ */
 public class GenericSteps extends BaseSteps
 {
+    /**
+     * Navigates the user to a specific page by matching the provided page name.
+     * @param page The name of the target page
+     */
     @Given("the user is on the {string} page")
     public void startAtPage(String page)
     {

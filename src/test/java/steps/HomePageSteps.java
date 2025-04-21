@@ -11,6 +11,10 @@ import pages.HeaderPage;
 import pages.HomePage;
 import utils.ConfigReader;
 
+/**
+ * Actions and verifications related to the homepage,
+ * including navigation through tabs, redirects to external links, and core homepage elements.
+ */
 public class HomePageSteps extends BaseSteps
 {
     HomePage homePage = new HomePage(driver);

@@ -9,6 +9,9 @@ import pages.CreateAccountPage;
 
 import static utils.RandomUtils.getRandomEmail;
 
+/**
+ * Step definitions for account creation, including validation of inputs such as email and password.
+ */
 public class CreateAccountSteps extends BaseSteps
 {
     CreateAccountPage createAccountPage = new CreateAccountPage(driver);

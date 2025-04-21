@@ -16,6 +16,12 @@ import utils.Yopmail;
 import static org.junit.Assert.assertTrue;
 import static utils.RandomUtils.getRandomEmail;
 
+/**
+ * Step definitions for authentication-related features
+ *  Logging in and out with default credentials
+ *  Account creation scenarios with valid/invalid inputs
+ *  Password reset flow using a disposable Yopmail email address
+ */
 public class AuthenticationSteps extends BaseSteps
 {
     HeaderPage headerPage = new HeaderPage(driver);
