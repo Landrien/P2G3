@@ -6,14 +6,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.AuthenticationPage;
 import pages.HeaderPage;
 import pages.ResetPasswordPage;
 import utils.ConfigReader;
 import utils.Yopmail;
-
 import java.util.logging.Logger;
 
 import static org.junit.Assert.assertTrue;
@@ -26,27 +24,22 @@ public class AuthenticationSteps extends BaseSteps
     ResetPasswordPage resetPasswordPage = new ResetPasswordPage(driver);
     Yopmail yopmail = new Yopmail(driver);
 
-    private final String registeredAccountEmail = ConfigReader.getProperty("email-account-addresses");
-    private final String registeredAccountPassword = ConfigReader.getProperty("password-account-addresses");
+    private final String defaultAccountEmail = ConfigReader.getProperty("default-account-email");
+    private final String defaultAccountPassword = ConfigReader.getProperty("default-account-password");
 
-    private final String registeredAccountFirstName = "Admin";
-    private final String registeredAccountLastName = "admin";
+    private final String defaultAccountFirstName = ConfigReader.getProperty("default-account-first-name");
+    private final String defaultAccountLastName = ConfigReader.getProperty("default-account-last-name");
+
+
     private final String disposableAccountEmail = "kemeufexauqua-6861@yopmail.com";
     private final String randomEmail = getRandomEmail();
     private String newPassword = "";
 
-    @Given("the user is connected with an account and no registered addresses")
-    public void connectNoAddressesAccount()
+    @Given("the user is connected with the default account")
+    public void connectDefaultAccount()
     {
         headerPage.clickSignInButton();
-        authenticationPage.connectNoAddressAccount();
-    }
-
-    @Given("the user is connected with an account with addresses")
-    public void connectWithAddressesAccount()
-    {
-        headerPage.clickSignInButton();
-        authenticationPage.connectAddressesAccount();
+        authenticationPage.connect(defaultAccountEmail, defaultAccountPassword);
     }
 
     @Given("the user is on the Authentication page")
@@ -60,8 +53,7 @@ public class AuthenticationSteps extends BaseSteps
     {
         headerPage.clickSignInButton();
 
-
-        authenticationPage.enterCreateEmailAddress(randomEmail);
+        authenticationPage.enterCreateEmailAddress(getRandomEmail());
         authenticationPage.clickCreateAccountButton();
     }
 
@@ -110,7 +102,7 @@ public class AuthenticationSteps extends BaseSteps
     @When("the user enters a valid sign in email address")
     public void enterValidSignInEmail()
     {
-        authenticationPage.enterSignInEmailAddress("admin13@gmail.com");
+        authenticationPage.enterSignInEmailAddress(defaultAccountEmail);
     }
 
     @And("the user enters an incorrect password")
@@ -127,9 +119,9 @@ public class AuthenticationSteps extends BaseSteps
     }
 
     @And("the user enters the password associated with their account")
-    public void enterValidRegisterPassword()
+    public void enterValidSignInPassword()
     {
-        authenticationPage.enterSignInPassword(registeredAccountPassword);
+        authenticationPage.enterSignInPassword(defaultAccountPassword);
     }
 
     @And("the user clicks on the sign in button")
@@ -147,10 +139,10 @@ public class AuthenticationSteps extends BaseSteps
     @And("the user's first and last name appear in the menu bar")
     public void checkFirstNameLastNameInMenuBar()
     {
-        assertTrue(headerPage.getUserAccountButton().getText().contains(registeredAccountFirstName + " " + registeredAccountLastName));
+        assertTrue(headerPage.getUserAccountButton().getText().contains(defaultAccountFirstName + " " + defaultAccountLastName));
     }
 
-    @When("the user clicks on the 'Forgot your password?' link")
+    @When("the user clicks on the 'Forgot your password' link")
     public void clickForgotPasswordLink()
     {
         resetPasswordPage.clickForgotPasswordButton();
@@ -176,7 +168,7 @@ public class AuthenticationSteps extends BaseSteps
 
     @When("the user enters a valid email address associated with an account")
     public void EntersAValidEmailAddress() {
-        resetPasswordPage.getEmailField().sendKeys(randomEmail);
+        resetPasswordPage.getEmailField().sendKeys(disposableAccountEmail);
 
     }
 
@@ -187,7 +179,7 @@ public class AuthenticationSteps extends BaseSteps
     }
 
     @And("the user receives an email containing a reset link")
-    public void ReceivesAnEmailContainingAResetLink() throws InterruptedException {
+    public void ReceivesAnEmailContainingAResetLink() {
 
         yopmail.openYopmail();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//p[contains(text(), 'Autoriser')]/..")));

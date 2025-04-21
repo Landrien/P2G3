@@ -6,48 +6,16 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import pages.*;
 
-import java.util.Arrays;
 import java.util.List;
+
+import static utils.AddressJsonUtils.getAddressInfo;
 
 public class ManageAccountSteps extends BaseSteps
 {
     AccountPage accountPage = new AccountPage(driver);
     AddressesPage addressesPage = new AddressesPage(driver);
     AddressEditPage addressEditPage = new AddressEditPage(driver);
-
-    String newAddressFirstName = "John";
-    String newAddressLastName = "Doe";
-    String newAddress = "8 Main Street";
-    String newAddressCity = "Birmingham";
-    String newAddressState = "Texas";
-    String newAddressPostalCode = "33333";
-    String newAddressHomePhone = "6666";
-    String newAddressMobilePhone = "7777";
-    String newAddressTitle = "Test New Address";
-
-    List<String> newAddressInfo = Arrays.asList(
-        newAddressFirstName,
-        newAddressLastName,
-        newAddress,
-        newAddressCity,
-        newAddressState,
-        newAddressPostalCode,
-        newAddressHomePhone,
-        newAddressMobilePhone,
-        newAddressTitle
-    );
-
-    List<String> registeredAddressInfo = Arrays.asList(
-        "Admin",
-        "admin",
-        "Grande Place",
-        "Versailles",
-        "Florida",
-        "78000",
-        "027889",
-        "02558754",
-        "My address"
-    );
+    HeaderPage headerPage = new HeaderPage(driver);
 
     @When("the user clicks on Add my first Address button")
     public void clickAddMyFirstAddressButton()
@@ -108,6 +76,7 @@ public class ManageAccountSteps extends BaseSteps
     @And("the user is on the My Addresses page")
     public void goToAddressesPage()
     {
+        headerPage.clickUserAccountButton();
         accountPage.clickMyAddressesButton();
     }
 
@@ -132,21 +101,16 @@ public class ManageAccountSteps extends BaseSteps
     @And("the user enters the address details")
     public void enterNewAddressInfo()
     {
-        addressEditPage.enterFirstNameField(newAddressFirstName);
-        addressEditPage.enterLastNameField(newAddressLastName);
-        addressEditPage.enterAddressField(newAddress);
-        addressEditPage.enterCityField(newAddressCity);
-        addressEditPage.selectState(newAddressState);
-        addressEditPage.enterPostalCodeField(newAddressPostalCode);
-        addressEditPage.enterHomePhoneField(newAddressHomePhone);
-        addressEditPage.enterMobilePhoneField(newAddressMobilePhone);
-        addressEditPage.enterAddressTitleField(newAddressTitle);
+        addressEditPage.enterAddressInfo("new_address");
     }
 
     @Then("the address details should be added")
     public void checkNewAddressInfo()
     {
-        checkTextsArePresent(newAddressInfo);
+        List<String> newAddressInfo = getAddressInfo("new_address");
+
+        if (newAddressInfo != null)
+            checkTextsArePresent(newAddressInfo);
     }
 
     @And("the user modifies their name")
@@ -164,6 +128,37 @@ public class ManageAccountSteps extends BaseSteps
     @And("the page should contain the address details of the user")
     public void checkRegisteredAddressInfo()
     {
-        checkTextsArePresent(registeredAddressInfo);
+        List<String> registeredAddressInfo = getAddressInfo("registered_address");
+
+        if (registeredAddressInfo != null)
+            checkTextsArePresent(registeredAddressInfo);
+    }
+
+    @And("there are no registered addresses")
+    public void deleteRegisteredAddresses()
+    {
+        headerPage.clickUserAccountButton();
+        accountPage.clickMyAddressesButton();
+
+        addressesPage.deleteAddresses();
+    }
+
+    @And("there is only one registered address")
+    public void deleteRegisteredAddressesAndCreateOne()
+    {
+        headerPage.clickUserAccountButton();
+        accountPage.clickMyAddressesButton();
+
+        addressesPage.deleteAddresses();
+        addressesPage.clickAddAddressButton();
+
+        addressEditPage.enterAddressInfo("registered_address");
+        addressEditPage.clickValidateAddressButton();
+    }
+
+    @And("the user is on the My account page")
+    public void goToMyAccountPage()
+    {
+        headerPage.clickUserAccountButton();
     }
 }

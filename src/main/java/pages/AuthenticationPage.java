@@ -89,20 +89,10 @@ public class AuthenticationPage extends BasePage
         return authenticationTitle;
     }
 
-    public void connectNoAddressAccount()
-    {
-        connect("email-account-no-address", "password-account-no-address");
-    }
-
-    public void connectAddressesAccount()
-    {
-        connect("email-account-addresses", "password-account-addresses");
-    }
-
     public void connect(String email, String password)
     {
-        enterSignInEmailAddress(ConfigReader.getProperty(email));
-        enterSignInPassword(ConfigReader.getProperty(password));
+        enterSignInEmailAddress(email);
+        enterSignInPassword(password);
         clickSignInButton();
     }
 }

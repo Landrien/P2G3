@@ -17,7 +17,7 @@ Feature: US 6 - Déconnexion
 	#La page d'authentification s'affiche et le lien "Sign in" remplace le lien "Sign out" dans la barre menu
 	@POEI25P2G3-23 @POEI25P2G3-86 @TNR
 	Scenario: Déconnexion - Barre Menu
-		Given the user is connected with an account and no registered addresses
+		Given the user is connected with the default account
 		When the user clicks on the 'Sign out' button
 		Then the user should be logged out and 'Sign in' displayed
 		
