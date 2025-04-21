@@ -9,6 +9,9 @@ import org.openqa.selenium.support.FindBy;
  */
 public class HomePage extends BasePage
 {
+    /**
+     * Web elements on the homepage.
+     */
     @FindBy(xpath = "//a[@class='homefeatured']")
     private WebElement popularButton;
 
@@ -27,21 +30,36 @@ public class HomePage extends BasePage
     @FindBy(xpath = "//div[@id='block_top_menu']/ul/li[3]/a")
     private WebElement tshirtsTab;
 
+    /**
+     * Constructor to initialize the HomePage with the given WebDriver.
+     * @param driver The WebDriver used to interact with the browser.
+     */
     public HomePage(WebDriver driver)
     {
         super(driver);
     }
 
+    /**
+     * Clicks on the blog tab to navigate to the blog section.
+     */
     public void clickBlogTab()
     {
         blogTab.click();
     }
 
+    /**
+     * Clicks on the featured advertisement section.
+     */
     public void clickFeaturedAd()
     {
         featuredAd.click();
     }
 
+
+    /**
+     * Clicks on the blog tab to navigate to the blog section
+     * @param tabName The name of the tab to click
+     */
     public void clickOnCategoryTab(String tabName)
     {
         switch (tabName.toLowerCase())

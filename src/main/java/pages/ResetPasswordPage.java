@@ -9,11 +9,18 @@ import org.openqa.selenium.support.FindBy;
  */
 public class ResetPasswordPage extends BasePage
 {
+    /**
+     * Constructor to initialize the reset password page.
+     * @param driver The WebDriver used to interact with the browser.
+     */
     public ResetPasswordPage(WebDriver driver)
     {
         super(driver);
     }
 
+    /**
+     * Web elements on the reset password page.
+     */
     @FindBy(id = "email")
     private WebElement emailField;
 
@@ -29,26 +36,44 @@ public class ResetPasswordPage extends BasePage
     @FindBy(xpath = "//p[@class='alert alert-success']")
     private WebElement retrievePasswordConfirmationMessage;
 
+    /**
+     * Clicks the "Forgot Password" button to navigate to the reset password section.
+     */
     public void clickForgotPasswordButton()
     {
         forgotPasswordButton.click();
     }
 
+    /**
+     * Returns the title element of the "Forgot Password" section.
+     * @return WebElement representing the "Forgot Password" title.
+     */
     public WebElement getForgotPasswordTitle()
     {
         return forgotPasswordTitle;
     }
 
+    /**
+     * Clicks the "Retrieve Password" button to submit the password reset request.
+     */
     public void clickRetrievePasswordButton()
     {
         retrievePasswordButton.click();
     }
 
+    /**
+     * Returns the confirmation message displayed after successfully submitting the password retrieval request.
+     * @return WebElement representing the confirmation message.
+     */
     public WebElement getRetrievePasswordConfirmationMessage()
     {
         return retrievePasswordConfirmationMessage;
     }
 
+    /**
+     * Returns the email field element where users can enter their email address for password retrieval.
+     * @return WebElement representing the email field.
+     */
     public WebElement getEmailField() {
         return emailField;
     }

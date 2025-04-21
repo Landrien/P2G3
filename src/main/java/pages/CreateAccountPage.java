@@ -10,11 +10,18 @@ import org.openqa.selenium.support.ui.Select;
  */
 public class CreateAccountPage extends BasePage
 {
+    /**
+     * Constructor that initializes the CreateAccountPage with the provided WebDriver.
+     * @param driver The WebDriver instance used to interact with the page.
+     */
     public CreateAccountPage(WebDriver driver)
     {
         super(driver);
     }
 
+    /**
+     * Web elements on the create account page.
+     */
     @FindBy(xpath = "//h1[text()='Create an account']")
     private WebElement createAccountTitle;
 
@@ -50,11 +57,17 @@ public class CreateAccountPage extends BasePage
 
     @FindBy(id = "years")
     private WebElement birthDateYearSelect;
+
     @FindBy(id = "months")
     private WebElement birthDateMonthSelect;
+
     @FindBy(id = "days")
     private WebElement birthDateDaySelect;
 
+    /**
+     * Selects gender title based on the boolean value.
+     * @param isMale True if male, false if female.
+     */
     public void selectGenderTitle(boolean isMale)
     {
         if (isMale == true)
@@ -122,6 +135,12 @@ public class CreateAccountPage extends BasePage
         selectValue(year, birthDateYearSelect);
     }
 
+
+    /**
+     * Method to select a value in a dropdown element.
+     * @param value The value to be selected in the select element (day,month,year).
+     * @param element The WebElement representing the select HTML element.
+     */
     private void selectValue(String value, WebElement element)
     {
         Select select = new Select(element);

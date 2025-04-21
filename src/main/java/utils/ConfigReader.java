@@ -22,6 +22,11 @@ public class ConfigReader
         }
     }
 
+    /**
+     * Retrieves the value associated with the specified key from the properties file.
+     * @param key The key to search for in the properties file.
+     * @return The value corresponding to the provided key.
+     */
     public static String getProperty(String key)
     {
         return properties.getProperty(key);

@@ -10,8 +10,14 @@ import org.openqa.selenium.support.ui.Select;
  */
 public class AddressEditPage extends BasePage
 {
+    /**
+     * URL identifier for the address page.
+     */
     public static final String pageUrlId = "controller=address";
 
+    /**
+     * Web elements on the address edit page.
+     */
     @FindBy(id = "firstname")
     private WebElement firstNameField;
 
@@ -45,6 +51,11 @@ public class AddressEditPage extends BasePage
     @FindBy(id = "submitAddress")
     private WebElement validateAddressButton;
 
+
+    /**
+     * Constructor to initialize the address edit page.
+     * @param driver The WebDriver used to interact with the browser.
+     */
     public AddressEditPage(WebDriver driver)
     {
         super(driver);
@@ -55,6 +66,10 @@ public class AddressEditPage extends BasePage
         validateAddressButton.click();
     }
 
+    /**
+     * Enters the first name into the corresponding field.
+     * @param value The first name to enter.
+     */
     public void enterFirstNameField(String value)
     {
         firstNameField.clear();

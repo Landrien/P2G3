@@ -9,6 +9,9 @@ import org.openqa.selenium.support.FindBy;
  */
 public class HeaderPage extends BasePage
 {
+    /**
+     * Web elements on the header
+     */
     @FindBy(xpath = "//a[@class='logout']")
     private WebElement signOutButton;
 
@@ -17,6 +20,7 @@ public class HeaderPage extends BasePage
 
     @FindBy(xpath = "//div[@class='header_user_info']")
     private WebElement userAccountButton;
+
     @FindBy(xpath = "//a[@class='account']")
     private WebElement clickableUserAccountButton;
 
@@ -31,6 +35,10 @@ public class HeaderPage extends BasePage
 
     private SearchBarPageElement searchBarPageElement;
 
+    /**
+     * Constructor to initialize the HeaderPage and its components.
+     * @param driver WebDriver used to interact with the browser.
+     */
     public HeaderPage(WebDriver driver)
     {
         super(driver);
@@ -76,6 +84,9 @@ public class HeaderPage extends BasePage
         return userAccountButton;
     }
 
+    /**
+     * Returns the search bar component used to search for products.
+     */
     public SearchBarPageElement getSearchBarPage()
     {
         return searchBarPageElement;

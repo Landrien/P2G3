@@ -7,6 +7,11 @@ import org.openqa.selenium.WebDriver;
  */
 public class FooterPage extends BasePage
 {
+    /**
+     * Constructor to initialize the FooterPage.
+     *
+     * @param driver The WebDriver used to interact with the browser.
+     */
     public FooterPage(WebDriver driver)
     {
         super(driver);
