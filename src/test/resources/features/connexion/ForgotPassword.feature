@@ -9,7 +9,7 @@ Feature: Forgot Password
     Then the message 'Your account has been created' is displayed
     When the user clicks on the 'Sign out' button
     And the user is on the Authentication page
-    When the user clicks on the 'Forgot your password?' link
+    When the user clicks on the 'Forgot your password' link
     Then the user is redirected to the password reset page
     When the user enters a valid email address associated with an account
     And the user clicks on the 'Retrieve Password' button

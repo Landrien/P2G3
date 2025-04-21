@@ -30,8 +30,6 @@ public class AuthenticationSteps extends BaseSteps
     private final String defaultAccountFirstName = ConfigReader.getProperty("default-account-first-name");
     private final String defaultAccountLastName = ConfigReader.getProperty("default-account-last-name");
 
-
-    private final String disposableAccountEmail = "kemeufexauqua-6861@yopmail.com";
     private final String randomEmail = getRandomEmail();
     private String newPassword = "";
 
@@ -53,7 +51,7 @@ public class AuthenticationSteps extends BaseSteps
     {
         headerPage.clickSignInButton();
 
-        authenticationPage.enterCreateEmailAddress(getRandomEmail());
+        authenticationPage.enterCreateEmailAddress(randomEmail);
         authenticationPage.clickCreateAccountButton();
     }
 
@@ -84,7 +82,7 @@ public class AuthenticationSteps extends BaseSteps
     @When("the user enters a valid account creation email address")
     public void enterValidCreateEmail()
     {
-        authenticationPage.enterCreateEmailAddress(getRandomEmail());
+        authenticationPage.enterCreateEmailAddress(randomEmail);
     }
 
     @When("the user enters an account creation email address with an invalid format")
@@ -168,7 +166,7 @@ public class AuthenticationSteps extends BaseSteps
 
     @When("the user enters a valid email address associated with an account")
     public void EntersAValidEmailAddress() {
-        resetPasswordPage.getEmailField().sendKeys(disposableAccountEmail);
+        resetPasswordPage.getEmailField().sendKeys(randomEmail);
 
     }
 
