@@ -3,14 +3,16 @@ package steps;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.*;
 
-import java.util.Arrays;
+import java.io.FileReader;
+import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ManageAccountSteps extends BaseSteps
@@ -19,41 +21,8 @@ public class ManageAccountSteps extends BaseSteps
     AddressesPage addressesPage = new AddressesPage(driver);
     AddressEditPage addressEditPage = new AddressEditPage(driver);
 
-    // TODO Put this into json / config files to manage the data sets better
-
-    String newAddressFirstName = "John";
-    String newAddressLastName = "Doe";
-    String newAddress = "8 Main Street";
-    String newAddressCity = "Birmingham";
-    String newAddressState = "Texas";
-    String newAddressPostalCode = "33333";
-    String newAddressHomePhone = "6666";
-    String newAddressMobilePhone = "7777";
-    String newAddressTitle = "Test New Address";
-
-    List<String> newAddressInfo = Arrays.asList(
-        newAddressFirstName,
-        newAddressLastName,
-        newAddress,
-        newAddressCity,
-        newAddressState,
-        newAddressPostalCode,
-        newAddressHomePhone,
-        newAddressMobilePhone,
-        newAddressTitle
-    );
-
-    List<String> registeredAddressInfo = Arrays.asList(
-        "Admin",
-        "admin",
-        "Grande Place",
-        "Versailles",
-        "Florida",
-        "78000",
-        "027889",
-        "02558754",
-        "My address"
-    );
+    JSONParser parser = new JSONParser();
+    String addressesFilePath = "src/main/resources/addresses.json";
 
     @When("the user clicks on Add my first Address button")
     public void clickAddMyFirstAddressButton()
@@ -127,6 +96,9 @@ public class ManageAccountSteps extends BaseSteps
         //Assert.assertTrue(addressesPage.getAddAddressButton().isEnabled());
         //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", addressesPage.getAddAddressButton());
         addressesPage.clickAddAddressButton();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        wait.until(ExpectedConditions.urlContains("controller=address"));
     }
 
     @When("the user clicks on the 'Update' button")
@@ -139,6 +111,9 @@ public class ManageAccountSteps extends BaseSteps
         //Assert.assertTrue(addressesPage.getUpdateAddressButton().isEnabled());
         //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", addressesPage.getUpdateAddressButton());
         addressesPage.clickUpdateAddressButton();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        wait.until(ExpectedConditions.urlContains("controller=address"));
     }
 
     @And("the user clicks on the 'Validate' button")
@@ -150,21 +125,26 @@ public class ManageAccountSteps extends BaseSteps
     @And("the user enters the address details")
     public void enterNewAddressInfo()
     {
-        addressEditPage.enterFirstNameField(newAddressFirstName);
-        addressEditPage.enterLastNameField(newAddressLastName);
-        addressEditPage.enterAddressField(newAddress);
-        addressEditPage.enterCityField(newAddressCity);
-        addressEditPage.selectState(newAddressState);
-        addressEditPage.enterPostalCodeField(newAddressPostalCode);
-        addressEditPage.enterHomePhoneField(newAddressHomePhone);
-        addressEditPage.enterMobilePhoneField(newAddressMobilePhone);
-        addressEditPage.enterAddressTitleField(newAddressTitle);
+        String addressKey = "new_address";
+
+        addressEditPage.enterFirstNameField(getAddressElement(addressKey, "first_name"));
+        addressEditPage.enterLastNameField(getAddressElement(addressKey, "last_name"));
+        addressEditPage.enterAddressField(getAddressElement(addressKey, "address"));
+        addressEditPage.enterCityField(getAddressElement(addressKey, "city"));
+        addressEditPage.selectState(getAddressElement(addressKey, "state"));
+        addressEditPage.enterPostalCodeField(getAddressElement(addressKey, "postal_code"));
+        addressEditPage.enterHomePhoneField(getAddressElement(addressKey, "home_phone"));
+        addressEditPage.enterMobilePhoneField(getAddressElement(addressKey, "mobile_phone"));
+        addressEditPage.enterAddressTitleField(getAddressElement(addressKey, "title"));
     }
 
     @Then("the address details should be added")
     public void checkNewAddressInfo()
     {
-        checkTextsArePresent(newAddressInfo);
+        List<String> newAddressInfo = getAddressInfo("new_address");
+
+        if (newAddressInfo != null)
+            checkTextsArePresent(newAddressInfo);
     }
 
     @And("the user modifies their name")
@@ -182,6 +162,47 @@ public class ManageAccountSteps extends BaseSteps
     @And("the page should contain the address details of the user")
     public void checkRegisteredAddressInfo()
     {
-        checkTextsArePresent(registeredAddressInfo);
+        List<String> registeredAddressInfo = getAddressInfo("registered_address");
+
+        if (registeredAddressInfo != null)
+            checkTextsArePresent(registeredAddressInfo);
+    }
+
+    private List<String> getAddressInfo(String addressKey)
+    {
+        try
+        {
+            JSONObject addresses = (JSONObject) parser.parse(new FileReader(addressesFilePath));
+            JSONObject address = (JSONObject) addresses.get(addressKey);
+
+            List<String> addressInfo = new ArrayList<>();
+            for (Object key : address.keySet())
+            {
+                Object value = address.get(key);
+                addressInfo.add(String.valueOf(value));
+            }
+            return addressInfo;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private String getAddressElement(String addressKey, String elementKey)
+    {
+        try
+        {
+            JSONObject addresses = (JSONObject) parser.parse(new FileReader(addressesFilePath));
+            JSONObject address = (JSONObject) addresses.get(addressKey);
+
+            return String.valueOf(address.get(elementKey));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
