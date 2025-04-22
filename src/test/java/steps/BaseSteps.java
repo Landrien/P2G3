@@ -10,6 +10,10 @@ import java.time.Duration;
 
 import java.util.List;
 
+/**
+ * Base class for step definitions providing common utilities and access to the WebDriver.
+ */
+
 public class BaseSteps
 {
     protected WebDriver driver = Hooks.getDriver();

@@ -6,6 +6,9 @@ import org.junit.Assert;
 import pages.CartPage;
 import pages.HeaderPage;
 
+/**
+ * Step definitions related to the shopping cart feature.
+ */
 public class CartSteps extends BaseSteps
 {
     HeaderPage headerPage = new HeaderPage(driver);

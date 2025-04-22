@@ -16,14 +16,24 @@ import java.util.List;
  */
 public class AddressesPage extends BasePage
 {
+    /**
+     * URL identifier for the address page.
+     */
     public static final String pageUrlId = "controller=addresses";
 
+    /**
+     * Web elements on the address page.
+     */
     @FindBy(xpath = "//a[@title='Add an address']")
     private WebElement addAddressButton;
 
     @FindBy(xpath = "//a[@title='Update']")
     private WebElement updateAddressButton;
 
+    /**
+     * Constructor to initialize the address page.
+     * @param driver The WebDriver used to interact with the browser.
+     */
     public AddressesPage(WebDriver driver)
     {
         super(driver);
@@ -39,6 +49,9 @@ public class AddressesPage extends BasePage
         updateAddressButton.click();
     }
 
+    /**
+     * Method to delete all addresses on the page
+     */
     public void deleteAddresses()
     {
         boolean shouldDelete = false;
@@ -56,6 +69,9 @@ public class AddressesPage extends BasePage
         while (shouldDelete == true);
     }
 
+    /**
+     * Method to accept the delete confirmation popup
+     */
     private void acceptDeletePopup()
     {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
