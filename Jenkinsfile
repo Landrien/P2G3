@@ -61,7 +61,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                catchError (buildResult: 'FAILURE', stageResult: 'FAILURE'){bat "mvn test -Dgrid.url=${params.GRID_URL} -DthreadCount=4"}
+                catchError (buildResult: 'FAILURE', stageResult: 'FAILURE'){bat "mvn test -Dgrid.url=${params.GRID_URL}"}
                 echo "Grid URL fournie à Maven : ${params.GRID_URL}"
             }
         }
