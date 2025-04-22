@@ -59,11 +59,11 @@ pipeline {
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                catchError (buildResult: 'FAILURE', stageResult: 'FAILURE'){bat 'mvn test'}
             }
         }
 
-        stage('Export report à XRAY') {
+        stage('Export report to XRAY') {
             steps {
                 script {
                     def exportResponse = bat(
