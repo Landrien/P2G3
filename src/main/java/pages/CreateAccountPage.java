@@ -79,58 +79,105 @@ public class CreateAccountPage extends BasePage
             femaleGenderRadioSelect.click();
     }
 
+    /**
+     * Enters the first name into the first name field on the create account page.
+     * @param firstName The first name to be entered.
+     */
     public void enterFirstName(String firstName)
     {
         firstNameField.clear();
         firstNameField.sendKeys(firstName);
     }
 
+    /**
+     * Enters the last name into the last name field on the create account page.
+     * @param lastName The last name to be entered.
+     */
     public void enterLastName(String lastName)
     {
         lastNameField.clear();
         lastNameField.sendKeys(lastName);
     }
 
+    /**
+     * Enters the email address into the email field on the create account page.
+     * @param email The email address to be entered.
+     */
     public void enterEmailAddress(String email)
     {
         emailAddressField.clear();
         emailAddressField.sendKeys(email);
     }
 
+    /**
+     * Enters the password into the password field on the create account page.
+     * @param password The password to be entered.
+     */
     public void enterPassword(String password)
     {
         passwordField.clear();
         passwordField.sendKeys(password);
     }
 
+
+    /**
+     * Clicks on the register button to submit the registration form.
+     */
     public void clickRegisterButton()
     {
         registerButton.click();
     }
 
+    /**
+     * Returns the WebElement representing the invalid email message displayed on the page.
+     * @return WebElement representing the invalid email message.
+     */
     public WebElement getInvalidEmailMessage()
     {
         return invalidEmailMessage;
     }
 
+    /**
+     * Returns the WebElement representing the invalid password message displayed on the page.
+     * @return WebElement representing the invalid password message.
+     */
     public WebElement getInvalidPasswordMessage()
     {
         return invalidPasswordMessage;
     }
 
+    /**
+     * Clicks on the newsletter sign-up checkbox to enable or disable newsletter subscription.
+     */
     public void clickNewsletterSignUpCheckbox()
     {
         newsletterSignUpCheckbox.click();
     }
 
+
+    /**
+     * Selects the day of birth from the dropdown.
+     * @param day The day of birth to be selected.
+     */
     public void selectBirthDateDay(String day)
     {
         selectValue(day, birthDateDaySelect);
     }
+
+
+    /**
+     * Selects the month of birth from the dropdown.
+     * @param month The month of birth to be selected.
+     */
     public void selectBirthDateMonth(String month)
     {
         selectValue(month, birthDateMonthSelect);
     }
+
+    /**
+     * Selects the year of birth from the dropdown.
+     * @param year The year of birth to be selected.
+     */
     public void selectBirthDateYear(String year)
     {
         selectValue(year, birthDateYearSelect);
@@ -148,11 +195,20 @@ public class CreateAccountPage extends BasePage
         select.selectByValue(value);
     }
 
+    /**
+     * Returns the WebElement representing the error box that displays validation messages.
+     * @return WebElement representing the error box.
+     */
     public WebElement getErrorBox()
     {
         return errorBox;
     }
 
+
+    /**
+     * Returns the WebElement representing the title "Create an account" on the page.
+     * @return WebElement representing the account creation title.
+     */
     public WebElement getCreateAccountTitle()
     {
         return createAccountTitle;

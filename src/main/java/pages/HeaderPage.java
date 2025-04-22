@@ -20,6 +20,7 @@ public class HeaderPage extends BasePage
 
     @FindBy(xpath = "//div[@class= \"header_user_info\"]")
     private WebElement userAccountButton;
+
     @FindBy(xpath = "//a[@class= \"account\"]")
     private WebElement clickableUserAccountButton;
 
@@ -45,45 +46,81 @@ public class HeaderPage extends BasePage
         searchBarPage = new SearchBarPage(driver);
     }
 
+    /**
+     * Clicks on the shopping cart logo to navigate to the shopping cart page.
+     */
     public void clickCartLogo()
     {
         cartLogoButton.click();
     }
 
+
+    /**
+     * Clicks on the sign-out button to log the user out.
+     */
     public void clickSignOutButton()
     {
         signOutButton.click();
     }
+
+
+    /**
+     * Clicks on the sign-in button to navigate to the login page.
+     */
     public void clickSignInButton()
     {
         signInButton.click();
     }
 
+    /**
+     * Clicks on the home page logo to navigate back to the homepage.
+     */
     public void clickLogoButton()
     {
         homePageLogoButton.click();
     }
 
+
+    /**
+     * Clicks on the contact us link to navigate to the contact page.
+     */
     public void clickContactUs()
     {
         contactUs.click();
     }
 
+    /**
+     * Clicks on the user account button to view the user account details.
+     */
     public void clickUserAccountButton()
     {
         clickableUserAccountButton.click();
     }
 
+    /**
+     * Returns the sign-in button WebElement.
+     * @return WebElement of the sign-in button
+     */
     public WebElement getSignInButton()
     {
         return signInButton;
     }
 
+
+    /**
+     * Returns the sign-out button WebElement.
+     * @return WebElement of the sign-out button
+     */
     public WebElement getSignOutButton()
     {
         return signOutButton;
     }
 
+
+    /**
+     * Returns the user account button WebElement.
+     * @return WebElement of the user account button
+     */
     public WebElement getUserAccountButton()
     {
         return userAccountButton;
