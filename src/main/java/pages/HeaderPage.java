@@ -32,7 +32,7 @@ public class HeaderPage extends BasePage
     @FindBy(xpath = "//a[@title = 'Contact us']")
     private WebElement contactUs;
 
-    @FindBy(xpath = "//a[@title='My Shop']")
+    @FindBy(xpath = "//div[@id='header_logo']/*")
     private WebElement homePageLogoButton;
 
     @FindBy(xpath = "//a[@title = 'View my shopping cart']")
