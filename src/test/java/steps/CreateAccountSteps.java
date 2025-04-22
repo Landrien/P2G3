@@ -26,7 +26,7 @@ public class CreateAccountSteps extends BaseSteps
         createAccountPage.clickRegisterButton();
     }
 
-    @Then("a password is invalid message is displayed")
+    @Then("a Password is invalid message is displayed")
     public void checkPasswordInvalidErrorMessage()
     {
         Assert.assertTrue(createAccountPage.getInvalidPasswordMessage().isDisplayed());
@@ -89,13 +89,13 @@ public class CreateAccountSteps extends BaseSteps
         createAccountPage.selectBirthDateYear("2001");
     }
 
-    @And("the user checks Sign up for our newsletter!")
+    @And("the user checks the Sign up for our newsletter checkbox")
     public void clickNewsletterSignUpCheckbox()
     {
         createAccountPage.clickNewsletterSignUpCheckbox();
     }
 
-    @Then("the Create an account page is displayed")
+    @Then("the user is redirected to the Create account page")
     public void checkCreateAccountPage()
     {
         Assert.assertTrue(createAccountPage.getCreateAccountTitle().isDisplayed());

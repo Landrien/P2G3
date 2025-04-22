@@ -27,7 +27,7 @@ public class HomePageSteps extends BaseSteps
         checkNewTabUrl("prestashop.com/blog");
     }
 
-    @When ("the user clicks on the links Sign in")
+    @When ("the user clicks on the Sign in link")
     public void clickSignInButton()
     {
         headerPage.clickSignInButton();
@@ -90,7 +90,7 @@ public class HomePageSteps extends BaseSteps
         }
     }
 
-    @And("the user clicks on the links Contact us")
+    @And("the user clicks on the Contact us link")
     public void clickContactUs()
     {
         headerPage.clickContactUs();

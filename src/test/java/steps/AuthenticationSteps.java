@@ -134,7 +134,7 @@ public class AuthenticationSteps extends BaseSteps
         assertTrue(headerPage.getSignOutButton().getText().contains("Sign out"));
     }
 
-    @And("the user's first and last name appear in the menu bar")
+    @And("the first name and last name of the user are displayed")
     public void checkFirstNameLastNameInMenuBar()
     {
         assertTrue(headerPage.getUserAccountButton().getText().contains(defaultAccountFirstName + " " + defaultAccountLastName));
