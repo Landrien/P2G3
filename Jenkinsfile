@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'TICKET_KEYS', defaultValue: 'POEI25P2G3-75', description: 'Liste des tickets séparés par des virgules, ex: TICKET-1,TICKET-2')
+        string(name: 'TICKET_KEYS', defaultValue: 'POEI25P2G3-98,POEI25P2G3-97,POEI25P2G3-96,POEI25P2G3-95,POEI25P2G3-94,POEI25P2G3-92,POEI25P2G3-91', description: 'Liste des tickets séparés par des virgules, ex: TICKET-1,TICKET-2')
     }
     environment {
         XRAY_AUTH_URL = "https://xray.cloud.getxray.app/api/v2/authenticate"
