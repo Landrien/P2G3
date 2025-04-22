@@ -118,7 +118,10 @@ public class AuthenticationSteps extends BaseSteps
     @Then("an error message Invalid password is displayed")
     public void checkInvalidPasswordErrorMessage()
     {
+        authenticationPage.initializePage();
+
         wait.until(ExpectedConditions.visibilityOf(authenticationPage.getInvalidPasswordErrorMessage()));
+
         assertTrue(authenticationPage.getInvalidPasswordErrorMessage().isDisplayed());
     }
 
@@ -140,7 +143,7 @@ public class AuthenticationSteps extends BaseSteps
         assertTrue(headerPage.getSignOutButton().getText().contains("Sign out"));
     }
 
-    @And("the user's first and last name appear in the menu bar")
+    @And("the first name and last name of the user are displayed")
     public void checkFirstNameLastNameInMenuBar()
     {
         assertTrue(headerPage.getUserAccountButton().getText().contains(defaultAccountFirstName + " " + defaultAccountLastName));

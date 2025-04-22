@@ -93,6 +93,11 @@ public class HeaderPage extends BasePage
         }
         }
 
+    public WebElement getLogoButton()
+    {
+        return homePageLogoButton;
+    }
+
 
     /**
      * Clicks on the contact us link to navigate to the contact page.
