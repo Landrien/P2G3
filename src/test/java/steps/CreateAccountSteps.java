@@ -15,9 +15,9 @@ public class CreateAccountSteps extends BaseSteps
     AccountPage accountPage = new AccountPage(driver);
 
     @When("the user enters a {string} invalid password")
-    public void enterInvalidPassword(String invalidPassword)
+    public void enterInvalidPassword(String badPassword)
     {
-        createAccountPage.enterPassword(invalidPassword);
+        createAccountPage.enterPassword(badPassword);
     }
 
     @And("the user clicks on the Register button")
@@ -26,7 +26,7 @@ public class CreateAccountSteps extends BaseSteps
         createAccountPage.clickRegisterButton();
     }
 
-    @Then("a Password is invalid message is displayed")
+    @Then("a password is invalid message is displayed")
     public void checkPasswordInvalidErrorMessage()
     {
         Assert.assertTrue(createAccountPage.getInvalidPasswordMessage().isDisplayed());
@@ -35,7 +35,7 @@ public class CreateAccountSteps extends BaseSteps
     @When("the user modifies their email address to an invalid format")
     public void enterInvalidEmail()
     {
-        createAccountPage.enterEmailAddress("invalid-email");
+        createAccountPage.enterEmailAddress("bad-email");
     }
 
     @Then("an Email is invalid message is displayed")
@@ -65,6 +65,7 @@ public class CreateAccountSteps extends BaseSteps
     @And("the user modifies their email address with a valid format")
     public void enterValidEmail()
     {
+
         createAccountPage.enterEmailAddress(getRandomEmail());
     }
 
@@ -88,14 +89,14 @@ public class CreateAccountSteps extends BaseSteps
         createAccountPage.selectBirthDateYear("2001");
     }
 
-    @And("the user checks the Sign up for our newsletter checkbox")
+    @And("the user checks Sign up for our newsletter!")
     public void clickNewsletterSignUpCheckbox()
     {
         createAccountPage.clickNewsletterSignUpCheckbox();
     }
 
-    @Then("the user is redirected to the Create account page")
-    public void checkUserIsOnCreateAccountPage()
+    @Then("the Create an account page is displayed")
+    public void checkCreateAccountPage()
     {
         Assert.assertTrue(createAccountPage.getCreateAccountTitle().isDisplayed());
     }

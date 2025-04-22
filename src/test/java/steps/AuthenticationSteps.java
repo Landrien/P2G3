@@ -12,6 +12,7 @@ import pages.HeaderPage;
 import pages.ResetPasswordPage;
 import utils.ConfigReader;
 import utils.Yopmail;
+import java.util.logging.Logger;
 
 import static org.junit.Assert.assertTrue;
 import static utils.RandomUtils.getRandomEmail;
@@ -21,7 +22,6 @@ public class AuthenticationSteps extends BaseSteps
     HeaderPage headerPage = new HeaderPage(driver);
     AuthenticationPage authenticationPage = new AuthenticationPage(driver);
     ResetPasswordPage resetPasswordPage = new ResetPasswordPage(driver);
-
     Yopmail yopmail = new Yopmail(driver);
 
     private final String defaultAccountEmail = ConfigReader.getProperty("default-account-email");
@@ -30,7 +30,8 @@ public class AuthenticationSteps extends BaseSteps
     private final String defaultAccountFirstName = ConfigReader.getProperty("default-account-first-name");
     private final String defaultAccountLastName = ConfigReader.getProperty("default-account-last-name");
 
-    private final String disposableAccountEmail = "kemeufexauqua-6861@yopmail.com";
+    private final String randomEmail = getRandomEmail();
+    private String newPassword = "";
 
     @Given("the user is connected with the default account")
     public void connectDefaultAccount()
@@ -50,7 +51,7 @@ public class AuthenticationSteps extends BaseSteps
     {
         headerPage.clickSignInButton();
 
-        authenticationPage.enterCreateEmailAddress(getRandomEmail());
+        authenticationPage.enterCreateEmailAddress(randomEmail);
         authenticationPage.clickCreateAccountButton();
     }
 
@@ -81,7 +82,7 @@ public class AuthenticationSteps extends BaseSteps
     @When("the user enters a valid account creation email address")
     public void enterValidCreateEmail()
     {
-        authenticationPage.enterCreateEmailAddress(getRandomEmail());
+        authenticationPage.enterCreateEmailAddress(randomEmail);
     }
 
     @When("the user enters an account creation email address with an invalid format")
@@ -133,8 +134,8 @@ public class AuthenticationSteps extends BaseSteps
         assertTrue(headerPage.getSignOutButton().getText().contains("Sign out"));
     }
 
-    @And("the first name and last name of the user are displayed")
-    public void checkFirstNameLastDisplayed()
+    @And("the user's first and last name appear in the menu bar")
+    public void checkFirstNameLastNameInMenuBar()
     {
         assertTrue(headerPage.getUserAccountButton().getText().contains(defaultAccountFirstName + " " + defaultAccountLastName));
     }
@@ -165,7 +166,7 @@ public class AuthenticationSteps extends BaseSteps
 
     @When("the user enters a valid email address associated with an account")
     public void EntersAValidEmailAddress() {
-        resetPasswordPage.getEmailField().sendKeys(disposableAccountEmail);
+        resetPasswordPage.getEmailField().sendKeys(randomEmail);
 
     }
 
@@ -179,16 +180,17 @@ public class AuthenticationSteps extends BaseSteps
     public void ReceivesAnEmailContainingAResetLink() {
 
         yopmail.openYopmail();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class = 'fc-dialog-container']")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//p[contains(text(), 'Autoriser')]/..")));
         yopmail.getAcceptCookiesButton().click();
-        yopmail.enterEmail(disposableAccountEmail);
+        yopmail.enterEmail(randomEmail);
         yopmail.clickSearchButton();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='bname']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='wmmail']")));
 
     }
 
     @And("the user clicks on the reset link in the email")
     public void ClicksOnTheResetLink() {
+        yopmail.waitmail1();
         yopmail.switchToIframe();
         yopmail.getEmailLink().click();
     }
@@ -204,16 +206,20 @@ public class AuthenticationSteps extends BaseSteps
     }
 
     @And("the user returns to their mailbox")
-    public void ReturnsToTheirMailbox() throws InterruptedException {
+    public void ReturnsToTheirMailbox(){
         yopmail.switchToMailTab();
-        Thread.sleep(5000);
+        yopmail.waitmail2();
         yopmail.getRefreshButton().click();
     }
 
     @And("the user obtains the new password")
     public String ObtainsTheNewPassword(){
-        return yopmail.getPassword().getText();
-
+        yopmail.switchToIframe();
+        String fullPassword = yopmail.getPassword();
+        String[] parts = fullPassword.split(" ");
+        String password = parts[3];
+        Logger.getLogger("ObtainsTheNewPassword").info("Obtaining the new password " + password);
+        return newPassword = password;
     }
 
     @Then("the user returns to the Authentication page")
@@ -224,11 +230,11 @@ public class AuthenticationSteps extends BaseSteps
 
     @And("enters their email address")
     public void entersTheirEmailAddress() {
-        authenticationPage.enterSignInEmailAddress(disposableAccountEmail);
+        authenticationPage.enterSignInEmailAddress(randomEmail);
     }
 
     @And("the user enters the new password")
     public void theUserEntersTheNewPassword(){
-        authenticationPage.enterSignInPassword(ObtainsTheNewPassword());
+        authenticationPage.enterSignInPassword(newPassword);
     }
 }

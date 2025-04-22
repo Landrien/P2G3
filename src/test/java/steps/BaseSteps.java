@@ -13,7 +13,7 @@ import java.util.List;
 public class BaseSteps
 {
     protected WebDriver driver = Hooks.getDriver();
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
     boolean checkTextIsPresent(String text)
     {

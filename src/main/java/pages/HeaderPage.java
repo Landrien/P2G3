@@ -9,32 +9,32 @@ import org.openqa.selenium.support.FindBy;
  */
 public class HeaderPage extends BasePage
 {
-    @FindBy(xpath = "//a[@class='logout']")
+    @FindBy(xpath = "//a[@class= \"logout\"]")
     private WebElement signOutButton;
 
-    @FindBy(xpath = "//a[@class='login']")
+    @FindBy(xpath = "//a[@class= \"login\"]")
     private WebElement signInButton;
 
-    @FindBy(xpath = "//div[@class='header_user_info']")
+    @FindBy(xpath = "//div[@class= \"header_user_info\"]")
     private WebElement userAccountButton;
-    @FindBy(xpath = "//a[@class='account']")
+    @FindBy(xpath = "//a[@class= \"account\"]")
     private WebElement clickableUserAccountButton;
 
-    @FindBy(xpath = "//a[@title='Contact us']")
-    private WebElement contactUsButton;
+    @FindBy(xpath = "//a[@title = 'Contact us']")
+    private WebElement contactUs;
 
     @FindBy(xpath = "//a[@title='My Shop']")
     private WebElement homePageLogoButton;
 
-    @FindBy(xpath = "//a[@title='View my shopping cart']")
+    @FindBy(xpath = "//a[@title = 'View my shopping cart']")
     private WebElement cartLogoButton;
 
-    private SearchBarPageElement searchBarPageElement;
+    private SearchBarPage searchBarPage;
 
     public HeaderPage(WebDriver driver)
     {
         super(driver);
-        searchBarPageElement = new SearchBarPageElement(driver);
+        searchBarPage = new SearchBarPage(driver);
     }
 
     public void clickCartLogo()
@@ -56,9 +56,9 @@ public class HeaderPage extends BasePage
         homePageLogoButton.click();
     }
 
-    public void clickContactUsButton()
+    public void clickContactUs()
     {
-        contactUsButton.click();
+        contactUs.click();
     }
 
     public void clickUserAccountButton()
@@ -81,8 +81,8 @@ public class HeaderPage extends BasePage
         return userAccountButton;
     }
 
-    public SearchBarPageElement getSearchBarPage()
+    public SearchBarPage getSearchBarPage()
     {
-        return searchBarPageElement;
+        return searchBarPage;
     }
 }

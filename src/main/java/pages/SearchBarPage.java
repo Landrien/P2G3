@@ -6,9 +6,9 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class SearchBarPageElement extends BasePage
+public class SearchBarPage extends BasePage
 {
-    public SearchBarPageElement(WebDriver driver)
+    public SearchBarPage(WebDriver driver)
     {
         super(driver);
     }
@@ -27,10 +27,10 @@ public class SearchBarPageElement extends BasePage
         searchButton.click();
     }
 
-    public void enterSearchText(String text)
+    public void enterSearchElement(String article)
     {
         searchField.clear();
-        searchField.sendKeys(text);
+        searchField.sendKeys(article);
     }
 
     public WebElement getSearchField()
