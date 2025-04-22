@@ -1,8 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'TICKET_KEYS', defaultValue: 'POEI25P2G3-75', description: 'Liste des tickets séparés par des virgules, ex: TICKET-1,TICKET-2')
-        string(name: 'GRID_IP', defaultValue: '', description: 'Adresse IP du Selenium Grid, ex: 192.168.1.100')
+        string(name: 'TICKET_KEYS', defaultValue: 'POEI25P2G3-98', description: 'Liste des tickets séparés par des virgules, ex: TICKET-1,TICKET-2')
     }
     environment {
         XRAY_AUTH_URL = "https://xray.cloud.getxray.app/api/v2/authenticate"
@@ -52,7 +51,7 @@ pipeline {
                             returnStdout: true
                         ).trim()
 
-                        powershell "Expand-Archive -Path features_${ticketKey}.zip -DestinationPath src/test/resources/features/ -Force"
+                        powershell "Expand-Archive -Path features_${ticketKey}.zip -DestinationPath src/test/resources/feature/imported/ -Force"
                     }
                 }
             }
@@ -60,11 +59,11 @@ pipeline {
 
         stage('Test') {
             steps {
-                bat 'mvn test -Dgrid.ip=${params.GRID_IP}'
+                catchError (buildResult: 'FAILURE', stageResult: 'FAILURE'){bat 'mvn test'}
             }
         }
 
-        stage('Export report à XRAY') {
+        stage('Export report to XRAY') {
             steps {
                 script {
                     def exportResponse = bat(
