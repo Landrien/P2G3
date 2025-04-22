@@ -77,11 +77,14 @@ public class Hooks
     @After
     public void exit(Scenario scenario)
     {
-        if (scenario.isFailed())
-        {
-            byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenshot, "image/png", scenario.getName());
+        if (driver != null) {
+            if (scenario.isFailed()) {
+                byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+                scenario.attach(screenshot, "image/png", scenario.getName());
+            }
+            driver.quit();
+        } else {
+            System.out.println("Driver was null during @After. Possible initialization failure.");
         }
-        driver.quit();
     }
 }
