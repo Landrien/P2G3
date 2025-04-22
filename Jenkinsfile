@@ -2,6 +2,8 @@ pipeline {
     agent any
     parameters {
         string(name: 'TICKET_KEYS', defaultValue: 'POEI25P2G3-98', description: 'Liste des tickets séparés par des virgules, ex: TICKET-1,TICKET-2')
+        string(name: 'GRID_URL', defaultValue: '', description: 'URL du Selenium Grid (ex: http://192.168.1.10:4444/wd/hub). Laisser vide pour exécution locale.')
+
     }
     environment {
         XRAY_AUTH_URL = "https://xray.cloud.getxray.app/api/v2/authenticate"
@@ -59,7 +61,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                catchError (buildResult: 'FAILURE', stageResult: 'FAILURE'){bat 'mvn test'}
+                catchError (buildResult: 'FAILURE', stageResult: 'FAILURE'){bat 'mvn test -Dgrid.url=${params.GRID_URL}'}
             }
         }
 
