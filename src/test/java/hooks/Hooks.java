@@ -28,7 +28,7 @@ public class Hooks
 
     @Before
     public void init() {
-        String gridUrl = System.getProperty("grid.url");
+        String gridUrl = System.getProperty("grid.url"); // <== ici on récupère depuis le paramètre Maven
         String browser = ConfigReader.getProperty("browser");
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
@@ -87,4 +87,5 @@ public class Hooks
             System.out.println("Driver was null during @After. Possible initialization failure.");
         }
     }
+
 }
