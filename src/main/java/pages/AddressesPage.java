@@ -18,35 +18,54 @@ public class AddressesPage extends BasePage
 {
     public static final String pageUrlId = "controller=addresses";
 
+    /**
+     * Web elements on the address page.
+     */
     @FindBy(xpath = "//a[@title='Add an address']")
     private WebElement addAddressButton;
 
     @FindBy(xpath = "//a[@title='Update']")
     private WebElement updateAddressButton;
 
+    /**
+     * Constructor to initialize the address page.
+     * @param driver The WebDriver used to interact with the browser.
+     */
     public AddressesPage(WebDriver driver)
     {
         super(driver);
     }
 
+    /**
+     * Clicks the button to add a new address.
+     */
     public void clickAddAddressButton()
     {
         addAddressButton.click();
     }
 
+    /**
+     * Clicks the button to update an existing address.
+     */
     public void clickUpdateAddressButton()
     {
         updateAddressButton.click();
     }
 
+    /**
+     * Deletes all the addresses present on the page one by one.
+     * It keeps clicking the first delete button until none are left.
+     */
     public void deleteAddresses()
     {
         boolean shouldDelete = false;
         do
         {
+            // Find all delete buttons currently on the page
             List<WebElement> deleteButtons = driver.findElements(By.xpath("//a[@title='Delete']"));
             shouldDelete = deleteButtons.isEmpty() == false;
 
+            // If at least one delete button is found, click the first one and confirm deletion
             if (shouldDelete == true)
             {
                 deleteButtons.get(0).click();
@@ -56,6 +75,9 @@ public class AddressesPage extends BasePage
         while (shouldDelete == true);
     }
 
+    /**
+     * Waits for the browser's confirmation alert to appear, and accepts it.
+     */
     private void acceptDeletePopup()
     {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));

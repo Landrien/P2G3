@@ -8,26 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe pour lire les données d'adresses depuis un fichier JSON.
+ * Utility class to read address data from a JSON file.
  */
 public class AddressJsonUtils
 {
     /**
-     * Parser JSON utilisé pour lire les fichiers.
+     * JSON parser used to read the JSON file.
      */
     public static final JSONParser parser = new JSONParser();
 
     /**
-     * Chemin du fichier JSON contenant les adresses.
+     * Path to the JSON file containing address data.
      */
     public static final String addressesFilePath = "src/main/resources/addresses.json";
 
     /**
-     * Récupère toutes les valeurs (sous forme de liste) d'une adresse spécifique
-     * identifiée par sa clé dans le fichier JSON.
+     * Retrieves all values of a specific address as a list of strings,
+     * identified by the given key from the JSON file.
      *
-     * @param addressKey La clé de l'adresse à récupérer
-     * @return Une liste des valeurs de l'adresse, ou {@code null} en cas d'erreur.
+     * @param addressKey The key corresponding to the desired address.
+     * @return A list of address values, or {@code null} in case of an error.
      */
     public static List<String> getAddressInfo(String addressKey)
     {
@@ -52,11 +52,11 @@ public class AddressJsonUtils
     }
 
     /**
-     * Récupère une valeur spécifique d'une adresse à partir du fichier JSON.
+     * Retrieves a specific element from a given address using the address and element keys.
      *
-     * @param addressKey La clé de l'adresse
-     * @param elementKey Le nom de l'élément à récupérer
-     * @return La valeur correspondante sous forme de chaîne, ou {@code null} en cas d'erreur.
+     * @param addressKey The key corresponding to the desired address.
+     * @param elementKey The key of the element to retrieve.
+     * @return The string value of the requested element, or {@code null} in case of an error.
      */
     public static String getAddressElement(String addressKey, String elementKey)
     {

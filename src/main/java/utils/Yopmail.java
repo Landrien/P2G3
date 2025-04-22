@@ -9,8 +9,8 @@ import pages.BasePage;
 import java.util.ArrayList;
 
 /**
- * Classe pour interagir avec le site Yopmail.
- * Étend la classe {@link BasePage} pour hériter du WebDriver et des méthodes communes.
+ * Class to interact with the Yopmail service.
+ * Extends {@link BasePage} to inherit WebDriver and common methods.
  */
 public class Yopmail extends BasePage {
 
@@ -40,12 +40,12 @@ public class Yopmail extends BasePage {
     @FindBy(xpath = "//div[@id='nbmail']")
     private WebElement nbrMail;
 
-    // ---------- Constructeur ----------
+    // ---------- Constructor ----------
 
     /**
-     * Constructeur de la page Yopmail.
+     * Constructor for the Yopmail page.
      *
-     * @param driver le WebDriver utilisé pour l'automatisation.
+     * @param driver the WebDriver used for automation.
      */
     public Yopmail(WebDriver driver) {
         super(driver);
@@ -65,53 +65,53 @@ public class Yopmail extends BasePage {
         return acceptCookiesButton;
     }
 
-    // ---------- Actions sur la page ----------
+    // ---------- Page Actions ----------
 
     /**
-     * Saisit une adresse e-mail dans le champ prévu.
+     * Enters an email address into the input field.
      *
-     * @param email l'adresse e-mail à saisir.
+     * @param email the email address to input.
      */
     public void enterEmail(String email) {
         emailField.sendKeys(email);
     }
 
     /**
-     * Clique sur le bouton de recherche pour accéder à la boîte mail.
+     * Clicks the search button to open the mailbox.
      */
     public void clickSearchButton() {
         searchButton.click();
     }
 
     /**
-     * Récupère le mot de passe depuis l'e-mail reçu.
+     * Retrieves the password from the received email.
      *
-     * @return le mot de passe en texte brut.
+     * @return the password as plain text.
      */
     public String getPassword() {
         return password.getText();
     }
 
-    // ---------- Navigation dans les iframes ----------
+    // ---------- Iframe Navigation ----------
 
     /**
-     * Bascule vers l'iframe contenant l'e-mail.
+     * Switches to the iframe containing the email content.
      */
     public void switchToIframe() {
         driver.switchTo().frame(iframe);
     }
 
     /**
-     * Bascule vers le contenu principal hors iframe.
+     * Switches back to the main content outside of the iframe.
      */
     public void switchToDefaultContent() {
         driver.switchTo().defaultContent();
     }
 
-    // ---------- Gestion des onglets ----------
+    // ---------- Tab Management ----------
 
     /**
-     * Bascule vers l'onglet d'origine (premier onglet ouvert).
+     * Switches to the original tab (the first opened tab).
      */
     public void switchToOriginTab() {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -119,7 +119,7 @@ public class Yopmail extends BasePage {
     }
 
     /**
-     * Bascule vers le second onglet (supposé être la boîte Yopmail).
+     * Switches to the second tab (supposed to be the Yopmail inbox).
      */
     public void switchToMailTab() {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -127,7 +127,7 @@ public class Yopmail extends BasePage {
     }
 
     /**
-     * Bascule vers le troisième onglet si présent.
+     * Switches to the third tab, if available.
      */
     public void switchToNewTab() {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -135,7 +135,7 @@ public class Yopmail extends BasePage {
     }
 
     /**
-     * Ouvre un nouvel onglet avec la page d'accueil de Yopmail.
+     * Opens a new browser tab and navigates to Yopmail.
      */
     public void openYopmail() {
         ((JavascriptExecutor) driver).executeScript("window.open()");
@@ -144,15 +144,15 @@ public class Yopmail extends BasePage {
         driver.get("https://yopmail.com/fr/");
     }
 
-    // ---------- Attente d'e-mails ----------
+    // ---------- Email Waiting ----------
 
     /**
-     * Attend jusqu'à ce qu'un e-mail soit détecté (affichage "1 mail").
+     * Waits until one email is detected ("1 mail" appears).
      */
     public void waitmail1() {
         while (!nbrMail.getText().contains("1 mail")) {
             try {
-                Thread.sleep(1000); // Attendre 1 seconde
+                Thread.sleep(1000); // Wait 1 second
                 getRefreshButton().click();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -161,12 +161,12 @@ public class Yopmail extends BasePage {
     }
 
     /**
-     * Attend jusqu'à ce que deux e-mails soient détectés (affichage "2 mails").
+     * Waits until two emails are detected ("2 mails" appears).
      */
     public void waitmail2() {
         while (!nbrMail.getText().contains("2 mails")) {
             try {
-                Thread.sleep(1000); // Attendre 1 seconde
+                Thread.sleep(1000); // Wait 1 second
                 getRefreshButton().click();
             } catch (InterruptedException e) {
                 e.printStackTrace();

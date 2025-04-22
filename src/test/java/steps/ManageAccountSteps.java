@@ -10,6 +10,9 @@ import java.util.List;
 
 import static utils.AddressJsonUtils.getAddressInfo;
 
+/**
+ * Managing the account, addresses, and editing address information.
+ */
 public class ManageAccountSteps extends BaseSteps
 {
     AccountPage accountPage = new AccountPage(driver);
@@ -29,6 +32,10 @@ public class ManageAccountSteps extends BaseSteps
         Assert.assertTrue(driver.getCurrentUrl().contains(AddressEditPage.pageUrlId));
     }
 
+    /**
+     * Simulates the user clicking on a specified section in the account page.
+     * @param section The section to be clicked ("Order History", "Credits").
+     */
     @When("the user clicks on {string} section")
     public void clickSectionButton(String section)
     {
