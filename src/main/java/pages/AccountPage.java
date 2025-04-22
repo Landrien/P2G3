@@ -5,16 +5,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * Page "Mon Compte" permettant à l'utilisateur d'accéder aux différentes sections de gestion de compte.
+ * "My Account" page allowing the user to access different account management sections.
  */
 public class AccountPage extends BasePage
 {
-    // ---------- Constructeur ----------
+    // ---------- Constructor ----------
 
     /**
-     * Constructeur de la page AccountPage.
+     * Constructor for the AccountPage.
      *
-     * @param driver le WebDriver utilisé pour l'automatisation.
+     * @param driver the WebDriver used for automation.
      */
     public AccountPage(WebDriver driver)
     {
@@ -44,19 +44,19 @@ public class AccountPage extends BasePage
     // ---------- Getters ----------
 
     /**
-     * Récupère le message de confirmation de création de compte.
+     * Gets the success message confirming that the account has been created.
      *
-     * @return le WebElement contenant le message de succès.
+     * @return the WebElement containing the success message.
      */
     public WebElement getAccountCreatedMessage()
     {
         return accountCreatedMessage;
     }
 
-    // ---------- Actions sur la page ----------
+    // ---------- Page Actions ----------
 
     /**
-     * Clique sur le bouton "Add my first address" pour ajouter une première adresse.
+     * Clicks the "Add my first address" button to add a first address.
      */
     public void clickAddMyFirstAddressButton()
     {
@@ -64,7 +64,7 @@ public class AccountPage extends BasePage
     }
 
     /**
-     * Clique sur le bouton "Order history and details" pour consulter l'historique des commandes.
+     * Clicks the "Order history and details" button to view the order history.
      */
     public void clickOrderHistoryButton()
     {
@@ -72,7 +72,7 @@ public class AccountPage extends BasePage
     }
 
     /**
-     * Clique sur le bouton "My credit slips" pour accéder aux avoirs.
+     * Clicks the "My credit slips" button to access credit notes.
      */
     public void clickCreditSlipsButton()
     {
@@ -80,7 +80,7 @@ public class AccountPage extends BasePage
     }
 
     /**
-     * Clique sur le bouton "My addresses" pour accéder à la liste des adresses enregistrées.
+     * Clicks the "My addresses" button to view saved addresses.
      */
     public void clickMyAddressesButton()
     {
@@ -88,7 +88,7 @@ public class AccountPage extends BasePage
     }
 
     /**
-     * Clique sur le bouton "My personal information" pour modifier les informations personnelles.
+     * Clicks the "My personal information" button to edit personal details.
      */
     public void clickPersonalInformationButton()
     {
