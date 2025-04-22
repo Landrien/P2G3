@@ -91,7 +91,7 @@ public class HeaderPage extends BasePage
                 System.out.println("Stale element - retrying click on logo (" + (i + 1) + "/3)");
             }
         }
-    }
+        }
 
 
     /**
