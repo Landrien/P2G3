@@ -2,6 +2,7 @@ pipeline {
     agent any
     parameters {
         string(name: 'TICKET_KEYS', defaultValue: 'POEI25P2G3-75', description: 'Liste des tickets séparés par des virgules, ex: TICKET-1,TICKET-2')
+        string(name: 'GRID_IP', defaultValue: '', description: 'Adresse IP du Selenium Grid, ex: 192.168.1.100')
     }
     environment {
         XRAY_AUTH_URL = "https://xray.cloud.getxray.app/api/v2/authenticate"
@@ -59,7 +60,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                bat 'mvn test -Dgrid.ip=${params.GRID_IP}'
             }
         }
 

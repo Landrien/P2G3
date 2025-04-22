@@ -48,26 +48,43 @@ public class AccountPage extends BasePage
         return accountCreatedMessage;
     }
 
+    // ---------- Page Actions ----------
+
+    /**
+     * Clicks the "Add my first address" button to add a first address.
+     */
     public void clickAddMyFirstAddressButton()
     {
         addMyFirstAddressButton.click();
     }
 
+    /**
+     * Clicks the "Order history and details" button to view the order history.
+     */
     public void clickOrderHistoryButton()
     {
         orderHistoryButton.click();
     }
 
+    /**
+     * Clicks the "My credit slips" button to access credit notes.
+     */
     public void clickCreditSlipsButton()
     {
         creditSlipsButton.click();
     }
 
+    /**
+     * Clicks the "My addresses" button to view saved addresses.
+     */
     public void clickMyAddressesButton()
     {
         myAddressesButton.click();
     }
 
+    /**
+     * Clicks the "My personal information" button to edit personal details.
+     */
     public void clickPersonalInformationButton()
     {
         personalInformationButton.click();

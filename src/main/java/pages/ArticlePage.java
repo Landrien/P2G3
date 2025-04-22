@@ -9,7 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 /**
- * The article page with all the details regarding a specific product
+ * The article page with all the details regarding a specific product.
+ * Extends BasePage to inherit shared behavior and WebDriver support.
  */
 public class ArticlePage extends BasePage
 {

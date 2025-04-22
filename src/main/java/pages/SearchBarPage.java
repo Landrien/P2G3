@@ -6,6 +6,9 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+/**
+ * Page object for the search bar and its behavior.
+ */
 public class SearchBarPage extends BasePage
 {
     /**
@@ -25,36 +28,55 @@ public class SearchBarPage extends BasePage
     @FindBy(id = "search_query_top")
     private WebElement searchField;
 
+    // Button to submit the search query
     @FindBy(name = "submit_search")
     private WebElement searchButton;
 
+    // List of suggested search results (autocomplete)
     @FindBy(xpath = "//li[contains(@class, 'ac_even')]")
     private List<WebElement> searchSuggestions;
 
+    /**
+     * Clicks the search button to initiate the search.
+     */
     public void clickSearchButton()
     {
         searchButton.click();
     }
 
+    /**
+     * Enters a search term into the search input field.
+     *
+     * @param article the search term to enter
+     */
     public void enterSearchElement(String article)
     {
         searchField.clear();
         searchField.sendKeys(article);
     }
 
+    /**
+     * Gets the WebElement representing the search input field.
+     *
+     * @return the search input field element
+     */
     public WebElement getSearchField()
     {
         return searchField;
     }
 
+    /**
+     * Clicks on the search input field.
+     */
     public void clickSearchField()
     {
         searchField.click();
     }
 
     /**
-     * List of search suggestions shown when a user starts typing in the search field
-     * @return A list of WebElements representing the search suggestions.
+     * Returns the list of search suggestion elements.
+     *
+     * @return list of search suggestion WebElements
      */
     public List<WebElement> getSearchSuggestions()
     {
@@ -62,9 +84,9 @@ public class SearchBarPage extends BasePage
     }
 
     /**
-     * Clicks on a specific search suggestion.
-     * The suggestion is selected if its text contains the provided suggestion text.
-     * @param suggestionText The text to search for among the search suggestions.
+     * Clicks on a suggestion from the autocomplete dropdown that contains the given text.
+     *
+     * @param suggestionText the text to match within suggestions
      */
     public void clickOnSuggestion(String suggestionText)
     {
@@ -78,6 +100,11 @@ public class SearchBarPage extends BasePage
         }
     }
 
+    /**
+     * Gets the WebElement representing the search button.
+     *
+     * @return the search button element
+     */
     public WebElement getSearchButton()
     {
         return searchButton;

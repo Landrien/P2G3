@@ -66,10 +66,7 @@ public class AuthenticationPage extends BasePage
         signInPasswordField.sendKeys(password);
     }
 
-    public void clickSignInButton()
-    {
-        signInButton.click();
-    }
+    public void clickSignInButton(){signInButton.click();}
 
     public WebElement getInvalidEmailErrorMessage()
     {

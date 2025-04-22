@@ -16,9 +16,6 @@ import java.util.List;
  */
 public class AddressesPage extends BasePage
 {
-    /**
-     * URL identifier for the address page.
-     */
     public static final String pageUrlId = "controller=addresses";
 
     /**
@@ -39,27 +36,36 @@ public class AddressesPage extends BasePage
         super(driver);
     }
 
+    /**
+     * Clicks the button to add a new address.
+     */
     public void clickAddAddressButton()
     {
         addAddressButton.click();
     }
 
+    /**
+     * Clicks the button to update an existing address.
+     */
     public void clickUpdateAddressButton()
     {
         updateAddressButton.click();
     }
 
     /**
-     * Method to delete all addresses on the page
+     * Deletes all the addresses present on the page one by one.
+     * It keeps clicking the first delete button until none are left.
      */
     public void deleteAddresses()
     {
         boolean shouldDelete = false;
         do
         {
+            // Find all delete buttons currently on the page
             List<WebElement> deleteButtons = driver.findElements(By.xpath("//a[@title='Delete']"));
             shouldDelete = deleteButtons.isEmpty() == false;
 
+            // If at least one delete button is found, click the first one and confirm deletion
             if (shouldDelete == true)
             {
                 deleteButtons.get(0).click();
@@ -70,7 +76,7 @@ public class AddressesPage extends BasePage
     }
 
     /**
-     * Method to accept the delete confirmation popup
+     * Waits for the browser's confirmation alert to appear, and accepts it.
      */
     private void acceptDeletePopup()
     {
