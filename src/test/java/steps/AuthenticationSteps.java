@@ -112,7 +112,7 @@ public class AuthenticationSteps extends BaseSteps
     @Then("an error message Invalid password is displayed")
     public void checkInvalidPasswordErrorMessage()
     {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class= \"alert alert-danger\"]")));
+        wait.until(ExpectedConditions.visibilityOf(authenticationPage.getInvalidPasswordErrorMessage()));
         assertTrue(authenticationPage.getInvalidPasswordErrorMessage().isDisplayed());
     }
 
