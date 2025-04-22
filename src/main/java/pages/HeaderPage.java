@@ -1,8 +1,13 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 /**
  * The header part of any page on the website containing the logo, search bar, cart and connexion links
@@ -59,10 +64,27 @@ public class HeaderPage extends BasePage
         signInButton.click();
     }
 
-    public void clickLogoButton()
+    /*public void clickLogoButton()
     {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(homePageLogoButton));
         homePageLogoButton.click();
+    }*/
+
+    public void clickLogoButton() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        for (int i = 0; i < 3; i++) {
+            try {
+                WebElement logoElement = wait.until(ExpectedConditions.elementToBeClickable(homePageLogoButton));
+                logoElement.click();
+                break;
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                System.out.println("Stale element - retrying click on logo (" + (i + 1) + "/3)");
+            }
+        }
     }
+
 
     public void clickContactUs()
     {
