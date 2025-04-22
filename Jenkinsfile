@@ -51,7 +51,7 @@ pipeline {
                             returnStdout: true
                         ).trim()
 
-                        powershell "Expand-Archive -Path features_${ticketKey}.zip -DestinationPath src/test/resources/features/imported/ -Force"
+                        powershell "Expand-Archive -Path features_${ticketKey}.zip -DestinationPath src/test/resources/feature/imported/ -Force"
                     }
                 }
             }
