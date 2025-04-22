@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.ContactPage;
 import pages.HeaderPage;
 import pages.HomePage;
@@ -105,6 +106,10 @@ public class HomePageSteps extends BaseSteps
     @When("the user clicks on the home logo")
     public void clickHomePageLogo()
     {
+        headerPage.initializePage();
+
+        wait.until(ExpectedConditions.elementToBeClickable(headerPage.getLogoButton()));
+
         headerPage.clickLogoButton();
     }
 

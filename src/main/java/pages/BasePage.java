@@ -11,6 +11,11 @@ public class BasePage
     public BasePage(WebDriver driver)
     {
         this.driver = driver;
+        initializePage();
+    }
+
+    public void initializePage()
+    {
         PageFactory.initElements(driver, this);
     }
 

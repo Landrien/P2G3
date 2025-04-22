@@ -112,7 +112,10 @@ public class AuthenticationSteps extends BaseSteps
     @Then("an error message Invalid password is displayed")
     public void checkInvalidPasswordErrorMessage()
     {
+        authenticationPage.initializePage();
+
         wait.until(ExpectedConditions.visibilityOf(authenticationPage.getInvalidPasswordErrorMessage()));
+
         assertTrue(authenticationPage.getInvalidPasswordErrorMessage().isDisplayed());
     }
 
