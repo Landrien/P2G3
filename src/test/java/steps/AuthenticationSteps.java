@@ -6,12 +6,16 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.AuthenticationPage;
 import pages.HeaderPage;
 import pages.ResetPasswordPage;
 import utils.ConfigReader;
 import utils.Yopmail;
+
+import java.time.Duration;
 import java.util.logging.Logger;
 
 import static org.junit.Assert.assertTrue;
@@ -115,12 +119,17 @@ public class AuthenticationSteps extends BaseSteps
         authenticationPage.enterSignInPassword("bad-password");
     }
 
+
     @Then("an error message Invalid password is displayed")
     public void checkInvalidPasswordErrorMessage()
     {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class= \"alert alert-danger\"]")));
-        assertTrue(authenticationPage.getInvalidPasswordErrorMessage().isDisplayed());
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement errorElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-danger']"))
+        );
+        assertTrue(errorElement.isDisplayed());
     }
+
 
     @And("the user enters the password associated with their account")
     public void enterValidSignInPassword()
